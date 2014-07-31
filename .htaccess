@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^([0-9]+) /index.php?action=item&id=$1
+RewriteRule ^story/(.+) /index.php?action=story&guid=$1
+RewriteRule ^story/(.+)/[0-9]+ /index.php?action=story&guid=$1&item=$2

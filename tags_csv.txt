@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en" dir="ltr">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta name="robots" content="noindex">
+<title>Select: tag - Adminer</title>
+<link rel="stylesheet" type="text/css" href="../adminer/static/default.css">
+<script type="text/javascript">
+var areYouSure = 'Resend POST data?';
+</script>
+<script type="text/javascript" src="../adminer/static/functions.js"></script>
+<script type="text/javascript" src="static/editing.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="../adminer/static/favicon.ico" id="favicon">
+
+<body class="ltr nojs" onclick="return bodyClick(event, 'sushinews&#039;, &#039;');" onkeydown="bodyKeydown(event);" onload="bodyLoad('5.5');">
+<script type="text/javascript">
+document.body.className = document.body.className.replace(/(^|\s)nojs(\s|$)/, '$1js$2');
+</script>
+
+<div id="content">
+<p id="breadcrumb"><a href=".">MySQL</a> &raquo; <a href='?username=root' accesskey='1' title='Alt+Shift+1'>Server</a> &raquo; <a href="?username=root&amp;db=sushinews">sushinews</a> &raquo; Select: tag
+<span id='loader'></span>
+<h2>Select: tag</h2>
+<p class="tabs"> <a href='?username=root&amp;db=sushinews&amp;select=tag' class='active'>Select data</a> <a href='?username=root&amp;db=sushinews&amp;table=tag'>Show structure</a> <a href='?username=root&amp;db=sushinews&amp;create=tag'>Alter table</a> <a href='?username=root&amp;db=sushinews&amp;edit=tag'>New item</a>
+<form action='' id='form'>
+<div style='display: none;'><input type="hidden" name="username" value="root"><input type="hidden" name="db" value="sushinews"><input type="hidden" name="select" value="tag"></div>
+<fieldset><legend><a href='#fieldset-select' onclick="return !toggle('fieldset-select');">Select</a></legend><div id='fieldset-select' class='hidden'>
+<div><select name='columns[0][fun]' onchange="this.nextSibling.nextSibling.onchange();"><option selected><optgroup label="Functions"><option>char_length<option>date<option>from_unixtime<option>hex<option>lower<option>round<option>sec_to_time<option>time_to_sec<option>upper</optgroup><optgroup label="Aggregation"><option>avg<option>count<option>count distinct<option>group_concat<option>max<option>min<option>sum</optgroup></select>(<select name='columns[0][col]' onchange='selectAddRow(this);'><option><option value="id">id<option value="title">title<option value="name">name<option value="type">type<option value="weight">weight</select>)</div>
+</div></fieldset>
+<fieldset><legend><a href='#fieldset-search' onclick="return !toggle('fieldset-search');">Search</a></legend><div id='fieldset-search' class='hidden'>
+<div><select name='where[0][col]' onchange='selectAddRow(this);'><option value=''>(anywhere)<option value="id">id<option value="title">title<option value="name">name<option value="type">type<option value="weight">weight</select><select name='where[0][op]'><option selected>=<option>&lt;<option>&gt;<option>&lt;=<option>&gt;=<option>!=<option>LIKE<option>LIKE %%<option>REGEXP<option>IN<option>IS NULL<option>NOT LIKE<option>NOT REGEXP<option>NOT IN<option>IS NOT NULL<option></select><input name='where[0][val]'></div>
+</div></fieldset>
+<fieldset><legend><a href='#fieldset-sort' onclick="return !toggle('fieldset-sort');">Sort</a></legend><div id='fieldset-sort' class='hidden'>
+<div><select name='order[0]' onchange='selectAddRow(this);'><option><option value="id">id<option value="title">title<option value="name">name<option value="type">type<option value="weight">weight</select><label><input type='checkbox' name='desc[0]' value='1'>descending</label></div>
+</div></fieldset>
+<fieldset><legend>Limit</legend><div><input name='limit' size='3' value='30'></div></fieldset>
+<fieldset><legend>Action</legend><div><input type='submit' value='Select'></div></fieldset>
+</form>
+<p><a href='/adminer/?username=root&amp;db=sushinews&amp;select=tag&amp;page=last' title='Last page'>&gt;&gt;</a> <code class='jush-sql'>SELECT * FROM `tag` LIMIT 30</code> <a href='?username=root&amp;db=sushinews&amp;sql=SELECT+%2A%0AFROM+%60tag%60%0ALIMIT+30'>Edit</a></p>
+<form action='' method='post' enctype='multipart/form-data'>
+<table cellspacing='0' class='nowrap checkable' onclick='tableClick(event);' onkeydown='return editingKeydown(event);'>
+<thead><tr><td><input type='checkbox' id='all-page' onclick='formCheck(this, /check/);'> <a href='/adminer/?username=root&amp;db=sushinews&amp;select=tag&amp;modify=1'>edit</a><th><a href="/adminer/?username=root&amp;db=sushinews&amp;select=tag&amp;order%5B0%5D=id"><span title="int(11)">id</span></a><th><a href="/adminer/?username=root&amp;db=sushinews&amp;select=tag&amp;order%5B0%5D=title"><span title="char(32)">title</span></a><th><a href="/adminer/?username=root&amp;db=sushinews&amp;select=tag&amp;order%5B0%5D=name"><span title="char(32)">name</span></a><th><a href="/adminer/?username=root&amp;db=sushinews&amp;select=tag&amp;order%5B0%5D=type"><span title="char(16)">type</span></a><th><a href="/adminer/?username=root&amp;db=sushinews&amp;select=tag&amp;order%5B0%5D=weight"><span title="int(11)">weight</span></a></thead>
+<tr><td><input type='checkbox' name='check[]' value='where%5Bid%5D=1' onclick="this.form[&#039;all&#039;].checked = false; formUncheck(&#039;all-page&#039;);" id='checkbox-1'> <a href='?username=root&amp;db=sushinews&amp;edit=tag&amp;where%5Bid%5D=1'>edit</a><td id='val[&amp;where%5Bid%5D=1][id]' ondblclick="selectDblClick(this, event);">1<td id='val[&amp;where%5Bid%5D=1][title]' ondblclick="selectDblClick(this, event);"><code>Opinion</code><td id='val[&amp;where%5Bid%5D=1][name]' ondblclick="selectDblClick(this, event);"><code>opinion</code><td id='val[&amp;where%5Bid%5D=1][type]' ondblclick="selectDblClick(this, event);"><code>topic</code><td id='val[&amp;where%5Bid%5D=1][weight]' ondblclick="selectDblClick(this, event);">0</tr>
+<tr class="odd"><td><input type='checkbox' name='check[]' value='where%5Bid%5D=2' onclick="this.form[&#039;all&#039;].checked = false; formUncheck(&#039;all-page&#039;);" id='checkbox-2'> <a href='?username=root&amp;db=sushinews&amp;edit=tag&amp;where%5Bid%5D=2'>edit</a><td id='val[&amp;where%5Bid%5D=2][id]' ondblclick="selectDblClick(this, event);">2<td id='val[&amp;where%5Bid%5D=2][title]' ondblclick="selectDblClick(this, event);"><code>Sports</code><td id='val[&amp;where%5Bid%5D=2][name]' ondblclick="selectDblClick(this, event);"><code>sports</code><td id='val[&amp;where%5Bid%5D=2][type]' ondblclick="selectDblClick(this, event);"><code>topic</code><td id='val[&amp;where%5Bid%5D=2][weight]' ondblclick="selectDblClick(this, event);">0</tr>
+<tr><td><input type='checkbox' name='check[]' value='where%5Bid%5D=3' onclick="this.form[&#039;all&#039;].checked = false; formUncheck(&#039;all-page&#039;);" id='checkbox-3'> <a href='?username=root&amp;db=sushinews&amp;edit=tag&amp;where%5Bid%5D=3'>edit</a><td id='val[&amp;where%5Bid%5D=3][id]' ondblclick="selectDblClick(this, event);">3<td id='val[&amp;where%5Bid%5D=3][title]' ondblclick="selectDblClick(this, event);"><code>World</code><td id='val[&amp;where%5Bid%5D=3][name]' ondblclick="selectDblClick(this, event);"><code>world</code><td id='val[&amp;where%5Bid%5D=3][type]' ondblclick="selectDblClick(this, event);"><code>topic</code><td id='val[&amp;where%5Bid%5D=3][weight]' ondblclick="selectDblClick(this, event);">0</tr>
+</table>
+<script type='text/javascript'>tableCheck();</script>
+<p class='pages'> (3 rows) <label for='checkbox-4'><input type='checkbox' name='all' value='1' id='checkbox-4'>whole result</label>
+<fieldset><legend>Edit</legend><div>
+<input type="submit" value="Save" title="Double click on a value to modify it." class="jsonly">
+<input type="submit" name="edit" value="Edit">
+<input type="submit" name="clone" value="Clone">
+<input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure? (' + (this.form['all'].checked ? 3 : formChecked(this, /check/)) + ')');">
+</div></fieldset>
+<fieldset><legend><a href='#fieldset-export' onclick="return !toggle('fieldset-export');">Export</a></legend><div id='fieldset-export' class='hidden'>
+<select name='output'><option value="text" selected>open<option value="file">save<option value="gz">gzip<option value="bz2">bzip2</select> <select name='format'><option value="sql">SQL<option value="csv" selected>CSV,<option value="csv;">CSV;<option value="tsv">TSV</select> <input type='submit' name='export' value='Export' onclick='eventStop(event);'>
+</div></fieldset>
+<fieldset><legend><a href='#fieldset-import' onclick="return !toggle('fieldset-import');">Import</a></legend><div id='fieldset-import' class='hidden'>
+<input type='file' name='csv_file'> <select name='separator'><option value="csv" selected>CSV,<option value="csv;">CSV;<option value="tsv">TSV</select> <input type='submit' name='import' value='Import'><input type='hidden' name='token' value='68102'>
+</div></fieldset>
+</form>
+</div>
+
+<form action=''>
+<div id='lang'><input type="hidden" name="username" value="root"><input type="hidden" name="db" value="sushinews"><input type="hidden" name="select" value="tag">Language: <select name='lang' onchange="var loc = location.search.replace(/[?&amp;]lang=[^&amp;]*/, &#039;&#039;); location.search = loc + (loc ? &#039;&amp;&#039; : &#039;&#039;) + &#039;lang=&#039; + this.value;"><option value="en" selected>English<option value="cs">Čeština<option value="sk">Slovenčina<option value="nl">Nederlands<option value="es">Español<option value="de">Deutsch<option value="fr">Français<option value="it">Italiano<option value="et">Eesti<option value="hu">Magyar<option value="pl">Polski<option value="ca">Català<option value="pt">Português<option value="sl">Slovenski<option value="lt">Lietuvių<option value="tr">Türkçe<option value="ro">Limba Română<option value="ru">Русский язык<option value="zh">简体中文<option value="zh-tw">繁體中文<option value="ja">日本語<option value="ta">த‌மிழ்<option value="ar">العربية</select> <input type='submit' value='Use' class='hidden'>
+</div>
+</form>
+<div id="menu">
+<h1>
+<a href='http://www.adminer.org/' id='h1'>Adminer</a> <span class="version">3.3.3</span>
+<a href="http://www.adminer.org/#download" id="version">4.1.0</a>
+</h1>
+<form action="" method="post">
+<p class="logout">
+<a href='?username=root&amp;db=sushinews&amp;sql='>SQL command</a>
+<a href='?username=root&amp;db=sushinews&amp;dump=tag' id='dump'>Dump</a>
+<input type="submit" name="logout" value="Logout" onclick="eventStop(event);">
+<input type="hidden" name="token" value="68102">
+</p>
+</form>
+<form action="">
+<p>
+<input type="hidden" name="username" value="root"><select name='db' onchange="this.form.submit();"><option value="">(database)<option>information_schema<option>mysql<option>performance_schema<option>phpmyadmin<option selected>sushinews<option>testdata</select><input type="submit" value="Use" class='hidden' onclick="eventStop(event);">
+<p><a href="?username=root&amp;db=sushinews&amp;create=">Create new table</a>
+<p id='tables'>
+<a href="?username=root&amp;db=sushinews&amp;select=item">select</a> <a href="?username=root&amp;db=sushinews&amp;table=item" title='Show structure'>item</a><br>
+<a href="?username=root&amp;db=sushinews&amp;select=item_tag">select</a> <a href="?username=root&amp;db=sushinews&amp;table=item_tag" title='Show structure'>item_tag</a><br>
+<a href="?username=root&amp;db=sushinews&amp;select=tag" class='active'>select</a> <a href="?username=root&amp;db=sushinews&amp;table=tag" title='Show structure'>tag</a><br>
+<script type='text/javascript'>
+var jushLinks = { sql: [ '?username=root&db=sushinews&table=$&', /\b(item|item_tag|tag)\b/g ] };
+jushLinks.bac = jushLinks.sql;
+jushLinks.bra = jushLinks.sql;
+jushLinks.sqlite_quo = jushLinks.sql;
+jushLinks.mssql_bra = jushLinks.sql;
+</script>
+</p></form>
+</div>
