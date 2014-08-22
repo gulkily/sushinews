@@ -4,11 +4,11 @@ include_once('config/env.php');
 include_once('module/utilities.php');
 include_once('module/sherlock.php');
 
-
-
 $sherlock = new SherlockSession($db);
 $sherlock->populateFromGlobals();
 $sherlock->storeSession();
+
+//$sherlock->getRelatedSession()
 
 $action = getParam('action');
 

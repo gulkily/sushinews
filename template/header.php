@@ -19,9 +19,9 @@ function printHeader($username = null) {
 </div>
 <div class="row">
     <div class="large-12 columns">
-        <a href="/" class="topmenu">Newest</a>
-        <a href="/" class="topmenu">Current</a>
+        <a href="/" class="topmenu">News</a>
         <a href="/?action=submit" class="topmenu">Submit News</a>
+        <a href="/moderate" class="topmenu">Moderate</a>
         <a href="/?action=mirror" class="topmenu">Mirror This</a>
         <a href="/" class="topmenu">About</a>
     </div>

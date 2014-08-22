@@ -35,6 +35,30 @@ function printTagList($tags) {
     }
 }
 
+function printItemTabs($itemId) {
+    $itemUrlPrefix = getItemUrl($item_id);
+
+?>
+    <div class="panel">
+
+    <?php
+
+    $tabs = array(
+        '/' => 'Article',
+        '/edit' => 'Edit',
+        '/data' => 'Data',
+        '/history' => 'Other Versions'
+    );
+
+    foreach ($tabs as $key => $caption) {
+        echo('<a class="itemtab" href="' . $itemUrlPrefix . $key . '">' . $caption . '</a></li>');
+    }
+
+    ?>
+    </div>
+    <?php
+}
+
 function printRelatedItems(array $relatedItems, $sourceItemId) {
 ?>
     <p>There Are Other Versions of This Story:</p>
@@ -57,6 +81,10 @@ function printOneItem($itemData, $relatedItems) {
     ?>
     <div class="row">
         <div class="large-12 columns">
+            <?php
+            printItemTabs($itemData['id']);
+
+            ?>
             <div class="panel">
 
 
@@ -125,11 +153,8 @@ function printItem(array $itemData) {
     </h3>
     <p><?=($itemData['body']?nl2br(htmlspecialchars($itemData['body'])):htmlspecialchars($itemData['summary']))?></p>
     <p>
-        <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a>
-        <br>
-        Tagged: <? printTagList($itemData['tags']); ?>
-        <br>
-        Add Tags: <? printAvailableTagsList($itemData['id']); ?>
+        <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a><br>
+        Tags: <? printTagList($itemData['tags']); ?>
     <br>
         Share: <a href="<?=getItemUrl($itemData['id'])?>" class="sharelink"><?=getItemUrl($itemData['id'])?></a>
     </p>
@@ -143,7 +168,10 @@ function printAvailableTagsList($item_id) {
     $tags = getAvailableTagList();
 
     foreach ($tags as $tag) {
-        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'" class="addtag">' . $tag['name'] . "</a> ");
+        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'" class="addtag"><nobr>');
+        echo(($tag['weight']<0?'&ndash;':'+') . '&nbsp;');
+        echo($tag['name']);
+        echo("</nobr></a> ");
     }
 }
 

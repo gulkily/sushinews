@@ -14,7 +14,14 @@ a.sharelink {
 }
 
 a.addtag {
-    border: 0.2em outset;
+    border: 0.2em solid;
     border-radius: 0.2em;
-    margin: 0.2em;
+    margin: 0.1em;
+    font-family: helvetica, arial, sans-serif;
+    font-size: smaller;
+    padding: 0.1em;
+}
+
+a.itemtab {
+    margin: 0.2em 1em 0.2em 0.2em;
 }

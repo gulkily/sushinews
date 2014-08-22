@@ -26,14 +26,8 @@ function printMirrorInfo() {
             </tr>
             <tr>
                 <td>
-                    <b>PHP & SQLite</b><br>
-                    Easy setup. Low performance under load.
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>PHP & MySQL</b><br>
-                    Full functionality, more complicated setup, better performance under load.
+                    <strong>MySQL Database Dump</strong><br>
+                    To be used with a copy of the site scripts to replicate the entire site.
                 </td>
             </tr>
         </table>
