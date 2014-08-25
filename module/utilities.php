@@ -17,6 +17,18 @@ function getParam($name) {
     return $param;
 }
 
+function getVotingHash($client_id, $item_id, $tag) {
+    return md5($client_id . $item_id . $tag . SECRET_SALT);
+}
+
+function verifyVotingHash($client_id, $item_id, $tag, $hash) {
+    if (md5($client_id . $item_id . $tag . SECRET_SALT) == $hash) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 function getLink($action, $text = null, $id = null, $class = null) {
 

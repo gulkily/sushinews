@@ -3,12 +3,11 @@
 include_once('config/env.php');
 include_once('module/utilities.php');
 include_once('module/sherlock.php');
+include_once('module/items.php');
 
 $sherlock = new SherlockSession($db);
 $sherlock->populateFromGlobals();
 $sherlock->storeSession();
-
-//$sherlock->getRelatedSession()
 
 $action = getParam('action');
 
@@ -19,20 +18,22 @@ if (!$action) {
 if (isset($action)) {
     switch($action) {
         case 'mirror':
-            include('template/header.php');
+            include_once('template/header.php');
+            include_once('template/footer.php');
+            include_once('template/mirror.php');
 
             printHeader();
 
-            include('template/mirror.php');
-
             printMirrorInfo();
-
-            include('template/footer.php');
 
             printFooter();
 
             break;
         case 'edit':
+            include_once('template/header.php');
+            include_once('template/edit.php');
+            include_once('template/footer.php');
+
             $itemId = intval(getParam('id'));
 
             if ($itemId) {
@@ -41,31 +42,25 @@ if (isset($action)) {
                     ':id' => $itemId
                 ));
 
-                include('template/header.php');
                 printHeader();
 
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    include('template/edit.php');
-
                     printEditForm($row['title'], $row['summary'], $row['body'], $row['guid'], $row['id']);
                 }
 
-                include('template/footer.php');
                 printFooter();
-
             }
 
             break;
         case 'submit':
+            include_once('template/header.php');
+            include_once('template/edit.php');
+            include_once('template/footer.php');
 
-            include('template/header.php');
             printHeader();
-
-            include('template/edit.php');
 
             printEditForm();
 
-            include('template/footer.php');
             printFooter();
 
 
@@ -120,9 +115,12 @@ if (isset($action)) {
         case 'index':
             $items = getItems(20);
 
-            include('template/item.php');
+            include_once('template/item.php');
 
-            include('template/header.php');
+            include_once('template/header.php');
+
+            include_once('template/footer.php');
+
             printHeader();
 
             beginItemList();
@@ -130,7 +128,39 @@ if (isset($action)) {
                 printItemSummary($item);
             }
             endItemList();
-            include('template/footer.php');
+            printFooter();
+
+            break;
+        case 'moderate':
+            include_once('template/item.php');
+            include_once('template/header.php');
+            include_once('template/footer.php');
+
+            $eligible = get_cache('voting/eligible', 3600, "select guid from ( select guid, count(guid) as gcount from item group by guid) guids where gcount > 1", 'get_col');
+
+            $rand = rand(0, count($eligible)-1);
+
+            $guid = $eligible[$rand];
+
+            $versions = get_cache("versions/$guid", 60, "select id from item where guid = '$guid'", 'get_col');
+
+            for ($i = 0; $i < 2; $i++) {
+                if (count($versions) == 1) {
+                    $chosen[] = $versions[0];
+                } else {
+                    $rand = rand(0, count($versions) - 1);
+                    $chosen[] = $versions[$rand];
+                    unset($versions[$rand]);
+                }
+            }
+
+            $itemDataOne = getItem($chosen[0]);
+            $itemDataTwo = getItem($chosen[1]);
+
+            printHeader();
+
+            printTwoItems(array($itemDataOne, $itemDataTwo), $linkedItems);
+
             printFooter();
 
             break;

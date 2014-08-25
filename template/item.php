@@ -122,6 +122,8 @@ function printTwoItems($items, $relatedItems) {
 
                 printItem($items[0]);
 
+                printAvailableTagList($items[0]['id'])
+
                 ?>
             </div>
         </div>
@@ -132,6 +134,8 @@ function printTwoItems($items, $relatedItems) {
                 <?php
 
                 printItem($items[1]);
+
+                printAvailableTagList($items[1]['id']);
 
                 ?>
             </div>
@@ -153,8 +157,9 @@ function printItem(array $itemData) {
     </h3>
     <p><?=($itemData['body']?nl2br(htmlspecialchars($itemData['body'])):htmlspecialchars($itemData['summary']))?></p>
     <p>
-        <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a><br>
+        <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a>
         Tags: <? printTagList($itemData['tags']); ?>
+
     <br>
         Share: <a href="<?=getItemUrl($itemData['id'])?>" class="sharelink"><?=getItemUrl($itemData['id'])?></a>
     </p>
@@ -164,11 +169,16 @@ function printItem(array $itemData) {
 
 }
 
-function printAvailableTagsList($item_id) {
+function printAvailableTagList($item_id) {
     $tags = getAvailableTagList();
 
+    global $sherlock;
+    $client_id = $sherlock->getClientId();
+
     foreach ($tags as $tag) {
-        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'" class="addtag"><nobr>');
+        $hash = getVotingHash($client_id, $item_id, $tag['name']);
+
+        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'&hash='.$hash.'" class="addtag" onClick="return addtag(this, '.$item_id.', \''.$tag['name'].'\', \''.$hash.'\');"><nobr>');
         echo(($tag['weight']<0?'&ndash;':'+') . '&nbsp;');
         echo($tag['name']);
         echo("</nobr></a> ");

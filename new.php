@@ -12,7 +12,7 @@
             $newItemId = createNewItem($title, $summary, $body, $parent_id, $guid);
 
             if ($newItemId) {
-                header('Location: ' . getItemUrl($newItemId));//@todo get site domain
+                header('Location: ' . getItemUrl($newItemId));
             }
         }
     }

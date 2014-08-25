@@ -1,6 +1,7 @@
 <?php
 include_once('config/env.php');
 include_once('module/utilities.php');
+include_once('module/items.php');
 include_once('module/sherlock.php');
 
 $sherlock = new SherlockSession($db);
@@ -11,10 +12,18 @@ $client_id = $sherlock->getClientId();
 if (isset($_POST)) {
     $item_id = getParam('item_id');
     $tag = getParam('tag');
+    $hash = getParam('hash');
 
-    addTagToItem($item_id, $tag, $client_id);
+    if (verifyVotingHash($sherlock->getClientId(), $item_id, $tag, $hash)) {
 
-    updateItemScore($item_id);
+        addTagToItem($item_id, $tag, $client_id);
 
-    header("Location: " . getItemUrl($item_id));
+        updateItemScore($item_id);
+
+        //header("Location: " . getItemUrl($item_id));
+
+        echo('ok');
+    } else {
+        echo('fail');
+    }
 }

@@ -1,4 +1,14 @@
 <?php
+function getMenuItems() {
+    return array(
+        '/' => 'News',
+        '/submit' => 'Submit',
+        '/moderate' => 'Moderate',
+        '/mirror' => 'Mirror',
+        '/about' => 'About'
+    );
+}
+
 function printHeader($username = null) {
 ?>
 <!doctype html>
@@ -9,6 +19,7 @@ function printHeader($username = null) {
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/sushi.css" />
     <script src="js/vendor/modernizr.js"></script>
+    <script src="js/sushi.js"></script>
 </head>
 <body>
 
@@ -18,12 +29,8 @@ function printHeader($username = null) {
     </div>
 </div>
 <div class="row">
-    <div class="large-12 columns">
-        <a href="/" class="topmenu">News</a>
-        <a href="/?action=submit" class="topmenu">Submit News</a>
-        <a href="/moderate" class="topmenu">Moderate</a>
-        <a href="/?action=mirror" class="topmenu">Mirror This</a>
-        <a href="/" class="topmenu">About</a>
+    <div class="large-12 columns" id="topmenu">
+        <?php foreach(getMenuItems() as $url => $item) { echo ('<a href="' . $url . '">' . $item . '</a>'); } ?>
     </div>
 </div>
 

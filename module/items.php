@@ -84,7 +84,7 @@ function getCommentUrl($item_id) {
 function getAvailableTagList() {
     global $dbp;
 
-    $stmt = $dbp->prepare("SELECT * FROM tag ORDER BY weight desc, name DESC");
+    $stmt = $dbp->prepare("SELECT * FROM tag WHERE active = 1 ORDER BY weight desc, name DESC");
 
     $tags = get_cache_dbp("alltags_weight", 60, $stmt);
 
