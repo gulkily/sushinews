@@ -1,5 +1,6 @@
 <?php
-    include_once('module/utilities.php');
+include_once('module/utilities.php');
+include_once('module/items.php');
 
     if (isset($_POST)) {
         $title = getParam('title');

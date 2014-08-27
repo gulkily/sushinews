@@ -178,10 +178,16 @@ function printAvailableTagList($item_id) {
     foreach ($tags as $tag) {
         $hash = getVotingHash($client_id, $item_id, $tag['name']);
 
+        if (isset($lastWeight) && $lastWeight != $tag['weight']) {
+            echo('<br>');
+        }
+
         echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'&hash='.$hash.'" class="addtag" onClick="return addtag(this, '.$item_id.', \''.$tag['name'].'\', \''.$hash.'\');"><nobr>');
         echo(($tag['weight']<0?'&ndash;':'+') . '&nbsp;');
         echo($tag['name']);
         echo("</nobr></a> ");
+
+        $lastWeight = $tag['weight'];
     }
 }
 
