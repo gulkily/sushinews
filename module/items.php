@@ -47,6 +47,20 @@ function getItems($limit = 20) {
 }
 
 function updateItemScore($item_id) {
+    global $db;
+
+
+    $item_id = intval($item_id);
+    if (!$item_id) return;
+
+    $query = "SELECT SUM(tag.weight) score FROM tag, item_tag WHERE item_tag.item_id = $item_id AND tag.id = item_tag.tag_id GROUP BY item_tag.item_id";
+    $item_score = $db->get_var($query);
+
+    $item_score = intval($item_score);
+
+    $query = "UPDATE item SET score = $item_score WHERE id = $item_id";
+    $db->query($query);
+/*
     global $dbp;
 
     $tags = $dbp->prepare("SELECT SUM(tag.weight) score FROM tag, item_tag WHERE item_tag.item_id = :id AND tag.id = item_tag.tag_id GROUP BY item_tag.item_id");
@@ -54,8 +68,9 @@ function updateItemScore($item_id) {
 
     $score = get_cache_dbp("itemscore/$item_id", 0, $tags);
 
-    $update = $dbp->prepare("UPDATE item SET score = :score WHERE item_id = :item_id");
+    $update = $dbp->prepare("UPDATE item SET score = :score WHERE id = :item_id");
     $update->execute(array(':score' => $score[0]['score'], ':item_id' => $item_id));
+*/
 }
 
 function getItemsByGuid($guid, $limit = 20) {
