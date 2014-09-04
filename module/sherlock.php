@@ -421,7 +421,20 @@
 		}
 
 		function getClientId() {
-            
+            $secret = 'sdjfasdf;q4rkqewfjkasdjlkfds';
+
+            if (isset($_COOKIE['sherlock'])) {
+                $data = $_COOKIE['sherlock'];
+                $data = explode(',', $data);
+
+                if (md5(intval($data[0]) . $_SERVER['REMOTE_ADDR'] . $secret) == $data[1]) {
+                    $client_id = intval($data[0]);
+
+                    $this->client_id = $client_id;
+
+                    return $client_id;
+                }
+            }
 
             if (isset($this->client_id)) {
 				return $this->client_id;
@@ -434,6 +447,8 @@
 			}
             
 			$client_id = intval($client_id);
+
+            setcookie('sherlock', $client_id . ',' . md5($client_id . $_SERVER['REMOTE_ADDR'] . $secret));
 
 			return $client_id;
 		}
