@@ -76,12 +76,12 @@ function getLink($action, $params = array(), $format = 'relative') {
     if ($format == 'relative') {
         $link = './?';
     } elseif ($format == 'absolute') {
-        $link =
+        $link = SITE_PATH . '?';
     }
-
 
     $link .= 'action=' . urlencode($action);
 
+    // currently unvalidated
     if (count($params)) {
         foreach($params as $key => $value) {
             $link .= '&' . urlencode($key) . '=' . urlencode($value);
@@ -89,10 +89,6 @@ function getLink($action, $params = array(), $format = 'relative') {
     }
 
     return $link;
-
-}
-
-function getLink($action, $text = null, $id = null, $class = null) {
 
 }
 

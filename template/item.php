@@ -89,7 +89,7 @@ function printTwoItems($items, $relatedItems) {
 }
 
 function printItem(array $itemData) {
-    $self_domain = 'sushi.local'; //@todo this shouldn't be defined here
+    $self_domain = SITE_DOMAIN;
 
     ?>
     <form>
@@ -100,7 +100,7 @@ function printItem(array $itemData) {
     </h3>
     <p><?=($itemData['body']?nl2br(htmlspecialchars($itemData['body'])):htmlspecialchars($itemData['summary']))?></p>
     <p>
-        <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a>
+        <a href="<?=getLink('edit', array('id' => $itemData['id']))?>">Edit This Story</a>
         Tags: <? printTagList($itemData['tags']); ?>
 
     <br>

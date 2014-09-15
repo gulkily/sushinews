@@ -89,7 +89,7 @@ function getItemsByGuid($guid, $limit = 20) {
 }
 
 function getItemUrl($item_id) {
-    return "http://" . getOwnUrl() . "/" . $item_id;
+    return getLink('view', array('id' => $item_id));
 }
 
 function getCommentUrl($item_id) {
