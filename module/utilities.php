@@ -16,6 +16,14 @@ function getParam($name) {
 
     return $param;
 }
+//
+//function getClientVotes() {
+//    if (!$_COOKIE['voted']) {
+//        return array();
+//    } else {
+//
+//    }
+//}
 
 function getVotingHash($client_id, $item_id, $tag) {
     return md5($client_id . $item_id . $tag . SECRET_SALT);
@@ -28,7 +36,61 @@ function verifyVotingHash($client_id, $item_id, $tag, $hash) {
         return false;
     }
 }
+//
+//function getConfigLine($name, $value) {
+//    return "define ('" . $name . "','" . $value . "');\n";
+//}
+//
+//function verifyEnv() {
+//    // verifies environment
+//    // returns null if current config [ IS VALID ] and [ MATCHES env.php ]
+//    // -otherwise-
+//    // returns a version of env.php to make both true
+//
+//    $validConfig = "<?php\n";
+//
+//    $validSoFar = true;
+//
+//    if (isset(GUID_SEED)) {
+//        $validConfig .= getConfigLine('GUID_SEED', GUID_SEED);
+//    } else {
+//        $validConfig .= getConfigLine('GUID_SEED', md5(sha1(time() . $_REQUEST['REMOTE_ADDR'] . $_REQUEST['HTTP_HOST'])));
+//        $validSoFar = false;
+//    }
+//
+//    define('GUID_SEED', "dsfadsfadsfadsfq43rq4rqfx4rdfadsf");
+//    define('CACHE_PATH', "/home/ilya/sushi/cache");
+//    define('SITE_NAME', 'sushi news');
+//    define('SECRET_SALT', '4rx34rfadjkfadslfjklaewfj19895489fj83rfj8');
+//    define('SITE_BASE', 'sushi.local');
+//    define('SITE_BASE_PATH', '/');
+//}
 
+function getLink($action, $params = array(), $format = 'relative') {
+    // generates a link to a resource
+    // $action is the action parameter, which helps organize the validation
+    // $params are all the other parameters, as an array
+    // $format can be relative (starting with ./), absolute (starting with /), or global (starting with http://)
+    $params['action'] = $action;
+
+    if ($format == 'relative') {
+        $link = './?';
+    } elseif ($format == 'absolute') {
+        $link =
+    }
+
+
+    $link .= 'action=' . urlencode($action);
+
+    if (count($params)) {
+        foreach($params as $key => $value) {
+            $link .= '&' . urlencode($key) . '=' . urlencode($value);
+        }
+    }
+
+    return $link;
+
+}
 
 function getLink($action, $text = null, $id = null, $class = null) {
 

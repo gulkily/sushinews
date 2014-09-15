@@ -427,7 +427,7 @@
                 $data = $_COOKIE['sherlock'];
                 $data = explode(',', $data);
 
-                if (md5(intval($data[0]) . $_SERVER['REMOTE_ADDR'] . $secret) == $data[1]) {
+                if (md5(intval($data[0]) . intval($data[1]) . $_SERVER['REMOTE_ADDR'] . $secret) == $data[2]) {
                     $client_id = intval($data[0]);
 
                     $this->client_id = $client_id;
@@ -447,8 +447,9 @@
 			}
             
 			$client_id = intval($client_id);
+            $rand = mt_rand();
 
-            setcookie('sherlock', $client_id . ',' . md5($client_id . $_SERVER['REMOTE_ADDR'] . $secret));
+            setcookie('sherlock', $client_id . ',' . $rand . ',' . md5($client_id . $rand . $_SERVER['REMOTE_ADDR'] . $secret));
 
 			return $client_id;
 		}

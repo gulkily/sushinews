@@ -3,18 +3,11 @@
 function beginItemList() {
 ?>
 
-    <div class="row">
-    <div class="large-12 columns">
-    <div class="panel">
-
 <?php
 }
 
 function endItemList() {
 ?>
-    </div>
-    </div>
-    </div>
 
 <?php
 }
@@ -33,30 +26,6 @@ function printTagList($tags) {
             <a href="/?action=tag&tag=<?=$tag['name']?>"><?=htmlspecialchars($tag['name'])?> (<?=$tag['count']?>)</a>
     <?php
     }
-}
-
-function printItemTabs($itemId) {
-    $itemUrlPrefix = getItemUrl($item_id);
-
-?>
-    <div class="panel">
-
-    <?php
-
-    $tabs = array(
-        '/' => 'Article',
-        '/edit' => 'Edit',
-        '/data' => 'Data',
-        '/history' => 'Other Versions'
-    );
-
-    foreach ($tabs as $key => $caption) {
-        echo('<a class="itemtab" href="' . $itemUrlPrefix . $key . '">' . $caption . '</a></li>');
-    }
-
-    ?>
-    </div>
-    <?php
 }
 
 function printRelatedItems(array $relatedItems, $sourceItemId) {
@@ -79,15 +48,6 @@ function printRelatedItems(array $relatedItems, $sourceItemId) {
 
 function printOneItem($itemData, $relatedItems) {
     ?>
-    <div class="row">
-        <div class="large-12 columns">
-            <?php
-            printItemTabs($itemData['id']);
-
-            ?>
-            <div class="panel">
-
-
                 <?php
 
                 printItem($itemData);
@@ -103,20 +63,10 @@ function printOneItem($itemData, $relatedItems) {
 
 <?php
                 }
-?>
-            </div>
-        </div>
-    </div>
-
-<?php
 }
 
 function printTwoItems($items, $relatedItems) {
     ?>
-    <div class="row">
-        <div class="large-6 columns">
-            <div class="panel">
-
 
                 <?php
 
@@ -125,10 +75,6 @@ function printTwoItems($items, $relatedItems) {
                 printAvailableTagList($items[0]['id'])
 
                 ?>
-            </div>
-        </div>
-        <div class="large-6 columns">
-            <div class="panel">
 
 
                 <?php
@@ -138,9 +84,6 @@ function printTwoItems($items, $relatedItems) {
                 printAvailableTagList($items[1]['id']);
 
                 ?>
-            </div>
-        </div>
-    </div>
 
 <?php
 }
