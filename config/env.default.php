@@ -2,11 +2,22 @@
 
 // Please rename this file to env.php and set up the parameters below
 
-define('GUID_SEED', "dsfadsfadsfadsfq43rq4rqfx4rdfadsf");
-define('CACHE_PATH', "/home/ilya/sushi/cache");
-define('SITE_NAME', '');
-define('SECRET_SALT', '4rx34rfadjkfadslfjklaewfj19895489fj83rfj8');
+// The fields marked with a *** are mandatory and must be set before running the site
+
+// *** Fill this field with random text at least 128 characters long
+define('GUID_SEED', "");
+
+// *** Fill this field with random text at least 128 characters long
+define('SECRET_SALT', '');
+
+// *** This is the path to where the cache lives and must be writable
+define('CACHE_PATH', "");
+
+// *** This is the domain the site lives on @todo autoconfig this while running the site from HTTP_HOST
 define('SITE_DOMAIN', 'sushi.local');
+
+// This is the name of the site
+define('SITE_NAME', '');
 define('SITE_PATH', '/');
 define('SITE_PREFIX', 'http://');
 
