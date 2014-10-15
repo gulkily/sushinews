@@ -88,8 +88,8 @@ function getItemsByGuid($guid, $limit = 20) {
     return $items;
 }
 
-function getItemUrl($item_id) {
-    return getLink('view', array('id' => $item_id));
+function getItemUrl($item_id, $format = 'relative') {
+    return getLink('item', array('id' => $item_id), $format);
 }
 
 function getCommentUrl($item_id) {

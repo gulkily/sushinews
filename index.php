@@ -1,13 +1,18 @@
 <?php
 
-include_once('config/env.php');
+if(!@include_once("config/env.php")) {
+    echo("Please create config/env.php. You can use env.default.php as a starting point.");
+
+    throw new Exception("Please create config/env.php. You can use env.default.php as a starting point.");
+}
+
 include_once('module/utilities.php');
-//include_once('module/sherlock.php');
+include_once('module/sherlock.php');
 include_once('module/items.php');
 
-//$sherlock = new SherlockSession($db);
-//$sherlock->populateFromGlobals();
-//$sherlock->storeSession();
+$sherlock = new SherlockSession($db);
+$sherlock->populateFromGlobals();
+$sherlock->storeSession();
 //
 //echo ($sherlock->getClientId());
 
@@ -138,26 +143,28 @@ if (isset($action)) {
             include_once('template/header.php');
             include_once('template/footer.php');
 
-            $eligible = get_cache('voting/eligible', 3600, "select guid from ( select guid, count(guid) as gcount from item group by guid) guids where gcount > 1", 'get_col');
+            $eligible = get_cache(
+                'voting/eligible',
+                60,
+                "select guid from ( select guid, count(guid) as gcount from item group by guid) guids where gcount > 1",
+                'get_col'
+            );
 
-            $rand = rand(0, count($eligible)-1);
+            $rand = rand(0, count($eligible) - 1);
 
             $guid = $eligible[$rand];
 
             $versions = get_cache("versions/$guid", 60, "select id from item where guid = '$guid'", 'get_col');
 
-            for ($i = 0; $i < 2; $i++) {
-                if (count($versions) == 1) {
-                    $chosen[] = $versions[0];
-                } else {
-                    $rand = rand(0, count($versions) - 1);
-                    $chosen[] = $versions[$rand];
-                    unset($versions[$rand]);
-                }
-            }
+            shuffle($versions);
+
+            $chosen[] = array_pop($versions);
+            $chosen[] = array_pop($versions);
 
             $itemDataOne = getItem($chosen[0]);
             $itemDataTwo = getItem($chosen[1]);
+
+            $linkedItems = getItemsByGuid($guid);
 
             printHeader();
 

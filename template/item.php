@@ -3,11 +3,18 @@
 function beginItemList() {
 ?>
 
+    <div class="row">
+    <div class="large-12 columns">
+    <div class="panel">
+
 <?php
 }
 
 function endItemList() {
 ?>
+    </div>
+    </div>
+    </div>
 
 <?php
 }
@@ -26,6 +33,26 @@ function printTagList($tags) {
             <a href="/?action=tag&tag=<?=$tag['name']?>"><?=htmlspecialchars($tag['name'])?> (<?=$tag['count']?>)</a>
     <?php
     }
+}
+
+function printItemTabs($itemId) {
+?>
+    <div class="panel">
+
+    <?php
+
+    $tabs = array(
+        'item' => 'Article',
+        'edit' => 'Edit',
+    );
+
+    foreach ($tabs as $key => $caption) {
+        echo('<a class="itemtab" href="' . getLink($key, array('id' => $itemId)) . '">' . $caption . '</a></li>');
+    }
+
+    ?>
+    </div>
+    <?php
 }
 
 function printRelatedItems(array $relatedItems, $sourceItemId) {
@@ -48,6 +75,15 @@ function printRelatedItems(array $relatedItems, $sourceItemId) {
 
 function printOneItem($itemData, $relatedItems) {
     ?>
+    <div class="row">
+        <div class="large-12 columns">
+            <?php
+            printItemTabs($itemData['id']);
+
+            ?>
+            <div class="panel">
+
+
                 <?php
 
                 printItem($itemData);
@@ -63,10 +99,20 @@ function printOneItem($itemData, $relatedItems) {
 
 <?php
                 }
+?>
+            </div>
+        </div>
+    </div>
+
+<?php
 }
 
 function printTwoItems($items, $relatedItems) {
     ?>
+    <div class="row">
+        <div class="large-6 columns">
+            <div class="panel">
+
 
                 <?php
 
@@ -75,6 +121,10 @@ function printTwoItems($items, $relatedItems) {
                 printAvailableTagList($items[0]['id'])
 
                 ?>
+            </div>
+        </div>
+        <div class="large-6 columns">
+            <div class="panel">
 
 
                 <?php
@@ -84,12 +134,15 @@ function printTwoItems($items, $relatedItems) {
                 printAvailableTagList($items[1]['id']);
 
                 ?>
+            </div>
+        </div>
+    </div>
 
 <?php
 }
 
 function printItem(array $itemData) {
-    $self_domain = SITE_DOMAIN;
+    $self_domain = 'sushi.local'; //@todo this shouldn't be defined here
 
     ?>
     <form>
@@ -100,11 +153,11 @@ function printItem(array $itemData) {
     </h3>
     <p><?=($itemData['body']?nl2br(htmlspecialchars($itemData['body'])):htmlspecialchars($itemData['summary']))?></p>
     <p>
-        <a href="<?=getLink('edit', array('id' => $itemData['id']))?>">Edit This Story</a>
+        <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a>
         Tags: <? printTagList($itemData['tags']); ?>
 
     <br>
-        Share: <a href="<?=getItemUrl($itemData['id'])?>" class="sharelink"><?=getItemUrl($itemData['id'])?></a>
+        Share: <a href="<?=getItemUrl($itemData['id'], 'absolute')?>" class="sharelink"><?=getItemUrl($itemData['id'], 'absolute')?></a>
     </p>
     </form>
 
@@ -117,6 +170,7 @@ function printAvailableTagList($item_id) {
 
     global $sherlock;
     $client_id = $sherlock->getClientId();
+//    $client_id = 1; //temporary duct tape @todo
 
     foreach ($tags as $tag) {
         $hash = getVotingHash($client_id, $item_id, $tag['name']);
