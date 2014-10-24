@@ -46,6 +46,24 @@ function getItems($limit = 20) {
     return $items;
 }
 
+function updateAllItemScores() {
+    global $db;
+
+    $query = "SELECT item_tag.item_id item_id, SUM(tag.weight) score FROM tag, item_tag WHERE tag.id = item_tag.tag_id GROUP BY item_tag.item_id";
+    $newItemScores = $db->get_results($query);
+
+    foreach ($newItemScores as $newItemScore) {
+        $score = $newItemScore->score;
+        $item = $newItemScore->item_id;
+
+        $query = "UPDATE item SET score = $score WHERE id = $item";
+        $db->query($query);
+    }
+
+    // @todo this is sub-optimal and should also be broken down to only update __ at a time
+
+}
+
 function updateItemScore($item_id) {
     global $db;
 
@@ -72,6 +90,18 @@ function updateItemScore($item_id) {
     $update->execute(array(':score' => $score[0]['score'], ':item_id' => $item_id));
 */
 }
+
+//
+//function updateItemScore($itemId) {
+//    $itemId = intval($itemId);
+//    if (!$itemId) return false; //todo error handler
+//
+//    $item = $db->get_row("SELECT * FROM item WHERE item_id = $itemId");
+//
+//    $voteSum = $db->get_var("SELECT SUM(weight) score FROM tag, item_tag WHERE item_tag.tag_id = tag.id AND item_tag.item_id = $itemId");
+//    echo $voteSum;
+//}
+
 
 function getItemsByGuid($guid, $limit = 20) {
     global $dbp;

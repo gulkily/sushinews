@@ -108,6 +108,7 @@ function printOneItem($itemData, $relatedItems) {
 }
 
 function printTwoItems($items, $relatedItems) {
+
     ?>
     <div class="row">
         <div class="large-6 columns">
