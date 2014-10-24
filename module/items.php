@@ -49,7 +49,19 @@ function getItems($limit = 20) {
 function updateAllItemScores() {
     global $db;
 
-    $query = "SELECT item_tag.item_id item_id, SUM(tag.weight) score FROM tag, item_tag WHERE tag.id = item_tag.tag_id GROUP BY item_tag.item_id";
+    //$query = "SELECT item_tag.item_id item_id, SUM(tag.weight) score FROM tag, item_tag WHERE tag.id = item_tag.tag_id GROUP BY item_tag.item_id";
+    $query = "
+        SELECT
+        item.id item_id,
+        ifnull(SUM(tag.weight), 0) score,
+        COUNT(item_tag.tag_id) vote_count
+        FROM item
+        LEFT JOIN item_tag ON item.id = item_tag.item_id
+        LEFT JOIN tag ON item_tag.tag_id = tag.id
+        GROUP BY item.id
+        ORDER BY vote_count
+    ";
+
     $newItemScores = $db->get_results($query);
 
     foreach ($newItemScores as $newItemScore) {
