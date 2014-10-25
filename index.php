@@ -13,8 +13,6 @@ include_once('module/items.php');
 $sherlock = new SherlockSession($db);
 $sherlock->populateFromGlobals();
 $sherlock->storeSession();
-//
-//echo ($sherlock->getClientId());
 
 $action = getParam('action');
 
@@ -78,11 +76,6 @@ if (isset($action)) {
 
             $linkedItems = getItemsByGuid($itemData['guid'], 20);
 
-            //$stmt = $db->prepare("SELECT * FROM item WHERE id=:id AND name=:name");
-//            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-//            $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-            //$items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
             include('template/header.php');
             printHeader();
 
@@ -101,11 +94,6 @@ if (isset($action)) {
             $itemDataTwo = getItem($two);
 
             $linkedItems = getItemsByGuid($itemDataOne['guid'], 20);
-
-            //$stmt = $db->prepare("SELECT * FROM item WHERE id=:id AND name=:name");
-//            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-//            $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-            //$items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             include('template/header.php');
             printHeader();

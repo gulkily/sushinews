@@ -109,6 +109,23 @@ function printOneItem($itemData, $relatedItems) {
 
 function printTwoItems($items, $relatedItems) {
 
+    // include the Diff class
+    require_once('module/class.Diff.php');
+
+    //echo (Diff::toTable($diff));
+
+    //print_r($diff);
+
+    echo("<table class=\"diff\">\n");
+
+    foreach(array('title', 'summary', 'body') as $element) {
+        echo(Diff::toTable(Diff::compare($items[0][$element], $items[1][$element])));
+    }
+
+    // return the HTML
+    echo("</table>\n");
+
+
     ?>
     <div class="row">
         <div class="large-6 columns">

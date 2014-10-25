@@ -245,9 +245,17 @@
 				if ( ! isset($this->dbh) || ! $this->dbh )
 					return false;
 			}
+//
+//            $starttime = microtime(true);
 
 			// Perform the query via std mysql_query function..
 			$this->result = @mysql_query($query,$this->dbh);
+//
+//            $endtime = microtime(true);
+//
+//            $runtime = $endtime - $starttime;
+//
+//            error_log($runtime . ' - ' . $query);
 
 			// If there is an error then take note of it..
 			if ( $str = @mysql_error($this->dbh) )

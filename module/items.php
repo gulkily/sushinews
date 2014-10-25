@@ -39,7 +39,6 @@ function getItems($limit = 20) {
     $limit = intval($limit);
 
     $stmt = $dbp->prepare("SELECT title, body, summary, id, guid, publish_timestamp FROM item_best_v ORDER BY score DESC, publish_timestamp DESC LIMIT $limit");
-    //$stmt = $dbp->prepare("SELECT FIRST(title) title, FIRST(body) body, FIRST(summary) summary, FIRST(id) id, guid, FIRST(publish_timestamp) publish_timestamp, FIRST(score) FROM item GROUP BY guid ORDER BY score DESC, publish_timestamp DESC LIMIT $limit");
 
     $items = get_cache_dbp("items/$limit", 60, $stmt);
 
@@ -49,7 +48,6 @@ function getItems($limit = 20) {
 function updateAllItemScores() {
     global $db;
 
-    //$query = "SELECT item_tag.item_id item_id, SUM(tag.weight) score FROM tag, item_tag WHERE tag.id = item_tag.tag_id GROUP BY item_tag.item_id";
     $query = "
         SELECT
         item.id item_id,
@@ -102,17 +100,6 @@ function updateItemScore($item_id) {
     $update->execute(array(':score' => $score[0]['score'], ':item_id' => $item_id));
 */
 }
-
-//
-//function updateItemScore($itemId) {
-//    $itemId = intval($itemId);
-//    if (!$itemId) return false; //todo error handler
-//
-//    $item = $db->get_row("SELECT * FROM item WHERE item_id = $itemId");
-//
-//    $voteSum = $db->get_var("SELECT SUM(weight) score FROM tag, item_tag WHERE item_tag.tag_id = tag.id AND item_tag.item_id = $itemId");
-//    echo $voteSum;
-//}
 
 
 function getItemsByGuid($guid, $limit = 20) {

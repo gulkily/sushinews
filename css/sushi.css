@@ -42,3 +42,17 @@ img {
     -ms-interpolation-mode: bicubic;
 }
 
+.diff td{
+    vertical-align : top;
+    white-space    : pre;
+    white-space    : pre-wrap;
+}
+
+.diff .diffDeleted {
+    background-color: #ffe0e0;
+}
+
+.diff .diffInserted {
+    background-color: #e0ffe0;
+}
+

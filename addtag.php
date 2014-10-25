@@ -20,8 +20,6 @@ if (isset($_POST)) {
 
         updateItemScore($item_id);
 
-        //header("Location: " . getItemUrl($item_id));
-
         echo('ok');
     } else {
         echo('fail');
