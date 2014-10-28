@@ -186,8 +186,9 @@ function printItem(array $itemData) {
 function printAvailableTagList($item_id) {
     $tags = getAvailableTagList();
 
-    global $sherlock;
-    $client_id = $sherlock->getClientId();
+//    global $sherlock;
+    $client_id = getVoterId();
+
 //    $client_id = 1; //temporary duct tape @todo
 
     foreach ($tags as $tag) {

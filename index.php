@@ -10,10 +10,10 @@ include_once('module/utilities.php');
 include_once('module/sherlock.php');
 include_once('module/items.php');
 
-$sherlock = new SherlockSession($db);
-$sherlock->populateFromGlobals();
-$sherlock->storeSession();
-
+//$sherlock = new SherlockSession($db);
+//$sherlock->populateFromGlobals();
+//$sherlock->storeSession();
+//
 $action = getParam('action');
 
 if (!$action) {

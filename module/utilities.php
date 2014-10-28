@@ -29,6 +29,42 @@ function getVotingHash($client_id, $item_id, $tag) {
     return md5($client_id . $item_id . $tag . SECRET_SALT);
 }
 
+function getVoterId() {
+    static $voter_id;
+    static $voter;
+
+    if (isset($_COOKIE['voter_id'])) {
+        $voter_id = $_COOKIE['voter_id'];
+
+        $voter = explode(',', $voter_id);
+    }
+
+    // @todo some sanity checks here
+    if ($voter[1] == md5($voter[0] . $_SERVER['REMOTE_ADDR'] . SECRET_SALT)) {
+        return $voter[1];
+    } else {
+        $host = $_SERVER['REMOTE_ADDR'];
+        $host .= round(time() / 3600);
+        $host = md5(host);
+
+        global $db;
+        $last_assignment = $db->get_var("SELECT last_assigment FROM voter_id_rate WHERE host = '$host'"); // @todo escape
+
+        // @todo actually verify that it wasn't too recent
+
+        $query = "INSERT INTO voter_id_rate(host, last_assigment) VALUES('$host', NOW())";
+        $db->query($query);
+
+        $voter_id = md5(rand(0,100000) . time()); // @todo make this more random
+
+        $cookie = $voter_id . ',' . md5($voter_id . $_SERVER['REMOTE_ADDR'] . SECRET_SALT);
+
+        setcookie('voter_id', $cookie);
+
+        return $voter_id;
+    }
+}
+
 function verifyVotingHash($client_id, $item_id, $tag, $hash) {
     if (md5($client_id . $item_id . $tag . SECRET_SALT) == $hash) {
         return true;
@@ -109,12 +145,11 @@ function getTagId($tag_name) {
     return $tag_id[0]['id'];
 }
 
-function addTagToItem($item_id, $tag_name, $client_id) {
+function addTagToItem($item_id, $tag_name, $voter_id) {
     global $dbp;
 
     $item = intval($item_id);
     $tag = strtolower(trim($tag_name));
-    $client_id = intval($client_id);
 
     if (!$item || !$tag) {
         return;
@@ -126,9 +161,9 @@ function addTagToItem($item_id, $tag_name, $client_id) {
         return;
     }
 
-    $stmt = $dbp->prepare("INSERT INTO item_tag(item_id, tag_id, client_id) VALUES(:item_id, :tag_id, :client_id)");
+    $stmt = $dbp->prepare("INSERT INTO item_tag(item_id, tag_id, voter_id) VALUES(:item_id, :tag_id, :voter_id)");
 
-    $stmt->execute(array(':item_id' => $item, ':tag_id' => $tag_id, ':client_id' => $client_id));
+    $stmt->execute(array(':item_id' => $item, ':tag_id' => $tag_id, ':voter_id' => $voter_id));
 }
 
 function getUserId() {
