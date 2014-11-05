@@ -6,12 +6,15 @@
 
 // *** Fill this field with random text at least 128 characters long
 define('GUID_SEED', "");
+if (GUID_SEED === '') die ('Please set the GUID_SEED global in env.php');
 
 // *** Fill this field with random text at least 128 characters long
 define('SECRET_SALT', '');
+if (SECRET_SALT === '') die ('Please set the SECRET_SALT global in env.php');
 
 // *** This is the path to where the cache lives and must be writable
 define('CACHE_PATH', "");
+if (CACHE_PATH === '') die ('Please set the CACHE_PATH global in env.php');
 
 // *** This is the domain the site lives on @todo autoconfig this while running the site from HTTP_HOST
 define('SITE_DOMAIN', 'sushi.local');
