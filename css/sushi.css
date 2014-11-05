@@ -56,3 +56,15 @@ img {
     background-color: #e0ffe0;
 }
 
+.diff tr.title {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.diff tr.summary {
+    font-weight: bold;
+}
+
+.diff tr {
+    width: 50%;
+}

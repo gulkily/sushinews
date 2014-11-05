@@ -281,7 +281,7 @@ class Diff{
    * $separator   - the separator between lines; this optional parameter
    *                defaults to '<br>'
    */
-  public static function toTable($diff, $indentation = '', $separator = '<br>'){
+  public static function toTable($diff, $class = '', $indentation = '', $separator = '<br>'){
 
     // Initialise the HTML
     $html = '';
@@ -324,7 +324,7 @@ class Diff{
       // extend the HTML with the new row
       $html .=
           $indentation
-          . "  <tr>\n"
+          . "  <tr class=\"$class\">\n"
           . $indentation
           . '    <td class="diff'
           . ($leftCell == $rightCell

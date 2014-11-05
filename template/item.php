@@ -112,49 +112,33 @@ function printTwoItems($items, $relatedItems) {
     // include the Diff class
     require_once('module/class.Diff.php');
 
-    //echo (Diff::toTable($diff));
-
-    //print_r($diff);
-
+//    foreach(array('title', 'summary', 'body') as $element) {
+//        $diff[$element] = Diff::compare($items[0]['body'], $items[1]['body']);
+//    }
+//
+//    print_r($diff);
+//
     echo("<table class=\"diff\">\n");
 
     foreach(array('title', 'summary', 'body') as $element) {
-        echo(Diff::toTable(Diff::compare($items[0][$element], $items[1][$element])));
+        echo(Diff::toTable(Diff::compare($items[0][$element], $items[1][$element]), $element));
     }
 
-    // return the HTML
+    echo('<tr><td>');
+    echo('<a href="'.getItemUrl($items[0]['id'], 'absolute').'">'.getItemUrl($items[0]['id'], 'absolute').'</a>');
+    echo('</td><td>');
+    echo('<a href="'.getItemUrl($items[0]['id'], 'absolute').'">'.getItemUrl($items[0]['id'], 'absolute').'</a>');
+    echo('</td></tr>');
+
+    echo('<tr><td>');
+    printAvailableTagList($items[0]['id']);
+    echo('</td><td>');
+    printAvailableTagList($items[1]['id']);
+    echo('</td></tr>');
+
     echo("</table>\n");
 
-
     ?>
-    <div class="row">
-        <div class="large-6 columns">
-            <div class="panel">
-
-
-                <?php
-
-                printItem($items[0]);
-
-                printAvailableTagList($items[0]['id'])
-
-                ?>
-            </div>
-        </div>
-        <div class="large-6 columns">
-            <div class="panel">
-
-
-                <?php
-
-                printItem($items[1]);
-
-                printAvailableTagList($items[1]['id']);
-
-                ?>
-            </div>
-        </div>
-    </div>
 
 <?php
 }
@@ -201,7 +185,7 @@ function printAvailableTagList($item_id) {
         echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'&hash='.$hash.'" class="addtag" onClick="return addtag(this, '.$item_id.', \''.$tag['name'].'\', \''.$hash.'\');"><nobr>');
         echo(($tag['weight']<0?'&ndash;':'+') . '&nbsp;');
         echo($tag['name']);
-        echo("</nobr></a> ");
+        echo("</nobr></a>");
 
         $lastWeight = $tag['weight'];
     }
