@@ -6,14 +6,14 @@ include_once('module/utilities.php');
 include_once('module/items.php');
 
 function writeMysqlDump($path, $filename) {
-    
+
     $tables_data = array(
-		'item',
-		'item_tag',
-		'record_client_count',
-		'source',
-		'tag',
-		'user',
+        'item',
+        'item_tag',
+        'record_client_count',
+        'source',
+        'tag',
+        'user',
     );
 
     $tables = array(
@@ -33,11 +33,10 @@ function writeMysqlDump($path, $filename) {
         'sherlock_config',
     );
 
-    shell_exec('mysqldump -uroot -padmin sushinews >' . $path . $filename . ' ' . implode(' ', $tables_data));
-    shell_exec('mysqldump -d -uroot -padmin sushinews >>' . $path . $filename . ' ' . implode(' ', $tables));
-    shell_exec('gzip -9 ' . $path . $filename . '.gz' . ' ' . $path . $filename);
+    shell_exec('mysqldump -uroot -padmin sushinews >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
+    shell_exec('mysqldump -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
+    shell_exec('gzip -9 ' . $path . $filename . '_data.sql.gz' . ' ' . $path . $filename . '_data.sql');
 }
-
 
 function writeHtmlArchive($path, $filename) {
     $items = getItems(100000);
@@ -95,4 +94,4 @@ function writeHtmlArchive($path, $filename) {
 }
 
 writeHtmlArchive('/home/ilya/sushi/mirror/', 'mirror_all.zip');
-writeMysqlDump('/home/ilya/sushi/mirror/', 'sushinews.sql');
+writeMysqlDump('/home/ilya/sushi/mirror/', 'sushinews');
