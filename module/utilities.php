@@ -119,8 +119,10 @@ function getLink($action, $params = array(), $format = 'relative') {
 
     // currently unvalidated
     if (count($params)) {
+        $comma = 0;
         foreach($params as $key => $value) {
-            $link .= '&' . urlencode($key) . '=' . urlencode($value);
+            if ($comma == 0) $comma = 1; else $link .= '&';
+            $link .= urlencode($key) . '=' . urlencode($value);
         }
     }
 
