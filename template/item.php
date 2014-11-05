@@ -112,6 +112,14 @@ function printTwoItems($items, $relatedItems) {
     // include the Diff class
     require_once('module/class.Diff.php');
 
+    if ($items[0]['id'] > $items[1]['id']) {
+        $first = 1;
+        $second = 0;
+    } else {
+        $first = 0;
+        $second = 1;
+    }
+
 //    foreach(array('title', 'summary', 'body') as $element) {
 //        $diff[$element] = Diff::compare($items[0]['body'], $items[1]['body']);
 //    }
@@ -121,19 +129,19 @@ function printTwoItems($items, $relatedItems) {
     echo("<table class=\"diff\">\n");
 
     foreach(array('title', 'summary', 'body') as $element) {
-        echo(Diff::toTable(Diff::compare($items[0][$element], $items[1][$element]), $element));
+        echo(Diff::toTable(Diff::compare($items[$first][$element], $items[$second][$element]), $element));
     }
 
     echo('<tr><td>');
-    echo('<a href="'.getItemUrl($items[0]['id'], 'absolute').'">'.getItemUrl($items[0]['id'], 'absolute').'</a>');
+    echo('<a href="'.getItemUrl($items[$first]['id'], 'absolute').'">'.getItemUrl($items[$first]['id'], 'absolute').'</a>');
     echo('</td><td>');
-    echo('<a href="'.getItemUrl($items[1]['id'], 'absolute').'">'.getItemUrl($items[1]['id'], 'absolute').'</a>');
+    echo('<a href="'.getItemUrl($items[$second]['id'], 'absolute').'">'.getItemUrl($items[$second]['id'], 'absolute').'</a>');
     echo('</td></tr>');
 
     echo('<tr><td>');
-    printAvailableTagList($items[0]['id']);
+    printAvailableTagList($items[$first]['id']);
     echo('</td><td>');
-    printAvailableTagList($items[1]['id']);
+    printAvailableTagList($items[$second]['id']);
     echo('</td></tr>');
 
     echo("</table>\n");
