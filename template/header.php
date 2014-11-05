@@ -5,7 +5,7 @@ function getMenuItems() {
         '/submit' => 'Submit',
         '/moderate' => 'Moderate',
         '/mirror' => 'Mirror',
-        '/about' => 'About'
+        '/?action=about' => 'About'
     );
 }
 

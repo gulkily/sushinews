@@ -22,6 +22,18 @@ if (!$action) {
 
 if (isset($action)) {
     switch($action) {
+        case 'about':
+            include_once('template/header.php');
+            include_once('template/about.php');
+            include_once('template/footer.php');
+
+            printHeader();
+
+            printAbout();
+
+            printFooter();
+
+            break;
         case 'mirror':
             include_once('template/header.php');
             include_once('template/footer.php');
