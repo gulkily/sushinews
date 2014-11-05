@@ -11,12 +11,11 @@ a.sharelink {
 }
 
 a.addtag {
-    border: 0.2em solid;
-    border-radius: 0.2em;
-    margin: 0.1em;
+    border: 0.2em outset;
+    border-radius: 0.5em;
+    margin: 0.2em;
     font-family: helvetica, arial, sans-serif;
-    font-size: smaller;
-    padding: 0.1em;
+    padding: 0.2em;
     line-height: 2em;
 }
 

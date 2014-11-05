@@ -127,7 +127,7 @@ function printTwoItems($items, $relatedItems) {
     echo('<tr><td>');
     echo('<a href="'.getItemUrl($items[0]['id'], 'absolute').'">'.getItemUrl($items[0]['id'], 'absolute').'</a>');
     echo('</td><td>');
-    echo('<a href="'.getItemUrl($items[0]['id'], 'absolute').'">'.getItemUrl($items[0]['id'], 'absolute').'</a>');
+    echo('<a href="'.getItemUrl($items[1]['id'], 'absolute').'">'.getItemUrl($items[1]['id'], 'absolute').'</a>');
     echo('</td></tr>');
 
     echo('<tr><td>');
