@@ -30,7 +30,6 @@ function getVotingHash($client_id, $item_id, $tag) {
 }
 
 function getVoterId() {
-    static $voter_id;
     static $voter;
 
     if (isset($_COOKIE['voter_id'])) {
@@ -45,7 +44,7 @@ function getVoterId() {
     } else {
         $host = $_SERVER['REMOTE_ADDR'];
         $host .= round(time() / 3600);
-        $host = md5(host);
+        $host = md5($host);
 
         global $db;
         $last_assignment = $db->get_var("SELECT last_assigment FROM voter_id_rate WHERE host = '$host'"); // @todo escape
@@ -59,7 +58,7 @@ function getVoterId() {
 
         $cookie = $voter_id . ',' . md5($voter_id . $_SERVER['REMOTE_ADDR'] . SECRET_SALT);
 
-        setcookie('voter_id', $cookie);
+        if (!headers_sent()) setcookie('voter_id', $cookie);
 
         return $voter_id;
     }
