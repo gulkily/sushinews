@@ -190,10 +190,10 @@ function printAvailableTagList($item_id) {
             echo('<br>');
         }
 
-        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'&hash='.$hash.'" class="addtag" onClick="return addtag(this, '.$item_id.', \''.$tag['name'].'\', \''.$hash.'\');"><nobr>');
+        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'&hash='.$hash.'" class="addtag" onClick="return addtag(this, '.$item_id.', \''.$tag['name'].'\', \''.$hash.'\');">');
         echo(($tag['weight']<0?'&ndash;':'+') . '&nbsp;');
         echo($tag['name']);
-        echo("</nobr></a>");
+        echo("</a>");
 
         $lastWeight = $tag['weight'];
     }
