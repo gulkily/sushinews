@@ -92,6 +92,3 @@ function writeHtmlArchive($path, $filename) {
     }
 
 }
-
-writeHtmlArchive('/home/ilya/sushi/mirror/', 'mirror_all.zip');
-writeMysqlDump('/home/ilya/sushi/mirror/', 'sushinews');
