@@ -35,9 +35,10 @@ function printTagList($tags) {
     }
 }
 
-function printItemTabs($itemId) {
+function printItemTabs($itemData) {
 ?>
     <div class="panel">
+        <div class="columns large-6">
 
     <?php
 
@@ -47,10 +48,15 @@ function printItemTabs($itemId) {
     );
 
     foreach ($tabs as $key => $caption) {
-        echo('<a class="itemtab" href="' . getLink($key, array('id' => $itemId)) . '">' . $caption . '</a></li>');
+        echo('<a class="itemtab" href="' . getLink($key, array('id' => $itemData['id'])) . '">' . $caption . '</a></li>');
     }
 
     ?>
+
+        </div>
+        <div class="columns large-6" style="text-align: right">
+            <?=$itemData['publish_timestamp']?>
+        </div>
     </div>
     <?php
 }
@@ -78,7 +84,7 @@ function printOneItem($itemData, $relatedItems) {
     <div class="row">
         <div class="large-12 columns">
             <?php
-            printItemTabs($itemData['id']);
+            printItemTabs($itemData);
 
             ?>
             <div class="panel">
@@ -152,7 +158,7 @@ function printTwoItems($items, $relatedItems) {
 }
 
 function printItem(array $itemData) {
-    $self_domain = 'sushi.local'; //@todo this shouldn't be defined here
+    $self_domain = SITE_DOMAIN;
 
     ?>
     <form>
