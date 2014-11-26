@@ -16,6 +16,10 @@ if (SECRET_SALT === '') die ('Please set the SECRET_SALT global in env.php');
 define('CACHE_PATH', "");
 if (CACHE_PATH === '') die ('Please set the CACHE_PATH global in env.php');
 
+// *** This is the path to where the mirror dumps are made and must be writable
+define('MIRROR_PATH', "");
+if (MIRROR_PATH === '') die ('Please set the CACHE_PATH global in env.php');
+
 // *** This is the domain the site lives on @todo autoconfig this while running the site from HTTP_HOST
 define('SITE_DOMAIN', 'sushi.local');
 
