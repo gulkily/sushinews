@@ -33,8 +33,13 @@ function writeMysqlDump($path, $filename) {
         'sherlock_config',
     );
 
-    shell_exec('mysqldump -uroot -padmin sushinews >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
+    //data dump using insert ignore to sushinews_data.sql
+    shell_exec('mysqldump --insert-ignore -uroot -padmin sushinews >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
+
+    //dump database schema to sushinews_schema.sql
     shell_exec('mysqldump -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
+
+    // gzip the data file
     shell_exec('gzip -9 ' . $path . $filename . '_data.sql.gz' . ' ' . $path . $filename . '_data.sql');
 }
 
