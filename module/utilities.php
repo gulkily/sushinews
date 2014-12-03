@@ -53,18 +53,23 @@ function getPrettyLink($action, $params = array()) {
             $link = '';
             return $link;
 
+            break;
+
         case 'moderate':
         case 'about':
         case 'submit':
             $link = $action;
-
             return $link;
+
+            break;
         case 'item':
+        case 'edit':
             $id = intval($params['id']);
             if ($id) {
-                $link = 'item/'. $id;
+                $link = $action . '/'. $id;
+                return $link;
             }
-            return $link;
+            break;
 
         default:
     }
@@ -80,7 +85,8 @@ function getLink($action, $params = array(), $format = 'relative') {
 
     // if pretty links are enabled, see if we can generate one of those first
     // for now this only works for relative links @todo
-    if (defined(PRETTY_LINKS) && PRETTY_LINKS === 1 && $format === 'relative') {
+
+    if (PRETTY_LINKS && PRETTY_LINKS === 1 && $format === 'relative') {
         $link = getPrettyLink($action, $params, $format);
 
         if ($link === '' || $link) {

@@ -169,8 +169,9 @@ DROP TABLE IF EXISTS `item`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hash` int(11) NOT NULL,
   `parent_id` int(11) NOT NULL,
-  `guid` char(64) CHARACTER SET utf8 NOT NULL,
+  `group_id` char(64) CHARACTER SET utf8 NOT NULL,
   `title` char(255) CHARACTER SET utf8 NOT NULL,
   `body` text CHARACTER SET utf8 NOT NULL,
   `summary` text CHARACTER SET utf8 NOT NULL,
@@ -180,7 +181,7 @@ CREATE TABLE `item` (
   `author` varchar(31) DEFAULT NULL,
   `score` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +195,7 @@ SET character_set_client = utf8;
 /*!50001 CREATE TABLE `item_best_v` (
   `id` tinyint NOT NULL,
   `parent_id` tinyint NOT NULL,
-  `guid` tinyint NOT NULL,
+  `group_id` tinyint NOT NULL,
   `title` tinyint NOT NULL,
   `body` tinyint NOT NULL,
   `summary` tinyint NOT NULL,
@@ -426,7 +427,7 @@ CREATE TABLE `voter_id_rate` (
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `item_best_v` AS select `item`.`id` AS `id`,`item`.`parent_id` AS `parent_id`,`item`.`guid` AS `guid`,`item`.`title` AS `title`,`item`.`body` AS `body`,`item`.`summary` AS `summary`,`item`.`publish_timestamp` AS `publish_timestamp`,`item`.`language` AS `language`,`item`.`author` AS `author`,`item`.`score` AS `score` from `item` group by `item`.`guid` order by `item`.`guid` desc,`item`.`score` desc */;
+/*!50001 VIEW `item_best_v` AS select `item`.`id` AS `id`,`item`.`parent_id` AS `parent_id`,`item`.`group_id` AS `group_id`,`item`.`title` AS `title`,`item`.`body` AS `body`,`item`.`summary` AS `summary`,`item`.`publish_timestamp` AS `publish_timestamp`,`item`.`language` AS `language`,`item`.`author` AS `author`,`item`.`score` AS `score` from `item` group by `item`.`group_id` order by `item`.`group_id` desc,`item`.`score` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -478,7 +479,7 @@ CREATE TABLE `voter_id_rate` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-03  8:35:56
+-- Dump completed on 2014-12-03  9:33:38
 -- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: sushinews
@@ -576,4 +577,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-03  8:35:56
+-- Dump completed on 2014-12-03  9:33:39

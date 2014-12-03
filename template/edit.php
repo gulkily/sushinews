@@ -1,8 +1,8 @@
 <?php
 
-function printEditForm($title = '', $summary = '', $body = '', $guid = '', $parentid = '') {
-    if ($guid || $parentid) {
-        $password = md5($guid . '-' . $parentid . '-' . SECRET_SALT);
+function printEditForm($title = '', $summary = '', $body = '', $group_id = '', $parentid = '') {
+    if ($group_id || $parentid) {
+        $password = md5($group_id . '-' . $parentid . '-' . SECRET_SALT);
     } else {
         $password = '';
     }
@@ -35,11 +35,11 @@ function printEditForm($title = '', $summary = '', $body = '', $guid = '', $pare
             <input type="submit" class="medium button" value="Submit" title="Go ahead!">
         </div>
         <div class="large-4 columns" style="display: none">
-            <label for="guid"><strong>Story GUID:</strong> Do not write below this line.</label>
-            <input type="text" name="guid" id="guid" readonly value="<?=$guid?>">
+            <label for="group"><strong>Story:</strong> Do not write below this line.</label>
+            <input type="text" name="group" id="group" readonly value="<?=$group?>">
         </div>
         <div class="large-4 columns" style="display: none">
-            <label for="guid"><strong>Parent Story:</strong> Do not write below this line.</label>
+            <label for="parentstory"><strong>Parent Story:</strong> Do not write below this line.</label>
             <input type="text" name="parentstory" id="parentstory" readonly value="<?=$parentid?>">
         </div>
     </div>

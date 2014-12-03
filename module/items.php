@@ -1,10 +1,10 @@
 <?php
 
-function createNewItem($title, $summary, $body, $parent_id = null, $guid = null, $publish_timestamp = null) {
+function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null) {
     global $dbp;
 
-    if (!$guid) {
-        $guid = md5(time() . GUID_SEED);
+    if (!$group) {
+        $group = md5(time() . GUID_SEED);
     }
 
     if ($publish_timestamp) {
@@ -15,12 +15,12 @@ function createNewItem($title, $summary, $body, $parent_id = null, $guid = null,
 
     $stmt = $dbp->prepare(
         "
-        INSERT INTO item(guid, title, summary, body, publish_timestamp, parent_id)
-        VALUES(:guid, :title, :summary, :body, :publish_timestamp, :parent_id)
+        INSERT INTO item(group_id, title, summary, body, publish_timestamp, parent_id)
+        VALUES(:group, :title, :summary, :body, :publish_timestamp, :parent_id)
         "
     );
 
-    $stmt->bindParam(':guid', $guid);
+    $stmt->bindParam(':group', $group);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':summary', $summary);
     $stmt->bindParam(':body', $body);
@@ -39,7 +39,7 @@ function getItems($limit = 20) {
 
     $limit = intval($limit);
 
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, guid, publish_timestamp FROM item_best_v ORDER BY score DESC, publish_timestamp DESC LIMIT $limit");
+    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp FROM item_best_v ORDER BY score DESC, publish_timestamp DESC LIMIT $limit");
 
     $items = get_cache_dbp("items/$limit", 60, $stmt);
 
@@ -103,17 +103,16 @@ function updateItemScore($item_id) {
 }
 
 
-function getItemsByGuid($guid, $limit = 20) {
+function getItemsByGroup($group_id, $limit = 20) {
     global $dbp;
 
     $limit = intval($limit);
 
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, guid FROM item WHERE guid = :guid ORDER BY publish_timestamp DESC LIMIT $limit"); //@todo $limit should be passed in through pdo :limit
-    //$stmt->execute(array(':guid' => $guid));
+    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id FROM item WHERE group_id = :group_id ORDER BY publish_timestamp DESC LIMIT $limit"); //@todo $limit should be passed in through pdo :limit
 
-    $stmt->bindParam(':guid', $guid);
+    $stmt->bindParam(':group_id', $group_id);
 
-    $items = get_cache_dbp("related/$guid", 60, $stmt);
+    $items = get_cache_dbp("related/$group_id", 60, $stmt);
 
     return $items;
 }
@@ -143,7 +142,7 @@ function getItem($item_id) {
     $itemId = intval($item_id);
     if (!$itemId) return;
 
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, guid, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u FROM item WHERE id=:id");
+    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u FROM item WHERE id=:id");
     $stmt->bindParam(':id', $itemId);
 
     $item = get_cache_dbp("item/$itemId", 60, $stmt);
@@ -172,7 +171,7 @@ function getItem($item_id) {
             'tags' => $itemTags,
             'publish_timestamp' => $row['publish_timestamp'],
             'publish_timestamp_u' => $row['publish_timestamp_u'],
-            'guid' => $row['guid']
+            'group_id' => $row['group_id']
         );
     }
 

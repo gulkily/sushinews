@@ -66,7 +66,7 @@ if (isset($action)) {
             $itemId = intval(getParam('id'));
 
             if ($itemId) {
-                $stmt = $dbp->prepare("SELECT title, body, summary, guid, id FROM item WHERE id=:id");
+                $stmt = $dbp->prepare("SELECT title, body, summary, group_id, id FROM item WHERE id=:id");
                 $stmt->execute(array(
                     ':id' => $itemId
                 ));
@@ -74,7 +74,7 @@ if (isset($action)) {
                 printHeader();
 
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    printEditForm($row['title'], $row['summary'], $row['body'], $row['guid'], $row['id']);
+                    printEditForm($row['title'], $row['summary'], $row['body'], $row['group_id'], $row['id']);
                 }
 
                 printFooter();
@@ -98,7 +98,7 @@ if (isset($action)) {
             $itemId = intval(getParam('id'));
             $itemData = getItem($itemId);
 
-            $linkedItems = getItemsByGuid($itemData['guid'], 20);
+            $linkedItems = getItemsByGroup($itemData['group_id'], 20);
 
             include('template/header.php');
             printHeader();
@@ -117,7 +117,7 @@ if (isset($action)) {
             $itemDataOne = getItem($one);
             $itemDataTwo = getItem($two);
 
-            $linkedItems = getItemsByGuid($itemDataOne['guid'], 20);
+            $linkedItems = getItemsByGroup($itemDataOne['group_id'], 20);
 
             include('template/header.php');
             printHeader();
@@ -184,15 +184,15 @@ if (isset($action)) {
             $eligible = get_cache(
                 'voting/eligible',
                 60,
-                "select guid from ( select guid, count(guid) as gcount from item group by guid) guids where gcount > 1",
+                "select group_id from ( select group_id, count(group_id) as gcount from item group by group_id) groups where gcount > 1",
                 'get_col'
             );
 
             $rand = rand(0, count($eligible) - 1);
 
-            $guid = $eligible[$rand];
+            $group = $eligible[$rand];
 
-            $versions = get_cache("versions/$guid", 60, "select id from item where guid = '$guid'", 'get_col');
+            $versions = get_cache("versions/$group", 60, "select id from item where group_id = '$group'", 'get_col');
 
             shuffle($versions);
 
@@ -202,7 +202,7 @@ if (isset($action)) {
             $itemDataOne = getItem($chosen[0]);
             $itemDataTwo = getItem($chosen[1]);
 
-            $linkedItems = getItemsByGuid($guid);
+            $linkedItems = getItemsByGroup($group);
 
             printHeader();
 

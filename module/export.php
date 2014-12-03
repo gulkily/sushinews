@@ -62,7 +62,7 @@ function writeHtmlArchive($path, $filename) {
     $output .= '<body>';
 
     foreach ($items as $item) {
-        $output .= '<h3><a href="' . $item['guid'] . '_' . $item['id'] . '.html">' . $item['title'] . '</a></h3>';
+        $output .= '<h3><a href="' . $item['group_id'] . '_' . $item['id'] . '.html">' . $item['title'] . '</a></h3>';
         $output .= '<p>' . $item['summary'] . '</p>';
     }
 
@@ -75,7 +75,7 @@ function writeHtmlArchive($path, $filename) {
     $zip->addFile($path . 'index.html', 'index.html');
 
     foreach($items as $item) {
-        $filename = $item['guid'] . '_' . $item['id'] . ".html";
+        $filename = $item['group_id'] . '_' . $item['id'] . ".html";
         $tempFiles[] = $filename;
 
         $output = '<html><head><meta charset="utf-8" /><title>s.n.</title></head>';

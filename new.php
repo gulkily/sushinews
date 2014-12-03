@@ -6,13 +6,13 @@ include_once('module/items.php');
         $title = trim(getParam('title'));
         $summary = trim(getParam('summary'));
         $body = trim(getParam('body'));
-        $guid = getParam('guid');
+        $group = getParam('group');
         $parent_id = getParam('parentstory');
 
-        if ($guid || $parent_id) {
+        if ($group || $parent_id) {
             // this could be prettier, but it's enough
             // if the password doesn't match up for an existing article, something is wrong
-            if (!getParam('password') || getParam('password') != md5($guid . '-' . $parent_id . '-' . SECRET_SALT)) die("Something went wrong...");
+            if (!getParam('password') || getParam('password') != md5($group . '-' . $parent_id . '-' . SECRET_SALT)) die("Something went wrong...");
         }
 
         if (!$summary && $body) {
@@ -41,7 +41,7 @@ include_once('module/items.php');
         }
 
         if ($title && $summary && $body) {
-            $newItemId = createNewItem($title, $summary, $body, $parent_id, $guid);
+            $newItemId = createNewItem($title, $summary, $body, $parent_id, $group);
 
             if ($newItemId) {
                 header('Location: ' . getItemUrl($newItemId));
