@@ -11,8 +11,8 @@ include_once('module/items.php');
 
         if ($guid || $parent_id) {
             // this could be prettier, but it's enough
-            if (!getParam('password')) die();
-            if (getParam('password') != md5($guid . '-' . $parent_id . '-' . SECRET_SALT)) die();
+            // if the password doesn't match up for an existing article, something is wrong
+            if (!getParam('password') || getParam('password') != md5($guid . '-' . $parent_id . '-' . SECRET_SALT)) die("Something went wrong...");
         }
 
         if (!$summary && $body) {
@@ -46,5 +46,8 @@ include_once('module/items.php');
             if ($newItemId) {
                 header('Location: ' . getItemUrl($newItemId));
             }
+        } else {
+            echo ("You forgot something...");
+            // @todo make this more user-friendly
         }
     }
