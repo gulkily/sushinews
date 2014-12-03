@@ -135,6 +135,15 @@ function getLink($action, $params = array(), $format = 'relative') {
     // $params are all the other parameters, as an array
     // $format can be relative (starting with ./), absolute (starting with /), or global (starting with http://)
 
+    // if pretty links are enabled, see if we can generate one of those first
+    // for now this only works for relative links @todo
+    if (PRETTY_LINKS === 1 && $format === 'relative') {
+        $link = getPrettyLink($action, $params, $format);
+
+        if ($link !== null) {
+            return SITE_PATH . $link;
+        }
+    }
 
     // determine the link prefix first
     if ($format == 'relative') {
@@ -145,16 +154,6 @@ function getLink($action, $params = array(), $format = 'relative') {
         die();
     }
 
-    // if pretty links are enabled, see if we can generate one of those first
-    if (PRETTY_LINKS === 1) {
-        $link = getPrettyLink($action, $params, $format);
-
-        if ($link !== null) {
-            return $link;
-        }
-    }
-
-    // if it's not a pretty link, we need a question mark for the parameter string
     $prefix .= '?';
 
     $link = '';
