@@ -73,7 +73,7 @@ function printRelatedItems(array $relatedItems, $sourceItemId) {
     foreach ($relatedItems as $item) {
         if ($item['id'] != $sourceItemId) {
 ?>
-     <li><a href="/?action=compare&one=<?=$item['id']?>&two=<?=$sourceItemId?>"><?=htmlspecialchars($item['title'])?></a></li>
+     <li><a href="/?action=compare&one=<?=$item['id']?>&two=<?=$sourceItemId?>"><?=htmlspecialchars($item['title'])?></a> (<?=concise_timestamp($item['publish_timestamp_ut'])?>)</li>
 <?php
         }
     }

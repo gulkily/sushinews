@@ -109,7 +109,7 @@ function getItemsByGroup($group_id, $limit = 20) {
 
     $limit = intval($limit);
 
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id FROM item WHERE group_id = :group_id ORDER BY publish_timestamp DESC LIMIT $limit"); //@todo $limit should be passed in through pdo :limit
+    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_ut FROM item WHERE group_id = :group_id ORDER BY publish_timestamp DESC LIMIT $limit"); //@todo $limit should be passed in through pdo :limit
 
     $stmt->bindParam(':group_id', $group_id);
 

@@ -214,7 +214,7 @@ function getOwnUrl() {
 
 function concise_timestamp($timestamp) {
     if (date('Ymd',time()) == date('Ymd',$timestamp)) {
-        return 'at '.date('H:i', $timestamp);
+        return date('H:i', $timestamp);
     }
     if (date('Y', time()) == date('Y', $timestamp)) {
         return date('M j', $timestamp);
