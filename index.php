@@ -22,6 +22,15 @@ if (!$action) {
 
 if (isset($action)) {
     switch($action) {
+        case 'alltasks':
+            include_once('module/tasks.php');
+            $tasks = getTasksMenu();
+            foreach($tasks as $task) {
+                doTask($task);
+
+            }
+            break;
+
         case 'about':
             include_once('template/header.php');
             include_once('template/about.php');
