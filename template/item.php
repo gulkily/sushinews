@@ -137,6 +137,20 @@ function printTwoItems($items, $relatedItems) {
 //
     echo("<table class=\"diff\">\n");
 
+    echo('<tr><td>');
+    echo('<a href="'.getItemUrl($items[$first]['id'], 'absolute').'">'.getItemUrl($items[$first]['id'], 'absolute').'</a>');
+    echo('</td><td>');
+    echo('<a href="'.getItemUrl($items[$second]['id'], 'absolute').'">'.getItemUrl($items[$second]['id'], 'absolute').'</a>');
+    echo('</td></tr>');
+
+    if (getVoterId()) {
+        echo('<tr><td>');
+        printAvailableTagList($items[$first]['id']);
+        echo('</td><td>');
+        printAvailableTagList($items[$second]['id']);
+        echo('</td></tr>');
+    }
+
     foreach(array('title', 'summary', 'body') as $element) {
         echo(Diff::toTable(Diff::compare($items[$first][$element], $items[$second][$element]), $element));
     }
