@@ -56,6 +56,13 @@ function getPrettyLink($action, $params = array(), $format = 'relative') {
             break;
 
         case 'moderate':
+            $link = $action;
+            if (count($params)) {
+                $link .= '?' . getQueryString($params);
+            }
+            return $link;
+
+            break;
         case 'about':
         case 'submit':
             $link = $action;
@@ -106,20 +113,26 @@ function getLink($action, $params = array(), $format = 'relative') {
 
     $prefix .= '?';
 
-    $link = '';
-
     $params['action'] = $action;
+
+    $queryString = getQueryString($params);
+
+    return $prefix . $queryString;
+}
+
+function getQueryString($params) {
+    $queryString = '';
 
     // currently unvalidated @todo
     if (count($params)) {
         $comma = 0;
         foreach($params as $key => $value) {
-            if ($comma == 0) $comma = 1; else $link .= '&';
-            $link .= urlencode($key) . '=' . urlencode($value);
+            if ($comma == 0) $comma = 1; else $queryString .= '&';
+            $queryString .= urlencode($key) . '=' . urlencode($value);
         }
     }
 
-    return $prefix . $link;
+    return $queryString;
 }
 
 function getTagId($tag_name) {

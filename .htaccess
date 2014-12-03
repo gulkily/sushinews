@@ -3,6 +3,6 @@ RewriteBase /
 RewriteRule ^item/(.+) /index.php?action=item&id=$1
 RewriteRule ^edit/(.+) /index.php?action=edit&id=$1
 
-RewriteRule ^(submit|moderate|mirror|about)$ /index.php?action=$1
+RewriteRule ^(submit|moderate|mirror|about)$ /index.php?action=$1 [QSA]
 
 RewriteRule ^edit/([0-9]+)$ /index.php?action=edit&id=$1
