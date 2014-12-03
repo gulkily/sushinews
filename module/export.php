@@ -40,7 +40,7 @@ function writeMysqlDump($path, $filename) {
     shell_exec('mysqldump -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
 
     // gzip the data file
-    shell_exec('gzip -f -9 ' . $path . $filename . '_data.sql.gz' . ' ' . $path . $filename . '_data.sql');
+    shell_exec('gzip -f -9 ' . $path . $filename . '_data.sql');
 }
 
 function writeHtmlArchive($path, $filename) {
