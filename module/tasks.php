@@ -15,6 +15,19 @@ function doTask($taskName) {
 
             break;
 
+        case 'cleanup_tables':
+            global $db;
+
+            $db->query("DELETE FROM voter_id_rate WHERE DATE_ADD(last_assignment, INTERVAL 5 MINUTE) < NOW()");
+
+            break;
+
+        case 'update_cache':
+            batch_cache(10, 1);
+
+            break;
+
+
         default:
             break;
     }
@@ -23,7 +36,9 @@ function doTask($taskName) {
 function getRandomTask() {
     $possibleTasks = array(
         'export',
-        'update_scores'
+        'update_scores',
+        'cleanup_tables',
+        'update_cache'
     );
 
     srand(time());
