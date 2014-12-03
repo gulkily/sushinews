@@ -55,6 +55,37 @@ function isPost() {
     }
 }
 
+function put_ticket($messages, $redirect = null) {
+    mt_srand();
+    do {
+        $ticket_id = rand(1000000000,9999999999);
+    } while (cache_expired("ticket/$ticket_id") != -1);
+
+    put_cache("ticket/$ticket_id", $messages);
+
+    if ($redirect) {
+        if (strpos($redirect, '?') === false) {
+            Header("Location: $redirect?ticket=$ticket_id");
+        } else {
+            Header("Location: $redirect&ticket=$ticket_id");
+        }
+        exit;
+    } else {
+        return $ticket_id;
+    }
+}
+
+function get_ticket($ticket_id) {
+    $ticket_id = intval($ticket_id);
+    if ($ticket_id) {
+        $messages = get_cache("ticket/$ticket_id");
+        delete_cache("ticket/$ticket_id", 1);
+        return $messages;
+    } else {
+        return null;
+    }
+}
+
 function getPrettyLink($action, $params = array(), $format = 'relative') {
     switch ($action) {
         case 'index':
