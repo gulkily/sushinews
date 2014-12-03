@@ -39,7 +39,7 @@ if (isset($action)) {
             include_once('template/about.php');
             include_once('template/footer.php');
 
-            printHeader();
+            printHeader('About');
 
             printAbout();
 

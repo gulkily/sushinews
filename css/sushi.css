@@ -1,6 +1,25 @@
-#topmenu a {
-    padding-right: 1em;
+#menu a {
+    margin: 0.9em;
     font-weight: bold;
+    color: #2020a0
+}
+
+#topmenu {
+    padding: 0.5em;
+    vertical-align: middle;
+    margin-top: 0.5em;
+}
+
+#sitename, #sitename a {
+    font-size: xx-large;
+    text-align: right;
+}
+
+#sitename a {
+    background-color: #a0a0a0;
+    color: #2020a0;
+    padding: 0.5em;
+    text-shadow: 1px 1px #b0b0b0;
 }
 
 .sharelink {
@@ -86,9 +105,9 @@ table.diff {
     margin-right: 15px;
 }
 
-.item-tabs {
-    border-top-right-radius: 2em;
-    padding-bottom: 2em;
+.itemtabs {
+    background-color: #ffffff;
+    border: 0px;
 }
 
 .top-message {
@@ -96,4 +115,18 @@ table.diff {
     background-color: #f0f080;
     padding: 0.5em;
     border-radius: 0.5em;
+}
+
+.itemlist {
+    background-color: #ffffff;
+    border-radius: 0.5em;
+}
+
+.itemlist a, .itemtabs a {
+    color: #2020a0;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.itemlist p {
+    color: #202020;
 }

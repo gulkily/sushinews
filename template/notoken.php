@@ -12,7 +12,7 @@ function printNoToken() {
 
             <form action="<?=getLink('moderate')?>" method="POST">
                 <input type="text" value="welcome" name="token">
-                <input type="submit" value="Get Token">
+                <input type="submit" value="Moderate">
             </form>
             </p>
         </div>

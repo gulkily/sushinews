@@ -6,7 +6,7 @@ function beginItemList() {
 
     <div class="row">
     <div class="large-12 columns">
-    <div class="panel">
+    <div class="panel itemlist">
 
 <?php
 }
@@ -38,14 +38,14 @@ function printTagList($tags) {
 
 function printItemTabs($itemData) {
 ?>
-    <div class="panel item-tabs">
+    <div class="panel itemtabs">
         <div class="columns large-6">
 
     <?php
 
     $tabs = array(
         'item' => 'Read',
-        'edit' => 'Edit',
+        'edit' => 'Evolve',
     );
 
     foreach ($tabs as $key => $caption) {
@@ -54,9 +54,6 @@ function printItemTabs($itemData) {
 
     ?>
 
-        </div>
-        <div class="columns large-6" style="text-align: right">
-            <span title="<?=$itemData['publish_timestamp']?>"><?='posted ' . concise_timestamp($itemData['publish_timestamp_u'])?></span>
         </div>
     </div>
     <?php
@@ -90,7 +87,7 @@ function printOneItem($itemData, $relatedItems) {
             printItemTabs($itemData);
 
             ?>
-            <div class="panel">
+            <div class="panel itemlist">
 
 
                 <?php
