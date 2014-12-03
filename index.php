@@ -177,4 +177,10 @@ if (isset($action)) {
     }
 }
 
+srand(time());
+if (rand(1,100) == 5) {
+    include_once('module/tasks.php');
+    doTask(getRandomTask());
+}
+
 queue_cache('','','',1);
