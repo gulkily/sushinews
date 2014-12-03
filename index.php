@@ -7,7 +7,7 @@ if(!@include_once("config/env.php")) {
 }
 
 include_once('module/utilities.php');
-include_once('module/sherlock.php');
+//include_once('module/sherlock.php');
 include_once('module/items.php');
 
 //$sherlock = new SherlockSession($db);
