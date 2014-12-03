@@ -14,13 +14,13 @@ function printEditForm($title = '', $summary = '', $body = '', $guid = '', $pare
     <div class="row">
         <div class="large-12 columns">
 
-            <label for="title"><strong>Story Title:</strong> This should be descriptive, concise, and true. Please edit it down and avoid sensationalization.</label>
+            <label for="title"><strong>Story Title:</strong> Descriptive, yet concise. Avoid sensationalizing.</label>
             <input type="text" id="title" name="title" value="<?=$title?>" required>
         </div>
     </div>
     <div class="row">
         <div class="large-12 columns">
-            <label for="body"><strong>Article Body:</strong> The entire article, including the first paragraph.</label>
+            <label for="body"><strong>Story Text:</strong> The first paragraph will also be the summary. Markdown supported.</label>
             <textarea cols="80" rows="20" name="body" id="body" required><?=$body?></textarea>
         </div>
     </div>
