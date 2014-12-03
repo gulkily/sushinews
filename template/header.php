@@ -1,7 +1,7 @@
 <?php
 function getMenuItems() {
     $items = array(
-        'index' => 'News',
+        'index' => 'Home',
         'submit' => 'Submit',
         'moderate' => 'Moderate',
         'mirror' => 'Mirror',
