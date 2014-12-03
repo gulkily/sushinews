@@ -11,6 +11,8 @@ function printModerationInfo() {
 
                 <p>Below are two different versions of an article. Please review them and vote accordingly.</p>
 
+                <p><a href="<?=getLink('moderate', array('token' => 'remove'))?>">Stop Moderating</a></p>
+
             </div>
         </div>
     </div>
