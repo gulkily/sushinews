@@ -64,7 +64,8 @@ CREATE TABLE "item" (
   "language" char(2) DEFAULT NULL,
   "author" varchar(31) DEFAULT NULL,
   "score" int(11) DEFAULT NULL,
-  PRIMARY KEY ("id")
+  PRIMARY KEY ("id"),
+  UNIQUE KEY "hash" ("hash")
 );
 
 CREATE TABLE "item_tag" (
@@ -134,11 +135,7 @@ CREATE TABLE "voter_id_rate" (
   KEY "host" ("host")
 );
 
-CREATE VIEW "client_record_v" AS select distinct "fp_client"."client_id" AS "client_id","fp_record"."record_id" AS "record_id" from (((("fp_client" join "client_session") join "fp_session") join "session_record") join "fp_record") where ((1 = 1) and ("fp_client"."client_id" = "client_session"."client_id") and ("client_session"."session_id" = "fp_session"."session_id") and ("fp_session"."session_id" = "session_record"."session_id") and ("session_record"."record_id" = "fp_record"."record_id"));
-
 CREATE VIEW "client_session_t" AS select "client_session"."client_id" AS "client_id","client_session"."session_id" AS "session_id" from "client_session" where 1;
-
-CREATE VIEW "item_best_v" AS select "item"."id" AS "id","item"."parent_id" AS "parent_id","item"."group_id" AS "group_id","item"."title" AS "title","item"."body" AS "body","item"."summary" AS "summary","item"."publish_timestamp" AS "publish_timestamp","item"."language" AS "language","item"."author" AS "author","item"."score" AS "score" from "item" group by "item"."group_id" order by "item"."group_id" desc,"item"."score" desc;
 
 CREATE VIEW "record_client_count" AS select "fp_record"."record_id" AS "record_id",count(distinct "fp_client"."client_id") AS "client_count" from (((("fp_record" join "session_record") join "fp_session") join "client_session") join "fp_client") where (("fp_record"."record_id" = "session_record"."record_id") and ("session_record"."session_id" = "fp_session"."session_id") and ("fp_session"."session_id" = "client_session"."session_id") and ("client_session"."client_id" = "fp_client"."client_id")) group by "fp_record"."record_id";
 

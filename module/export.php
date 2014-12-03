@@ -33,16 +33,10 @@ function writeMysqlSchema($path, $filename) {
     $sql = "";
 
     $tables = $db->get_col("SHOW FULL TABLES WHERE table_type LIKE '%TABLE%'");
-    $views = $db->get_col("SHOW FULL TABLES WHERE table_type LIKE '%VIEW%'");
-    $data_tables = array('config', 'node', 'tag');
+    $data_tables = array('config', 'node', 'tag'); //@todo still need to add these
 
     foreach ($tables as $table) {
         $query = $db->get_var("SHOW CREATE TABLE $table", 1);
-        $sql .= $query . ";\n\n";
-    }
-
-    foreach ($views as $view) {
-        $query = $db->get_var("SHOW CREATE VIEW $view", 1);
         $sql .= $query . ";\n\n";
     }
 
