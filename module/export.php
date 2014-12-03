@@ -16,7 +16,7 @@ function writeMysqlDump($path, $filename) {
     );
 
     //data dump using insert ignore to sushinews_data.sql
-    shell_exec('mysqldump --insert-ignore -uroot -padmin sushinews >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
+    shell_exec('mysqldump --insert-ignore -u'.EZSQL_DB_USER.' -p'.EZSQL_DB_PASSWORD.' '.EZSQL_DB_NAME.' >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
 //
 //    //dump database schema to sushinews_schema.sql
 //    shell_exec('mysqldump --disable-extended-insert --compact -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
