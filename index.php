@@ -165,7 +165,7 @@ if (isset($action)) {
 
             $showModWelcome = 0;
 
-            if (getParam('token') == 'welcome') {
+            if (isPost() && getParam('token') == 'welcome') {
                 $voter_id = generateVoterId();
                 setVoterIdCookie($voter_id);
                 $showModWelcome = 1;
@@ -197,7 +197,10 @@ if (isset($action)) {
                 'get_col'
             );
 
-            if (count($eligible)) {
+            if (!count($eligible)) {
+                echo("Sorry, there is nothing for you to moderate at this time.");
+                //@todo make this pretty
+            } else {
 
                 $rand = rand(0, count($eligible) - 1);
 
@@ -226,9 +229,6 @@ if (isset($action)) {
                 if (!$showModWelcome) {
                     printModerationFooter();
                 }
-            } else {
-                echo("Sorry, there is nothing for you to moderate at this time.");
-                //@todo make this pretty
             }
 
             printFooter();

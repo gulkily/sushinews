@@ -47,6 +47,14 @@ function getParam($name) {
 //    define('SITE_BASE_PATH', '/');
 //}
 
+function isPost() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function getPrettyLink($action, $params = array(), $format = 'relative') {
     switch ($action) {
         case 'index':

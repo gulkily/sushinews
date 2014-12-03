@@ -2,7 +2,7 @@
 include_once('module/utilities.php');
 include_once('module/items.php');
 
-    if (isset($_POST)) {
+    if (isPost()) {
         $title = trim(getParam('title'));
         $summary = trim(getParam('summary'));
         $body = trim(getParam('body'));

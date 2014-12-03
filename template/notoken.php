@@ -7,11 +7,13 @@ function printNoToken() {
         <div class="large-12 columns">
             <div class="panel">
             <p>
-                In order to moderate, you have to get a token.
+                In order to moderate, you must have a token.
             </p>
 
-            <p>
-                <a href="/?action=moderate&token=welcome">Get Token</a>
+            <form action="<?=getLink('moderate')?>" method="POST">
+                <input type="text" value="welcome" name="token">
+                <input type="submit" value="Get Token">
+            </form>
             </p>
         </div>
     </div>
