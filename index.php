@@ -23,11 +23,14 @@ if (!$action) {
 if (isset($action)) {
     switch($action) {
         case 'alltasks':
-            include_once('module/tasks.php');
-            $tasks = getTasksMenu();
-            foreach($tasks as $task) {
-                doTask($task);
+            if ($_SERVER['SERVER_ADDR'] == '::1') {
+                include_once('module/tasks.php');
+                $tasks = getTasksMenu();
+                foreach($tasks as $task) {
+                    doTask($task);
 
+                }
+                echo "cool";
             }
             break;
 
