@@ -26,6 +26,14 @@ function setVoterIdCookie($voter_id) {
     $cookie = $voter_id . ',' . md5($voter_id . $_SERVER['REMOTE_ADDR'] . SECRET_SALT);
 
     if (!headers_sent()) setcookie('voter_id', $cookie);
+
+    $_COOKIE['voter_id'] = $cookie;
+}
+
+function unsetVoterIdCookie() {
+    if (!headers_sent()) setcookie('voter_id', '', time() - 3600);
+
+    unset($_COOKIE['voter_id']);
 }
 
 function generateVoterId() {
