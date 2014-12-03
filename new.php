@@ -12,7 +12,7 @@ include_once('module/items.php');
         if ($guid || $parent_id) {
             // this could be prettier, but it's enough
             if (!getParam('password')) die();
-            if (getParam('password') != md5($guid . '-' . $parentid . '-' . SECRET_SALT)) die();
+            if (getParam('password') != md5($guid . '-' . $parent_id . '-' . SECRET_SALT)) die();
         }
 
         if (!$summary && $body) {
