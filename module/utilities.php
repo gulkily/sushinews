@@ -42,26 +42,32 @@ function getVoterId() {
     if ($voter[1] == md5($voter[0] . $_SERVER['REMOTE_ADDR'] . SECRET_SALT)) {
         return $voter[1];
     } else {
-        $host = $_SERVER['REMOTE_ADDR'];
-        $host .= round(time() / 3600);
-        $host = md5($host);
-
-        global $db;
-        $last_assignment = $db->get_var("SELECT last_assigment FROM voter_id_rate WHERE host = '$host'"); // @todo escape
-
-        // @todo actually verify that it wasn't too recent
-
-        $query = "INSERT INTO voter_id_rate(host, last_assigment) VALUES('$host', NOW())";
-        $db->query($query);
-
-        $voter_id = md5(rand(0,100000) . time()); // @todo make this more random
-
-        $cookie = $voter_id . ',' . md5($voter_id . $_SERVER['REMOTE_ADDR'] . SECRET_SALT);
-
-        if (!headers_sent()) setcookie('voter_id', $cookie);
-
-        return $voter_id;
+        return 0;
     }
+}
+
+function setVoterIdCookie($voter_id) {
+    $cookie = $voter_id . ',' . md5($voter_id . $_SERVER['REMOTE_ADDR'] . SECRET_SALT);
+
+    if (!headers_sent()) setcookie('voter_id', $cookie);
+}
+
+function generateVoterId() {
+    $host = $_SERVER['REMOTE_ADDR'];
+    $host .= round(time() / 3600);
+    $host = md5($host);
+
+    global $db;
+    $last_assignment = $db->get_var("SELECT last_assigment FROM voter_id_rate WHERE host = '$host'"); // @todo escape
+
+    // @todo actually verify that it wasn't too recent
+
+    $query = "INSERT INTO voter_id_rate(host, last_assigment) VALUES('$host', NOW())";
+    $db->query($query);
+
+    $voter_id = md5(rand(0,100000) . time()); // @todo make this more random
+
+    return $voter_id;
 }
 
 function verifyVotingHash($client_id, $item_id, $tag, $hash) {
@@ -126,11 +132,6 @@ function getLink($action, $params = array(), $format = 'relative') {
     }
 
     return $link;
-
-}
-
-function getToken() {
-    return md5('todo');
 }
 
 function getTagId($tag_name) {
