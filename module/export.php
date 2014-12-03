@@ -37,7 +37,7 @@ function writeMysqlDump($path, $filename) {
     shell_exec('mysqldump --insert-ignore -uroot -padmin sushinews >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
 
     //dump database schema to sushinews_schema.sql
-    shell_exec('mysqldump -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
+    shell_exec('mysqldump --skip-auto-increment -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
 
     // gzip the data file
     shell_exec('gzip -f -9 ' . $path . $filename . '_data.sql');
