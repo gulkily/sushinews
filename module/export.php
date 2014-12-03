@@ -63,7 +63,7 @@ function writeMysqlDump($path, $filename) {
         $sql .= $query . ";\n\n";
     }
 
-    $file = @fopen($path . $filename, 'w');
+    $file = @fopen($path . $filename . '_schema.sql', 'w');
     if ($file) {
         fwrite($file, $sql);
         fclose($file);
