@@ -146,7 +146,7 @@ function getLink($action, $params = array(), $format = 'relative') {
     }
 
     // if pretty links are enabled, see if we can generate one of those first
-    if (PRETTY_LINKS == 1) {
+    if (PRETTY_LINKS === 1) {
         $link = getPrettyLink($action, $params, $format);
 
         if ($link !== null) {
