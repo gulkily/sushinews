@@ -158,6 +158,8 @@ function printTwoItems($items, $relatedItems) {
 }
 
 function printItem(array $itemData) {
+    $Parsedown = new Parsedown();
+
     $self_domain = SITE_DOMAIN;
 
     ?>
@@ -167,7 +169,7 @@ function printItem(array $itemData) {
     <?=htmlspecialchars($itemData['title'])?>
     </a>
     </h3>
-    <p><?=($itemData['body']?nl2br(htmlspecialchars($itemData['body'])):htmlspecialchars($itemData['summary']))?></p>
+    <p><?=$Parsedown->text(htmlspecialchars($itemData['body']))?></p>
     <p>
         <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a>
         Tags: <? printTagList($itemData['tags']); ?>
