@@ -135,9 +135,3 @@ CREATE TABLE "voter_id_rate" (
   KEY "host" ("host")
 );
 
-CREATE VIEW "client_session_t" AS select "client_session"."client_id" AS "client_id","client_session"."session_id" AS "session_id" from "client_session" where 1;
-
-CREATE VIEW "record_client_count" AS select "fp_record"."record_id" AS "record_id",count(distinct "fp_client"."client_id") AS "client_count" from (((("fp_record" join "session_record") join "fp_session") join "client_session") join "fp_client") where (("fp_record"."record_id" = "session_record"."record_id") and ("session_record"."session_id" = "fp_session"."session_id") and ("fp_session"."session_id" = "client_session"."session_id") and ("client_session"."client_id" = "fp_client"."client_id")) group by "fp_record"."record_id";
-
-CREATE VIEW "session_record_active" AS select "session_record"."session_id" AS "session_id","session_record"."record_id" AS "record_id","session_record"."record_timestamp" AS "record_timestamp","session_record"."active" AS "active" from "session_record" where ("session_record"."active" = 1);
-
