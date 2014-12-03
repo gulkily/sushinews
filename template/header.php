@@ -36,6 +36,7 @@ function printHeader($username = null) {
     </div>
 </div>
 <?php
+    // @todo move this part out of the template, messages should be passed to the template as a parameter
     if (getParam('ticket')) {
         $messages = get_ticket(getParam('ticket'));
 
