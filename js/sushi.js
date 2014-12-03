@@ -1,6 +1,7 @@
 function addtag(button, itemId, tagName, hash) {
 
     button.style.backgroundColor = '#c0c0c0';
+    button.style.borderStyle = 'none';
 
     var a = [];
     a.push({name: 'item_id', value: itemId});
