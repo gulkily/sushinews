@@ -159,8 +159,10 @@ function getItem($item_id) {
 
         $itemTags = array();
 
-        foreach ($tags as $tag) {
-            $itemTags[] = array('name' => $tag['name'], 'count' => $tag['tag_count']);
+        if (count($tags)) {
+            foreach ($tags as $tag) {
+                $itemTags[] = array('name' => $tag['name'], 'count' => $tag['tag_count']);
+            }
         }
 
         $itemData = array(

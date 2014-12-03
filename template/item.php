@@ -176,7 +176,7 @@ function printTwoItems($items, $relatedItems) {
 <?php
 }
 
-function printItem(array $itemData) {
+function printItem($itemData) {
     $Parsedown = new Parsedown();
 
     ?>
