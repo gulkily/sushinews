@@ -110,6 +110,9 @@ function verifyVotingHash($client_id, $item_id, $tag, $hash) {
 function getPrettyLink($action, $params = array()) {
     switch ($action) {
         case 'index':
+            $link = '';
+            return $link;
+
         case 'moderate':
         case 'about':
         case 'submit':
@@ -140,7 +143,7 @@ function getLink($action, $params = array(), $format = 'relative') {
     if (PRETTY_LINKS === 1 && $format === 'relative') {
         $link = getPrettyLink($action, $params, $format);
 
-        if ($link !== null) {
+        if ($link === '' || $link) {
             return SITE_PATH . $link;
         }
     }
