@@ -90,3 +90,10 @@ table.diff {
     border-top-right-radius: 2em;
     padding-bottom: 2em;
 }
+
+.top-message {
+    alignment: center;
+    background-color: #f0f080;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
