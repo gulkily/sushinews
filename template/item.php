@@ -45,7 +45,7 @@ function printItemTabs($itemData) {
 
     $tabs = array(
         'item' => 'Read',
-        'edit' => 'Evolve',
+        'edit' => 'Edit',
     );
 
     foreach ($tabs as $key => $caption) {
