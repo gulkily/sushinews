@@ -28,7 +28,7 @@ function printModerationWelcome() {
 
                 <p>Thank you for taking it upon yourself to moderate.</p>
 
-                <p>To see another story, just reload this page press <a href="<?getLink('moderate', array('random' => rand(11111111,99999999)))?>" class="addtag tp">Next Article</a></p>
+                <p>To see another story, just reload this page press <a href="<?=getLink('moderate', array('random' => rand(11111111,99999999)))?>" class="addtag tp">Next Article</a></p>
 
                 <p>If you would like to remove your cookie, please click the following:</p>
 
