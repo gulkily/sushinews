@@ -47,7 +47,7 @@ function getParam($name) {
 //    define('SITE_BASE_PATH', '/');
 //}
 
-function getPrettyLink($action, $params = array()) {
+function getPrettyLink($action, $params = array(), $format = 'relative') {
     switch ($action) {
         case 'index':
             $link = '';
@@ -86,13 +86,6 @@ function getLink($action, $params = array(), $format = 'relative') {
     // if pretty links are enabled, see if we can generate one of those first
     // for now this only works for relative links @todo
 
-    if (PRETTY_LINKS && PRETTY_LINKS === 1 && $format === 'relative') {
-        $link = getPrettyLink($action, $params, $format);
-
-        if ($link === '' || $link) {
-            return SITE_PATH . $link;
-        }
-    }
 
     // determine the link prefix first
     if ($format == 'relative') {
@@ -101,6 +94,14 @@ function getLink($action, $params = array(), $format = 'relative') {
         $prefix = SITE_PREFIX . SITE_DOMAIN . SITE_PATH;
     } else {
         die();
+    }
+
+    if (PRETTY_LINKS && PRETTY_LINKS === 1) {
+        $link = getPrettyLink($action, $params, $format);
+
+        if ($link === '' || $link) {
+            return $prefix . $link;
+        }
     }
 
     $prefix .= '?';
