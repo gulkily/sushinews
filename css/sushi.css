@@ -12,11 +12,25 @@ a.sharelink {
 
 a.addtag {
     border: 0.2em outset;
-    border-radius: 0.5em;
+    border-radius: 0.3em;
     margin: 0.2em;
     font-family: helvetica, arial, sans-serif;
     padding: 0.2em;
-    line-height: 2em;
+    line-height: 2.3em;
+    white-space: nowrap;
+    color: black;
+    text-shadow: 1px;
+    background-color: white;
+    width: 50em;
+    display: inline;
+}
+
+a.tp {
+    color: #008000
+}
+
+a.tn {
+    color: #800000;
 }
 
 a.itemtab {
