@@ -36,7 +36,7 @@ function printEditForm($title = '', $summary = '', $body = '', $group_id = '', $
         </div>
         <div class="large-4 columns" style="display: none">
             <label for="group"><strong>Story:</strong> Do not write below this line.</label>
-            <input type="text" name="group" id="group" readonly value="<?=$group?>">
+            <input type="text" name="group" id="group" readonly value="<?=$group_id?>">
         </div>
         <div class="large-4 columns" style="display: none">
             <label for="parentstory"><strong>Parent Story:</strong> Do not write below this line.</label>
