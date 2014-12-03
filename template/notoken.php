@@ -5,6 +5,7 @@ function printNoToken() {
     ?>
     <div class="row">
         <div class="large-12 columns">
+            <div class="panel">
             <p>
                 In order to moderate, you have to get a token.
             </p>
@@ -14,6 +15,10 @@ function printNoToken() {
             </p>
         </div>
     </div>
+    </div>
 <?php
 }
 ?>
+
+
+<?php
