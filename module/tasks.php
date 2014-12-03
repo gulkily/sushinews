@@ -7,6 +7,7 @@ function doTask($taskName) {
 
             writeHtmlArchive('./mirror/', 'mirror_all.zip');
             writeMysqlDump('./mirror/', 'sushinews');
+            writeMysqlSchema('./mirror/', 'sushinews');
 
             break;
 

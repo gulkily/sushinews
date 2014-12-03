@@ -5,46 +5,28 @@ include_once('module/ez_sql.php');
 include_once('module/utilities.php');
 include_once('module/items.php');
 
-//function writeMysqlDump($path, $filename) {
-//
-//    $tables_data = array(
-//        'item',
-//        'item_tag',
-//        'record_client_count',
-//        'source',
-//        'tag',
-//        'user',
-//    );
-//
-//    $tables = array(
-//        'cache_queue',
-//        'client_record_v',
-//        'client_session',
-//        'client_session_t',
-//        'client_variable',
-//        'fp_client',
-//        'fp_field',
-//        'fp_record',
-//        'fp_session',
-//        'item_best_v',
-//        'session',
-//        'session_record',
-//        'session_record_active',
-//        'sherlock_config',
-//    );
-//
-//    //data dump using insert ignore to sushinews_data.sql
-//    shell_exec('mysqldump --insert-ignore -uroot -padmin sushinews >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
+function writeMysqlDump($path, $filename) {
+
+    $tables_data = array(
+        'item',
+        'item_tag',
+        'source',
+        'tag',
+        'user',
+    );
+
+    //data dump using insert ignore to sushinews_data.sql
+    shell_exec('mysqldump --insert-ignore -uroot -padmin sushinews >' . $path . $filename . '_data.sql ' . implode(' ', $tables_data));
 //
 //    //dump database schema to sushinews_schema.sql
 //    shell_exec('mysqldump --disable-extended-insert --compact -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
 //    shell_exec('mysqldump --disable-extended-insert --compact -uroot -padmin sushinews config node tag >>' . $path . $filename . '_schema.sql');
-//
-//    // gzip the data file
-//    shell_exec('gzip -f -9 ' . $path . $filename . '_data.sql');
-//}
 
-function writeMysqlDump($path, $filename) {
+    // gzip the data file
+    shell_exec('gzip -f -9 ' . $path . $filename . '_data.sql');
+}
+
+function writeMysqlSchema($path, $filename) {
     global $db;
     $db->query("SET sql_mode = 'ANSI';");
 
@@ -52,6 +34,7 @@ function writeMysqlDump($path, $filename) {
 
     $tables = $db->get_col("SHOW FULL TABLES WHERE table_type LIKE '%TABLE%'");
     $views = $db->get_col("SHOW FULL TABLES WHERE table_type LIKE '%VIEW%'");
+    $data_tables = array('config', 'node', 'tag');
 
     foreach ($tables as $table) {
         $query = $db->get_var("SHOW CREATE TABLE $table", 1);
