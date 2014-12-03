@@ -15,8 +15,8 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
 
     $stmt = $dbp->prepare(
         "
-        INSERT INTO item(group_id, title, summary, body, publish_timestamp, parent_id)
-        VALUES(:group, :title, :summary, :body, :publish_timestamp, :parent_id)
+        INSERT INTO item(group_id, title, summary, body, publish_timestamp, parent_id, hash)
+        VALUES(:group, :title, :summary, :body, :publish_timestamp, :parent_id, :hash)
         "
     );
 
@@ -26,6 +26,7 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
     $stmt->bindParam(':body', $body);
     $stmt->bindParam(':publish_timestamp', $publish_timestamp_string);
     $stmt->bindParam(':parent_id', $parent_id);
+    $stmt->bindParam(':hash', md5($title . $summary . $body));
 
     $stmt->execute();
 
@@ -133,7 +134,28 @@ function getAvailableTagList() {
     $tags = get_cache_dbp("alltags_weight", 60, $stmt);
 
     return $tags;
+}
 
+function getItemByHash( $hash) {
+    global $dbp;
+
+    if(!preg_match('/^[a-f0-9]{32}$/i', $hash)) {
+        die(); //this needs to be fixed when replacing md5 with something better
+    }
+
+    if (isset($hash)) {
+        $stmt = $dbp->prepare("SELECT id FROM item WHERE hash = :hash");
+        $stmt->bindParam(':hash', $hash);
+
+        $oldItem = get_cache_dbp("hash/" . $hash, 60, $stmt);
+
+        if (count($oldItem)) {
+            $id = $oldItem[0]['id'];
+            return $id;
+        } else {
+            return null;
+        }
+    }
 }
 
 function getItem($item_id) {
