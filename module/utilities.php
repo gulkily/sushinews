@@ -153,6 +153,12 @@ function getOwnUrl() {
     return ($_SERVER['HTTP_HOST']);
 }
 
-function createUser() {
-    // returns hash for cookie
+function concise_timestamp($timestamp) {
+    if (date('Ymd',time()) == date('Ymd',$timestamp)) {
+        return 'at '.date('H:i', $timestamp);
+    }
+    if (date('Y', time()) == date('Y', $timestamp)) {
+        return date('M j', $timestamp);
+    }
+    return date('M j \'y', $timestamp);
 }
