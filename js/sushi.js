@@ -9,7 +9,7 @@ function addtag(button, itemId, tagName, hash) {
 
     $.post('/addtag.php', a, function (ret, stat) {
         if (stat=='success' && ret=='ok') {
-            button.style.backgroundColor = '#d0e0d0';
+            button.style.backgroundColor = '#c0c0c0';
             button.style.borderStyle = 'inset';
         } else {
             button.style.backgroundColor = 'default';
