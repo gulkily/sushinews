@@ -175,7 +175,7 @@
 		}
 	}
 
-    function get_cache_dbp($cache_name, $refresh_rate = 60, PDOStatement $statement = null, $force_refresh = 1) {
+    function get_cache_dbp($cache_name, $refresh_rate = 60, PDOStatement $statement = null, $force_refresh = 0) {
         $refresh_rate = 0;//@todo remove this
         global $cache_db_hit; //fixme
         $cache_db_hit = 0;
