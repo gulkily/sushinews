@@ -237,11 +237,17 @@
 	}
 
 	function batch_cache($count = 50, $max_runtime = 10) {
+        $count = intval($count);
+        if (!$count) return;
+
+        $max_runtime = intval($max_runtime);
+        if (!$max_runtime) return;
+
 		global $db;
         global $dbp;
-		$start = time();
+		$start = microtime(true);
 
-        $stmt = $dbp->prepare("
+        $query = "
             SELECT
                 cache_name,
                 MIN(add_timestamp)
@@ -252,25 +258,22 @@
             FROM cache_queue
             GROUP BY cache_name, FUNCTION
             ORDER BY req_count DESC, first_req
-            LIMIT :count
-        ");
+            LIMIT $count
+        ";
+        $caches = $db->get_results($query);
 
-		if ($stmt->execute(array(':count' => $count))) {
-			while($cache = $stmt->fetch(PDO::FETCH_OBJ)) {
-				if (time() - $start >= $max_runtime) {
+		if (count($caches)) {
+
+			foreach($caches as $cache) {
+				if (microtime() - $start >= $max_runtime) {
 					$not_cached[] = $cache->cache_name;
 				} else {
-					$qry_start = time();
-
                     if ($cache->func == 'dbp') {
                         $stmt = $dbp->prepare($cache->query);
                         get_cache_dbp($cache->cache_name, 0, $stmt, 1);
                     } else {
                         get_cache($cache->cache_name, 0, $cache->query, $cache->func, 1);
-                        // $db; @todo
                     }
-
-                    $qry_end = time();
 
                     $stmtDel = $dbp->prepare("DELETE QUICK FROM cache_queue WHERE cache_name = :cache_name");
                     $stmtDel->execute(array(':cache_name' => $cache->cache_name));
@@ -278,6 +281,7 @@
 					$cached[] = $cache->cache_name;
 				}
 			}
+
 			return array('cached' => $cached, 'not_cached' => $not_cached);
 		}
 	}
