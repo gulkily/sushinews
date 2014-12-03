@@ -154,9 +154,12 @@ if (isset($action)) {
             include_once('template/header.php');
             include_once('template/footer.php');
 
+            $showModWelcome = 0;
+
             if (getParam('token') == 'welcome') {
                 $voter_id = generateVoterId();
                 setVoterIdCookie($voter_id);
+                $showModWelcome = 1;
             }
 
             if (getParam('token') == 'remove') {
@@ -203,9 +206,15 @@ if (isset($action)) {
 
             printHeader();
 
-            printModerationInfo();
+            if ($showModWelcome) {
+                printModerationWelcome();
+            }
 
             printTwoItems(array($itemDataOne, $itemDataTwo), $linkedItems);
+
+            if (!$showModWelcome) {
+                printModerationFooter();
+            }
 
             printFooter();
 
