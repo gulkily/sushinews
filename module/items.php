@@ -1,4 +1,5 @@
 <?php
+
 function createNewItem($title, $summary, $body, $parent_id = null, $guid = null, $publish_timestamp = null) {
     global $dbp;
 
