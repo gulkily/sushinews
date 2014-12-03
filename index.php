@@ -194,7 +194,7 @@ if (isset($action)) {
 }
 
 srand(time());
-if (rand(1,100) == 5) {
+if (getVoterId() || rand(1,100) == 5) {
     ob_flush();
     include_once('module/tasks.php');
     doTask(getRandomTask());
