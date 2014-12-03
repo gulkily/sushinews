@@ -4,7 +4,7 @@ function getMenuItems() {
         'index' => 'Home',
         'submit' => 'Submit',
         'moderate' => 'Moderate',
-        'mirror' => 'Mirror',
+//        'mirror' => 'Mirror',
         'about' => 'About'
     );
 
