@@ -11,7 +11,7 @@ include_once('module/sherlock.php');
 
 $client_id = getVoterId();
 
-if (isset($_POST)) {
+if ($client_id && isset($_POST)) {
     $item_id = getParam('item_id');
     $tag = getParam('tag');
     $hash = getParam('hash');
