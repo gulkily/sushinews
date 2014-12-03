@@ -107,22 +107,61 @@ function verifyVotingHash($client_id, $item_id, $tag, $hash) {
 //    define('SITE_BASE_PATH', '/');
 //}
 
+function getPrettyLink($action, $params = array()) {
+    switch ($action) {
+        case 'index':
+        case 'moderate':
+        case 'about':
+        case 'submit':
+            $link = $action;
+
+            return $link;
+        case 'item':
+            $id = intval($params['id']);
+            if ($id) {
+                $link = 'item/'. $id;
+            }
+            return $link;
+
+        default:
+    }
+
+    return null;
+}
+
 function getLink($action, $params = array(), $format = 'relative') {
     // generates a link to a resource
     // $action is the action parameter, which helps organize the validation
     // $params are all the other parameters, as an array
     // $format can be relative (starting with ./), absolute (starting with /), or global (starting with http://)
-    $params['action'] = $action;
 
+
+    // determine the link prefix first
     if ($format == 'relative') {
-        $link = './?';
+        $prefix = './';
     } elseif ($format == 'absolute') {
-        $link = SITE_PREFIX . SITE_DOMAIN . SITE_PATH . '?';
+        $prefix = SITE_PREFIX . SITE_DOMAIN . SITE_PATH;
+    } else {
+        die();
     }
 
-    //$link .= 'action=' . urlencode($action);
+    // if pretty links are enabled, see if we can generate one of those first
+    if (PRETTY_LINKS == 1) {
+        $link = getPrettyLink($action, $params, $format);
 
-    // currently unvalidated
+        if ($link !== null) {
+            return $link;
+        }
+    }
+
+    // if it's not a pretty link, we need a question mark for the parameter string
+    $prefix .= '?';
+
+    $link = '';
+
+    $params['action'] = $action;
+
+    // currently unvalidated @todo
     if (count($params)) {
         $comma = 0;
         foreach($params as $key => $value) {
@@ -131,7 +170,7 @@ function getLink($action, $params = array(), $format = 'relative') {
         }
     }
 
-    return $link;
+    return $prefix . $link;
 }
 
 function getTagId($tag_name) {
