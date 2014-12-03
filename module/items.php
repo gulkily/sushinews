@@ -143,7 +143,7 @@ function getItem($item_id) {
     $itemId = intval($item_id);
     if (!$itemId) return;
 
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, guid, publish_timestamp FROM item WHERE id=:id");
+    $stmt = $dbp->prepare("SELECT title, body, summary, id, guid, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u FROM item WHERE id=:id");
     $stmt->bindParam(':id', $itemId);
 
     $item = get_cache_dbp("item/$itemId", 60, $stmt);
@@ -171,6 +171,8 @@ function getItem($item_id) {
             'id' => $row['id'],
             'tags' => $itemTags,
             'publish_timestamp' => $row['publish_timestamp'],
+            'publish_timestamp_u' => $row['publish_timestamp_u'],
+            'publish_timestamp_u' => $row['publish_timestamp_u'],
             'guid' => $row['guid']
         );
     }
