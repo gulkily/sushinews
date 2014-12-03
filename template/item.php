@@ -227,6 +227,8 @@ function printAvailableTagList($item_id) {
 }
 
 function printItemSummary(array $itemData) {
+    $parsedown = new Parsedown();
+
     ?>
 
         <h3>
@@ -234,7 +236,7 @@ function printItemSummary(array $itemData) {
                 <?=htmlspecialchars($itemData['title'])?>
             </a>
         </h3>
-        <p><?=htmlspecialchars($itemData['summary'])?></p>
+        <p><?=$parsedown->text(htmlspecialchars($itemData['summary']))?></p>
 
 
 <?php
