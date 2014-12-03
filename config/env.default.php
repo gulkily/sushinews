@@ -33,3 +33,7 @@ define("EZSQL_DB_HOST", "localhost");        // <-- mysql server host
 define("EZSQL_DB_USER", "root");                 // <-- mysql db user
 define("EZSQL_DB_PASSWORD", "admin");               // <-- mysql db password
 define("EZSQL_DB_NAME", "sushinews");         // <-- mysql db pname
+
+// If you have the .htaccess file with rewrites enabled,
+// setting this to 1 will make the links pretty
+define('PRETTY_LINKS', 0);
