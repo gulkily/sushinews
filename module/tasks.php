@@ -26,7 +26,7 @@ function getRandomTask() {
         'update_scores'
     );
 
-    $task = array_rand($possibleTasks);
+    $task = $possibleTasks[array_rand($possibleTasks)];
 
     return $task;
 }
