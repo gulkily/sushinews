@@ -139,9 +139,20 @@ if (isset($action)) {
 
             break;
         case 'moderate':
-            include_once('template/item.php');
             include_once('template/header.php');
             include_once('template/footer.php');
+
+            if (!getVoterId()) {
+                include_once('template/notoken.php');
+
+                printHeader();
+                printNoToken();
+                printFooter();
+
+                break;
+            }
+
+            include_once('template/item.php');
 
             $eligible = get_cache(
                 'voting/eligible',
