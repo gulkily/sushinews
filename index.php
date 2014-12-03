@@ -142,6 +142,11 @@ if (isset($action)) {
             include_once('template/header.php');
             include_once('template/footer.php');
 
+            if (getParam('token') == 'welcome') {
+                $voter_id = generateVoterId();
+                setVoterIdCookie($voter_id);
+            }
+
             if (!getVoterId()) {
                 include_once('template/notoken.php');
 
