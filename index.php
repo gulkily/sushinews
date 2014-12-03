@@ -194,13 +194,11 @@ if (isset($action)) {
 }
 
 srand(time());
-if (getVoterId() || rand(1,100) == 5) {
+if (rand(1,100) == 5) {
     ob_flush();
     include_once('module/tasks.php');
     $task = getRandomTask();
-    echo("You win the task lottery! Running '" . $task . "'...");
     doTask($task);
-    echo("done!");
 }
 
 queue_cache('','','',1);
