@@ -171,6 +171,8 @@ if (isset($action)) {
 
             include_once('template/item.php');
 
+            include_once('template/moderation.php');
+
             $eligible = get_cache(
                 'voting/eligible',
                 60,
@@ -195,6 +197,8 @@ if (isset($action)) {
             $linkedItems = getItemsByGuid($guid);
 
             printHeader();
+
+            printModerationInfo();
 
             printTwoItems(array($itemDataOne, $itemDataTwo), $linkedItems);
 
