@@ -96,7 +96,16 @@ if (isset($action)) {
             break;
         case 'item':
             $itemId = intval(getParam('id'));
+
+            if (!$itemId) {
+                die("No such item");
+            }
+
             $itemData = getItem($itemId);
+
+            if (!$itemData) {
+                die("No such item");
+            }
 
             $linkedItems = getItemsByGroup($itemData['group_id'], 20);
 
