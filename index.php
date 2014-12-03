@@ -193,12 +193,12 @@ if (isset($action)) {
     }
 }
 
+queue_cache('','','',1);
+
 srand(time());
-if (rand(1,100) == 5) {
-    ob_flush();
+if (true) {
     include_once('module/tasks.php');
+    ob_flush();
     $task = getRandomTask();
     doTask($task);
 }
-
-queue_cache('','','',1);
