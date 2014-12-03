@@ -38,6 +38,7 @@ function writeMysqlDump($path, $filename) {
 
     //dump database schema to sushinews_schema.sql
     shell_exec('mysqldump -d -uroot -padmin sushinews >' . $path . $filename . '_schema.sql');
+    shell_exec('mysqldump -uroot -padmin sushinews config node tag >>' . $path . $filename . '_schema.sql');
 
     // gzip the data file
     shell_exec('gzip -f -9 ' . $path . $filename . '_data.sql');
