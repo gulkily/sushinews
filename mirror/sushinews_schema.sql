@@ -53,7 +53,7 @@ CREATE TABLE "fp_session" (
 
 CREATE TABLE "item" (
   "id" int(11) NOT NULL AUTO_INCREMENT,
-  "hash" int(11) NOT NULL,
+  "hash" char(64) NOT NULL,
   "parent_id" int(11) NOT NULL,
   "group_id" char(64) CHARACTER SET utf8 NOT NULL,
   "title" char(255) CHARACTER SET utf8 NOT NULL,
