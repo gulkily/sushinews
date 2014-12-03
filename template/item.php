@@ -145,11 +145,13 @@ function printTwoItems($items, $relatedItems) {
     echo('<a href="'.getItemUrl($items[$second]['id'], 'absolute').'">'.getItemUrl($items[$second]['id'], 'absolute').'</a>');
     echo('</td></tr>');
 
-    echo('<tr><td>');
-    printAvailableTagList($items[$first]['id']);
-    echo('</td><td>');
-    printAvailableTagList($items[$second]['id']);
-    echo('</td></tr>');
+    if (getVoterId()) {
+        echo('<tr><td>');
+        printAvailableTagList($items[$first]['id']);
+        echo('</td><td>');
+        printAvailableTagList($items[$second]['id']);
+        echo('</td></tr>');
+    }
 
     echo("</table>\n");
 
