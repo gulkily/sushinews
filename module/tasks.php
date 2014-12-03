@@ -33,13 +33,19 @@ function doTask($taskName) {
     }
 }
 
-function getRandomTask() {
+function getTasksMenu() {
     $possibleTasks = array(
         'export',
         'update_scores',
         'cleanup_tables',
         'update_cache'
     );
+
+    return $possibleTasks;
+}
+
+function getRandomTask() {
+    $possibleTasks = getTasksMenu();
 
     srand(time());
     $index = rand(1, count($possibleTasks)) - 1;
