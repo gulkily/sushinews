@@ -211,8 +211,6 @@ function printAvailableTagList($item_id) {
 }
 
 function printItemSummary(array $itemData) {
-    $self_domain = 'sushi.local'; //@todo fix this FIX IT!
-
     ?>
 
         <h3>
