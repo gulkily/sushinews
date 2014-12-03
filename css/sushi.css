@@ -16,10 +16,12 @@
 }
 
 #sitename a {
-    background-color: #a0a0a0;
-    color: #2020a0;
+    background-color: #909090;
+    color: #3030b0;
     padding: 0.5em;
-    text-shadow: 1px 1px #b0b0b0;
+    text-shadow: 1px 1px #b8b8b8;
+
+    background: linear-gradient(#707070, #888888);
 }
 
 .sharelink {
