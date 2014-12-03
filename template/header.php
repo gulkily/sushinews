@@ -35,7 +35,17 @@ function printHeader($username = null) {
         <?php foreach(getMenuItems() as $action => $item) { echo ('<a href="' . getLink($action) . '">' . $item . '</a>'); } ?>
     </div>
 </div>
+<?php
+    if (getParam('ticket')) {
+        $messages = get_ticket(getParam('ticket'));
 
+        if (is_array($messages) && count($messages)) {
+            foreach($messages as $message) {
+                echo('<div class="row top-message">' . $message . '</div>'); //@note, $message is not escaped because it is always system-generated, or should be
+            }
+        }
+    }
+?>
 <br>
 <?php
 }
