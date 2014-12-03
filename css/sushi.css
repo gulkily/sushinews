@@ -86,3 +86,8 @@ table.diff {
     margin-left: 15px;
     margin-right: 15px;
 }
+
+.item-tabs {
+    border-top-right-radius: 2em;
+    padding-bottom: 2em;
+}

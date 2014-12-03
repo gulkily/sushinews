@@ -38,14 +38,14 @@ function printTagList($tags) {
 
 function printItemTabs($itemData) {
 ?>
-    <div class="panel">
+    <div class="panel item-tabs">
         <div class="columns large-6">
 
     <?php
 
     $tabs = array(
-        'item' => 'Article',
-        'edit' => 'Revise',
+        'item' => 'Read',
+        'edit' => 'Edit',
     );
 
     foreach ($tabs as $key => $caption) {
