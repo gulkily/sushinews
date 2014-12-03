@@ -148,7 +148,7 @@ function addTagToItem($item_id, $tag_name, $voter_id) {
 
     $stmt->execute(array(':item_id' => $item, ':tag_id' => $tag_id, ':voter_id' => $voter_id));
 
-    print_r($stmt->queryString);
+    print_r($stmt->errorInfo());
 }
 
 function getOwnUrl() {
