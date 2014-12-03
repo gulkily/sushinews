@@ -172,7 +172,6 @@ function getItem($item_id) {
             'tags' => $itemTags,
             'publish_timestamp' => $row['publish_timestamp'],
             'publish_timestamp_u' => $row['publish_timestamp_u'],
-            'publish_timestamp_u' => $row['publish_timestamp_u'],
             'guid' => $row['guid']
         );
     }
