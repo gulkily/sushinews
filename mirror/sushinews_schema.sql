@@ -1,25 +1,3 @@
--- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (i686)
---
--- Host: localhost    Database: sushinews
--- ------------------------------------------------------
--- Server version	5.5.40-0+wheezy1
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `cache_queue`
---
-
-DROP TABLE IF EXISTS `cache_queue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cache_queue` (
@@ -29,13 +7,6 @@ CREATE TABLE `cache_queue` (
   `add_timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Temporary table structure for view `client_record_v`
---
-
-DROP TABLE IF EXISTS `client_record_v`;
-/*!50001 DROP VIEW IF EXISTS `client_record_v`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `client_record_v` (
@@ -43,12 +14,6 @@ SET character_set_client = utf8;
   `record_id` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
-
---
--- Table structure for table `client_session`
---
-
-DROP TABLE IF EXISTS `client_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `client_session` (
@@ -56,13 +21,6 @@ CREATE TABLE `client_session` (
   `session_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Temporary table structure for view `client_session_t`
---
-
-DROP TABLE IF EXISTS `client_session_t`;
-/*!50001 DROP VIEW IF EXISTS `client_session_t`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `client_session_t` (
@@ -70,12 +28,6 @@ SET character_set_client = utf8;
   `session_id` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
-
---
--- Table structure for table `client_variable`
---
-
-DROP TABLE IF EXISTS `client_variable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `client_variable` (
@@ -85,12 +37,6 @@ CREATE TABLE `client_variable` (
   UNIQUE KEY `client_id` (`client_id`,`var_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `config`
---
-
-DROP TABLE IF EXISTS `config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `config` (
@@ -99,12 +45,6 @@ CREATE TABLE `config` (
   UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `fp_client`
---
-
-DROP TABLE IF EXISTS `fp_client`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fp_client` (
@@ -112,12 +52,6 @@ CREATE TABLE `fp_client` (
   PRIMARY KEY (`client_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `fp_field`
---
-
-DROP TABLE IF EXISTS `fp_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fp_field` (
@@ -130,12 +64,6 @@ CREATE TABLE `fp_field` (
   PRIMARY KEY (`field_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `fp_record`
---
-
-DROP TABLE IF EXISTS `fp_record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fp_record` (
@@ -146,12 +74,6 @@ CREATE TABLE `fp_record` (
   UNIQUE KEY `field_id` (`field_id`,`field_value`)
 ) ENGINE=InnoDB AUTO_INCREMENT=805 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `fp_session`
---
-
-DROP TABLE IF EXISTS `fp_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fp_session` (
@@ -159,12 +81,6 @@ CREATE TABLE `fp_session` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=823 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `item`
---
-
-DROP TABLE IF EXISTS `item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
@@ -181,15 +97,8 @@ CREATE TABLE `item` (
   `author` varchar(31) DEFAULT NULL,
   `score` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Temporary table structure for view `item_best_v`
---
-
-DROP TABLE IF EXISTS `item_best_v`;
-/*!50001 DROP VIEW IF EXISTS `item_best_v`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `item_best_v` (
@@ -205,12 +114,6 @@ SET character_set_client = utf8;
   `score` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
-
---
--- Table structure for table `item_tag`
---
-
-DROP TABLE IF EXISTS `item_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item_tag` (
@@ -222,25 +125,12 @@ CREATE TABLE `item_tag` (
   CONSTRAINT `item_tag_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `node`
---
-
-DROP TABLE IF EXISTS `node`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `node` (
   `host` char(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Temporary table structure for view `record_client_count`
---
-
-DROP TABLE IF EXISTS `record_client_count`;
-/*!50001 DROP VIEW IF EXISTS `record_client_count`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `record_client_count` (
@@ -248,12 +138,6 @@ SET character_set_client = utf8;
   `client_count` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
-
---
--- Table structure for table `session`
---
-
-DROP TABLE IF EXISTS `session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `session` (
@@ -263,12 +147,6 @@ CREATE TABLE `session` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `session_record`
---
-
-DROP TABLE IF EXISTS `session_record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `session_record` (
@@ -279,13 +157,6 @@ CREATE TABLE `session_record` (
   PRIMARY KEY (`session_id`,`record_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Temporary table structure for view `session_record_active`
---
-
-DROP TABLE IF EXISTS `session_record_active`;
-/*!50001 DROP VIEW IF EXISTS `session_record_active`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE TABLE `session_record_active` (
@@ -295,12 +166,6 @@ SET character_set_client = utf8;
   `active` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
-
---
--- Table structure for table `sherlock_config`
---
-
-DROP TABLE IF EXISTS `sherlock_config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sherlock_config` (
@@ -309,12 +174,6 @@ CREATE TABLE `sherlock_config` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `source`
---
-
-DROP TABLE IF EXISTS `source`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `source` (
@@ -327,12 +186,6 @@ CREATE TABLE `source` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `tag`
---
-
-DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tag` (
@@ -343,12 +196,6 @@ CREATE TABLE `tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
@@ -360,12 +207,6 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `voter_id_rate`
---
-
-DROP TABLE IF EXISTS `voter_id_rate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `voter_id_rate` (
@@ -374,13 +215,7 @@ CREATE TABLE `voter_id_rate` (
   KEY `host` (`host`)
 ) ENGINE=InnoDB DEFAULT CHARSET=binary;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Final view structure for view `client_record_v`
---
-
 /*!50001 DROP TABLE IF EXISTS `client_record_v`*/;
-/*!50001 DROP VIEW IF EXISTS `client_record_v`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -393,13 +228,7 @@ CREATE TABLE `voter_id_rate` (
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `client_session_t`
---
-
 /*!50001 DROP TABLE IF EXISTS `client_session_t`*/;
-/*!50001 DROP VIEW IF EXISTS `client_session_t`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -412,13 +241,7 @@ CREATE TABLE `voter_id_rate` (
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `item_best_v`
---
-
 /*!50001 DROP TABLE IF EXISTS `item_best_v`*/;
-/*!50001 DROP VIEW IF EXISTS `item_best_v`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -431,13 +254,7 @@ CREATE TABLE `voter_id_rate` (
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `record_client_count`
---
-
 /*!50001 DROP TABLE IF EXISTS `record_client_count`*/;
-/*!50001 DROP VIEW IF EXISTS `record_client_count`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -450,13 +267,7 @@ CREATE TABLE `voter_id_rate` (
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `session_record_active`
---
-
 /*!50001 DROP TABLE IF EXISTS `session_record_active`*/;
-/*!50001 DROP VIEW IF EXISTS `session_record_active`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -469,39 +280,6 @@ CREATE TABLE `voter_id_rate` (
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2014-12-03  9:33:38
--- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (i686)
---
--- Host: localhost    Database: sushinews
--- ------------------------------------------------------
--- Server version	5.5.40-0+wheezy1
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `config`
---
-
-DROP TABLE IF EXISTS `config`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `config` (
@@ -510,43 +288,13 @@ CREATE TABLE `config` (
   UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `config`
---
-
-LOCK TABLES `config` WRITE;
-/*!40000 ALTER TABLE `config` DISABLE KEYS */;
 INSERT INTO `config` VALUES ('version','1');
-/*!40000 ALTER TABLE `config` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `node`
---
-
-DROP TABLE IF EXISTS `node`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `node` (
   `host` char(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `node`
---
-
-LOCK TABLES `node` WRITE;
-/*!40000 ALTER TABLE `node` DISABLE KEYS */;
-/*!40000 ALTER TABLE `node` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tag`
---
-
-DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tag` (
@@ -557,24 +305,33 @@ CREATE TABLE `tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tag`
---
-
-LOCK TABLES `tag` WRITE;
-/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (1,'opinion',-1,0),(2,'sports',-1,0),(3,'world',1,0),(4,'advertising',-1,1),(5,'religious',-1,0),(6,'inspiring',1,1),(7,'important',1,0),(8,'current',1,0),(9,'accurate',1,0),(10,'abusive',-1,1),(11,'violent',-1,0),(12,'licensed',-1,0),(13,'unlicensed',-1,0),(14,'copyrighted',-1,0),(15,'derivative',1,0),(16,'kind',1,1),(17,'biased',-1,0),(18,'inaccurate',-1,1),(19,'deprecated',-1,0),(20,'spam',-1,1),(21,'fiction',1,0),(23,'incomplete',-1,0),(24,'bullshit',-1,0),(25,'funny',1,1),(26,'interesting',1,1),(27,'informative',1,1),(28,'novel',1,0),(29,'smart',1,0),(30,'fearmongering',-1,0),(31,'broken',-1,1);
-/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2014-12-03  9:33:39
+INSERT INTO `tag` VALUES (1,'opinion',-1,0);
+INSERT INTO `tag` VALUES (2,'sports',-1,0);
+INSERT INTO `tag` VALUES (3,'world',1,0);
+INSERT INTO `tag` VALUES (4,'advertising',-1,1);
+INSERT INTO `tag` VALUES (5,'religious',-1,0);
+INSERT INTO `tag` VALUES (6,'inspiring',1,1);
+INSERT INTO `tag` VALUES (7,'important',1,0);
+INSERT INTO `tag` VALUES (8,'current',1,0);
+INSERT INTO `tag` VALUES (9,'accurate',1,0);
+INSERT INTO `tag` VALUES (10,'abusive',-1,1);
+INSERT INTO `tag` VALUES (11,'violent',-1,0);
+INSERT INTO `tag` VALUES (12,'licensed',-1,0);
+INSERT INTO `tag` VALUES (13,'unlicensed',-1,0);
+INSERT INTO `tag` VALUES (14,'copyrighted',-1,0);
+INSERT INTO `tag` VALUES (15,'derivative',1,0);
+INSERT INTO `tag` VALUES (16,'kind',1,1);
+INSERT INTO `tag` VALUES (17,'biased',-1,0);
+INSERT INTO `tag` VALUES (18,'inaccurate',-1,1);
+INSERT INTO `tag` VALUES (19,'deprecated',-1,0);
+INSERT INTO `tag` VALUES (20,'spam',-1,1);
+INSERT INTO `tag` VALUES (21,'fiction',1,0);
+INSERT INTO `tag` VALUES (23,'incomplete',-1,0);
+INSERT INTO `tag` VALUES (24,'bullshit',-1,0);
+INSERT INTO `tag` VALUES (25,'funny',1,1);
+INSERT INTO `tag` VALUES (26,'interesting',1,1);
+INSERT INTO `tag` VALUES (27,'informative',1,1);
+INSERT INTO `tag` VALUES (28,'novel',1,0);
+INSERT INTO `tag` VALUES (29,'smart',1,0);
+INSERT INTO `tag` VALUES (30,'fearmongering',-1,0);
+INSERT INTO `tag` VALUES (31,'broken',-1,1);
