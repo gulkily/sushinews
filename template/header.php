@@ -18,10 +18,10 @@ function printHeader($username = null) {
 <head>
     <meta charset="utf-8" />
     <title><?=SITE_NAME?></title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <link rel="stylesheet" href="css/sushi.css" />
-    <script src="js/vendor/modernizr.js"></script>
-    <script src="js/sushi.js"></script>
+    <link rel="stylesheet" href="<?=SITE_PATH?>css/foundation.css" />
+    <link rel="stylesheet" href="<?=SITE_PATH?>css/sushi.css" />
+    <script src="<?=SITE_PATH?>js/vendor/modernizr.js"></script>
+    <script src="<?=SITE_PATH?>js/sushi.js"></script>
 </head>
 <body>
 
