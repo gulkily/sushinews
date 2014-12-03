@@ -180,24 +180,11 @@ function printItem($itemData) {
     $Parsedown = new Parsedown();
 
     ?>
-    <form>
-            <h3>
-                <a href="<?=getItemUrl($itemData['id'])?>">
-    <?=htmlspecialchars($itemData['title'])?>
-    </a>
-    </h3>
+    <h3><a href="<?=getItemUrl($itemData['id'])?>"><?=htmlspecialchars($itemData['title'])?></a></h3>
     <p><?=$Parsedown->text(htmlspecialchars($itemData['body']))?></p>
-    <p>
-        <a href="/?action=edit&id=<?=$itemData['id']?>">Edit This Story</a>
-        Tags: <? printTagList($itemData['tags']); ?>
+    <p class="sharelink">To share this story, copy the following link: <a href="<?=getItemUrl($itemData['id'], 'absolute')?>"><?=getItemUrl($itemData['id'], 'absolute')?></a></p>
 
-    <br>
-        Share: <a href="<?=getItemUrl($itemData['id'], 'absolute')?>" class="sharelink"><?=getItemUrl($itemData['id'], 'absolute')?></a>
-    </p>
-    </form>
-
-    <?php
-
+<?php
 }
 
 function printAvailableTagList($item_id) {
