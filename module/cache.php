@@ -263,6 +263,8 @@
         $caches = $db->get_results($query);
 
 		if (count($caches)) {
+            $cached = array();
+            $not_cached = array();
 
 			foreach($caches as $cache) {
 				if (microtime() - $start >= $max_runtime) {
