@@ -159,6 +159,11 @@ if (isset($action)) {
                 setVoterIdCookie($voter_id);
             }
 
+            if (getParam('token') == 'remove') {
+                $voter_id = null;
+                unsetVoterIdCookie();
+            }
+
             if (!getVoterId()) {
                 include_once('template/notoken.php');
 
