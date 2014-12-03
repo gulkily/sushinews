@@ -369,7 +369,7 @@ DROP TABLE IF EXISTS `voter_id_rate`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `voter_id_rate` (
   `host` binary(32) NOT NULL,
-  `last_assigment` datetime NOT NULL,
+  `last_assignment` datetime NOT NULL,
   KEY `host` (`host`)
 ) ENGINE=InnoDB DEFAULT CHARSET=binary;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -478,4 +478,4 @@ CREATE TABLE `voter_id_rate` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-03  5:07:29
+-- Dump completed on 2014-12-03  5:56:49
