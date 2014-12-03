@@ -188,32 +188,38 @@ if (isset($action)) {
                 'get_col'
             );
 
-            $rand = rand(0, count($eligible) - 1);
+            if (count($eligible)) {
 
-            $group = $eligible[$rand];
+                $rand = rand(0, count($eligible) - 1);
 
-            $versions = get_cache("versions/$group", 60, "select id from item where group_id = '$group'", 'get_col');
+                $group = $eligible[$rand];
 
-            shuffle($versions);
+                $versions = get_cache("versions/$group", 60, "select id from item where group_id = '$group'", 'get_col');
 
-            $chosen[] = array_pop($versions);
-            $chosen[] = array_pop($versions);
+                shuffle($versions);
 
-            $itemDataOne = getItem($chosen[0]);
-            $itemDataTwo = getItem($chosen[1]);
+                $chosen[] = array_pop($versions);
+                $chosen[] = array_pop($versions);
 
-            $linkedItems = getItemsByGroup($group);
+                $itemDataOne = getItem($chosen[0]);
+                $itemDataTwo = getItem($chosen[1]);
 
-            printHeader();
+                $linkedItems = getItemsByGroup($group);
 
-            if ($showModWelcome) {
-                printModerationWelcome();
-            }
+                printHeader();
 
-            printTwoItems(array($itemDataOne, $itemDataTwo), $linkedItems);
+                if ($showModWelcome) {
+                    printModerationWelcome();
+                }
 
-            if (!$showModWelcome) {
-                printModerationFooter();
+                printTwoItems(array($itemDataOne, $itemDataTwo), $linkedItems);
+
+                if (!$showModWelcome) {
+                    printModerationFooter();
+                }
+            } else {
+                echo("Sorry, there is nothing for you to moderate at this time.");
+                //@todo make this pretty
             }
 
             printFooter();
