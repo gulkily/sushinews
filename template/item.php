@@ -56,11 +56,13 @@ function printItemTabs($itemData) {
 
         </div>
         <div class="columns large-6" style="text-align: right">
-            <?=$itemData['publish_timestamp']?>
+            <span title="<?=$itemData['publish_timestamp']?>"><?='posted ' . concise_timestamp($itemData['publish_timestamp_u'])?></span>
         </div>
     </div>
     <?php
 }
+
+///////////////////////////////////////////////////////////////////////////////////
 
 function printRelatedItems(array $relatedItems, $sourceItemId) {
 ?>
@@ -163,8 +165,6 @@ function printTwoItems($items, $relatedItems) {
 function printItem(array $itemData) {
     $Parsedown = new Parsedown();
 
-    $self_domain = SITE_DOMAIN;
-
     ?>
     <form>
             <h3>
@@ -201,7 +201,9 @@ function printAvailableTagList($item_id) {
             echo('<br>');
         }
 
-        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'&hash='.$hash.'" class="addtag" onClick="return addtag(this, '.$item_id.', \''.$tag['name'].'\', \''.$hash.'\');">');
+        $weight_class = ($tag['weight'] > 0 ? 'tp' : 'tn');
+
+        echo('<a href="addtag.php?item_id='.$item_id.'&tag='.$tag['name'].'&hash='.$hash.'" class="addtag ' . $weight_class . '" onClick="return addtag(this, '.$item_id.', \''.$tag['name'].'\', \''.$hash.'\');">');
         echo(($tag['weight']<0?'&ndash;':'+') . '&nbsp;');
         echo($tag['name']);
         echo("</a>");
