@@ -1,10 +1,16 @@
 <?php
 
 function printEditForm($title = '', $summary = '', $body = '', $guid = '', $parentid = '') {
+    if ($guid || $parentid) {
+        $password = md5($guid . '-' . $parentid . '-' . SECRET_SALT);
+    } else {
+        $password = '';
+    }
 ?>
 
 
 <form action="/new.php" method="post">
+    <input type="hidden" name="password" value="<?=$password?>">
     <div class="row">
         <div class="large-12 columns">
 
