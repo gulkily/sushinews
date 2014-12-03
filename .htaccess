@@ -1,8 +1,8 @@
 RewriteEngine On
 RewriteBase /
-RewriteRule ^([0-9]+) /index.php?action=item&id=$1
-RewriteRule ^story/(.+) /index.php?action=story&guid=$1
-RewriteRule ^story/(.+)/[0-9]+ /index.php?action=story&guid=$1&item=$2
+#RewriteRule ^([0-9]+) /index.php?action=item&id=$1
+RewriteRule ^item/(.+) /index.php?action=item&id=$1
+#RewriteRule ^item/(.+)/[0-9]+ /index.php?action=story&guid=$1&item=$2
 
 RewriteRule ^(submit|moderate|mirror|about)$ /index.php?action=$1
 
