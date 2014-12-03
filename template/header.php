@@ -11,13 +11,13 @@ function getMenuItems() {
     return $items;
 }
 
-function printHeader($username = null) {
+function printHeader($title = null) {
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8" />
-    <title><?=SITE_NAME?></title>
+    <title><?=($title ? $title . ' - ' : '')?><?=SITE_NAME?></title>
     <link rel="stylesheet" href="<?=SITE_PATH?>css/foundation.css" />
     <link rel="stylesheet" href="<?=SITE_PATH?>css/sushi.css" />
     <script src="<?=SITE_PATH?>js/vendor/modernizr.js"></script>
@@ -25,15 +25,14 @@ function printHeader($username = null) {
 </head>
 <body>
 
-<div class="row">
-    <div class="large-12 columns">
-        <h1><a href="/"><?=SITE_NAME?></a></h1>
-    </div>
-</div>
-<div class="row">
-    <div class="large-12 columns" id="topmenu">
+<div class="row" id="topmenu">
+    <div class="large-8 columns" id="menu">
         <?php foreach(getMenuItems() as $action => $item) { echo ('<a href="' . getLink($action) . '">' . $item . '</a>'); } ?>
     </div>
+    <div class="large-4 columns" id="sitename">
+        <span><a href="/"><?=SITE_NAME?></a></span>
+    </div>
+
 </div>
 <?php
     // @todo move this part out of the template, messages should be passed to the template as a parameter
