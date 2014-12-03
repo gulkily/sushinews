@@ -1,12 +1,14 @@
 <?php
 function getMenuItems() {
-    return array(
-        '/' => 'News',
-        '/submit' => 'Submit',
-        '/moderate' => 'Moderate',
-        '/mirror' => 'Mirror',
-        '/?action=about' => 'About'
+    $items = array(
+        'index' => 'News',
+        'submit' => 'Submit',
+        'moderate' => 'Moderate',
+        'mirror' => 'Mirror',
+        'about' => 'About'
     );
+
+    return $items;
 }
 
 function printHeader($username = null) {
@@ -30,7 +32,7 @@ function printHeader($username = null) {
 </div>
 <div class="row">
     <div class="large-12 columns" id="topmenu">
-        <?php foreach(getMenuItems() as $url => $item) { echo ('<a href="' . $url . '">' . $item . '</a>'); } ?>
+        <?php foreach(getMenuItems() as $action => $item) { echo ('<a href="' . getLink($action) . '">' . $item . '</a>'); } ?>
     </div>
 </div>
 
