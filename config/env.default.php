@@ -12,9 +12,6 @@ if (CACHE_PATH === '') die ('Please set the CACHE_PATH global in env.php');
 define('MIRROR_PATH', "");
 if (MIRROR_PATH === '') die ('Please set the CACHE_PATH global in env.php');
 
-// *** This is the domain the site lives on @todo autoconfig this while running the site from HTTP_HOST
-define('SITE_DOMAIN', 'sushi.local');
-
 // This is the name of the site
 define('SITE_NAME', '');
 define('SITE_PATH', '/');
@@ -25,7 +22,3 @@ define("EZSQL_DB_HOST", "localhost");        // <-- mysql server host
 define("EZSQL_DB_USER", "root");                 // <-- mysql db user
 define("EZSQL_DB_PASSWORD", "admin");               // <-- mysql db password
 define("EZSQL_DB_NAME", "sushinews");         // <-- mysql db pname
-
-// If you have the .htaccess file with rewrites enabled,
-// setting this to 1 will make the links pretty
-define('PRETTY_LINKS', 0);

@@ -88,12 +88,19 @@ function putConfig($key, $value) {
 
 function configSanityCheck() {
     if (!getConfig('guid_seed')) {
-
         putConfig('guid_seed', generateSalt());
     }
 
     if (!getConfig('secret_salt')) {
         putConfig('secret_salt', generateSalt());
+    }
+
+    if (!getConfig('site_domain')) {
+        putConfig('site_domain', $_SERVER['HTTP_HOST']);
+    }
+
+    if (!getConfig('pretty_links')) {
+        putConfig('pretty_links', 0);
     }
 
 }
@@ -195,12 +202,12 @@ function getLink($action, $params = array(), $format = 'relative') {
     if ($format == 'relative') {
         $prefix = SITE_PATH;
     } elseif ($format == 'absolute') {
-        $prefix = SITE_PREFIX . SITE_DOMAIN . SITE_PATH;
+        $prefix = SITE_PREFIX . getConfig('site_domain') . SITE_PATH;
     } else {
         die();
     }
 
-    if (PRETTY_LINKS && PRETTY_LINKS === 1) {
+    if (getConfig('pretty_links') && getConfig('pretty_links') === 1) {
         $link = getPrettyLink($action, $params, $format);
 
         if ($link === '' || $link) {
