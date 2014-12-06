@@ -30,11 +30,9 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
 
     $stmt->execute();
 
-    $newItemId = $dbp->lastInsertId();
+    $newItemId = $dbp->lastInsertId('id');
 
-    if ($newItemId) {
-        updateItemScore($newItemId);
-
+    if (intval($newItemId)) {
         return $newItemId;
     } else {
         return null;
@@ -43,6 +41,17 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
 
 function getItems($params) {
     global $dbp;
+
+    $defaults = array(
+        'limit' => 50,
+        'sort' => 'hot'
+    );
+
+    foreach ($defaults as $default) {
+        if (!isset($params[$default])) {
+            $params[$default] = $defaults[$default];
+        }
+    }
 
     $limit = intval($params['limit']);
     if (!$limit) $limit = 50;
