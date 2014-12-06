@@ -152,7 +152,7 @@ function getLink($action, $params = array(), $format = 'relative') {
     if ($format == 'relative') {
         $prefix = getConfig('site_path');
     } elseif ($format == 'absolute') {
-        $prefix = SITE_PREFIX . getConfig('site_domain') . getConfig('site_path');
+        $prefix = getConfig('site_prefix') . getConfig('site_domain') . getConfig('site_path');
     } else {
         die();
     }
