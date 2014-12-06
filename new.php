@@ -55,9 +55,9 @@ include_once('module/items.php');
             $newItemId = createNewItem($title, $summary, $body, $parent_id, $group);
 
             if ($newItemId) {
-                delete_cache('items/*');
+                delete_cache('items/*', 1);
                 if ($group) {
-                    delete_cache("related/$group");
+                    delete_cache("related/$group", 1);
                 }
 
                 header('Location: ' . getItemUrl($newItemId));
