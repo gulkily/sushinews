@@ -57,6 +57,12 @@ function getConfigDefault($key) {
         case 'site_path':
             return '/'; //@todo this should be generated from current url if possible
             break;
+        case 'site_prefix':
+            return 'http://'; //@todo get this from the client request
+            break;
+        case 'mirror_path':
+            return './mirror';
+            break;
         default:
             return null;
     }
