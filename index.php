@@ -168,7 +168,8 @@ if (isset($action)) {
             if (isPost() && getParam('token') == 'welcome') {
                 $voter_id = generateVoterId();
                 setVoterIdCookie($voter_id);
-                $showModWelcome = 1;
+
+                put_ticket(array("You now have a moderation token and can moderate."), getLink('moderate'));
             }
 
             if (getParam('token') == 'remove') {
