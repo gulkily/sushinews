@@ -108,11 +108,6 @@ function configSanityCheck() {
     if (!getConfig('site_domain')) {
         putConfig('site_domain', $_SERVER['HTTP_HOST']);
     }
-
-    if (!getConfig('pretty_links')) {
-        putConfig('pretty_links', 0);
-    }
-
 }
 
 function generateSalt() {
@@ -217,7 +212,7 @@ function getLink($action, $params = array(), $format = 'relative') {
         die();
     }
 
-    if (getConfig('pretty_links') && getConfig('pretty_links') === 1) {
+    if (getConfig('pretty_links')) {
         $link = getPrettyLink($action, $params, $format);
 
         if ($link === '' || $link) {
