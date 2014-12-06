@@ -187,6 +187,7 @@
 
         if (!$force_refresh && cache_expired($cache_name, $refresh_rate) > 0 && $statement) {
             //queue_cache($cache_name, $statement->queryString, 'dbp');
+            // @todo this still needs some tweaking
         }
 
         if (($force_refresh && $ce || $ce < 0)  && $cache_name != '' && $statement) {
