@@ -47,6 +47,15 @@ function getItems($params) {
     $limit = intval($params['limit']);
     if (!$limit) $limit = 50;
 
+    $sort = $params['sort'];
+    switch ($sort) {
+        case 'hot':
+            break;
+        default:
+            $sort = 'hot';
+
+    }
+
     //$stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp FROM item_best_v ORDER BY score DESC, publish_timestamp DESC LIMIT $limit");
     $stmt = $dbp->prepare("
         select
