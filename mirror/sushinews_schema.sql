@@ -63,7 +63,7 @@ CREATE TABLE "item" (
   "reindex_timestamp" datetime NOT NULL,
   "language" char(2) DEFAULT NULL,
   "author" varchar(31) DEFAULT NULL,
-  "score" int(11) DEFAULT NULL,
+  "score" int(11) NOT NULL,
   PRIMARY KEY ("id"),
   UNIQUE KEY "hash" ("hash")
 );
