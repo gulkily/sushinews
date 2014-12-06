@@ -1,8 +1,10 @@
 <?php
+include_once('config.php');
 include_once('module/utilities.php');
 include_once('module/items.php');
 
     if (isPost()) {
+
         $title = trim(getParam('title'));
         $summary = trim(getParam('summary'));
         $body = trim(getParam('body'));
@@ -12,11 +14,11 @@ include_once('module/items.php');
         if ($group || $parent_id) {
             // this could be prettier, but it's enough
             // if the password doesn't match up for an existing article, something is wrong
-            if (!getParam('password') || getParam('password') != md5($group . '-' . $parent_id . '-' . SECRET_SALT)) die("Something went wrong...");
+            if (!getParam('password') || getParam('password') != md5($group . '-' . $parent_id . '-' . getConfig('secret_salt'))) die("Something went wrong...");
         }
 
-        if(!preg_match('/^[a-f0-9]{32}$/i', $group)) {
-            die(); //this needs to be fixed when replacing md5 with something better
+        if(!isHash($group)) {
+            die("There was a problem with the group hash. Please try again");
         }
 
         if (!$summary && $body) {
@@ -61,6 +63,8 @@ include_once('module/items.php');
                 }
 
                 header('Location: ' . getItemUrl($newItemId));
+            } else {
+                echo("There was a problem creating this item");
             }
         } else {
             echo ("You forgot something...");
