@@ -141,7 +141,7 @@ if (isset($action)) {
             break;
 
         case 'index':
-            $items = getItems(array('limit' => 20);
+            $items = getItems(array('limit' => 20));
 
             include_once('template/item.php');
 
