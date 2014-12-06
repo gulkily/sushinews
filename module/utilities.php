@@ -55,6 +55,64 @@ function isPost() {
     }
 }
 
+function getConfig($key) {
+    static $config;
+
+    if (!isset($config)) {
+        if (!cache_expired('config', 360)) {
+            $config = get_cache('config');
+        } else {
+            global $db;
+            $rows = $db->get_results("SELECT * FROM config");
+            foreach ($rows as $row) {
+                $config[$row->key] = $row->value;
+            }
+            put_cache('config', $config);
+        }
+    }
+
+    if (isset($config[$key])) {
+        return $config[$key];
+    } else {
+        return null;
+    }
+}
+
+function putConfig($key, $value) {
+    global $dbp;
+
+    $stmt = $dbp->prepare("INSERT INTO config(`key`, `value`) VALUES(:key, :value)");
+
+    $stmt->execute(array(':key' => $key, ':value' => $value));
+}
+
+function configSanityCheck() {
+    if (!getConfig('guid_seed')) {
+
+        putConfig('guid_seed', generateSalt());
+    }
+
+    if (!getConfig('secret_salt')) {
+        putConfig('secret_salt', generateSalt());
+    }
+
+}
+
+function generateSalt() {
+    //@todo make this actually crypto-safe; just a placeholder for now
+
+    mt_srand();
+    $length = rand(20,40);
+    $c = 0;
+    $salt = '';
+    while ($c < $length) {
+        $c++;
+        $salt .= rand(0,9);
+    }
+
+    return $salt;
+}
+
 function put_ticket($messages, $redirect = null) {
     mt_srand();
     do {
@@ -220,4 +278,10 @@ function concise_timestamp($timestamp) {
         return date('M j', $timestamp);
     }
     return date('M j \'y', $timestamp);
+}
+
+function hsh($string) {
+    //centralized hashing function so that we can replace md5
+
+    return md5($string);
 }

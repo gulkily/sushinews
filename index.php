@@ -16,6 +16,8 @@ include_once('module/items.php');
 //
 $action = getParam('action');
 
+configSanityCheck();
+
 if (!$action) {
     $action = 'index';
 }

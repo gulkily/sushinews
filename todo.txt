@@ -1,0 +1,4 @@
+finish configSanityCheck()
+    make sure to use crypto-safe random generation
+    add db config values
+continue moving config to database

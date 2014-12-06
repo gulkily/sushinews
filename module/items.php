@@ -4,7 +4,7 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
     global $dbp;
 
     if (!$group) {
-        $group = md5(time() . GUID_SEED);
+        $group = md5(time() . getConfig('guid_seed'));
     }
 
     if ($publish_timestamp) {
@@ -47,9 +47,9 @@ function getItems($params) {
         'sort' => 'hot'
     );
 
-    foreach ($defaults as $default) {
-        if (!isset($params[$default])) {
-            $params[$default] = $defaults[$default];
+    foreach ($defaults as $def => $default) {
+        if (!isset($params[$def])) {
+            $params[$def] = $defaults[$default];
         }
     }
 

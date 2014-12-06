@@ -2,7 +2,7 @@
 
 
 function getVotingHash($client_id, $item_id, $tag) {
-    return md5($client_id . $item_id . $tag . SECRET_SALT);
+    return md5($client_id . $item_id . $tag . getConfig('secret_salt'));
 }
 
 function getVoterId() {
@@ -15,7 +15,7 @@ function getVoterId() {
     }
 
     // @todo some sanity checks here
-    if ($voter[1] == md5($voter[0] . $_SERVER['REMOTE_ADDR'] . SECRET_SALT)) {
+    if ($voter[1] == md5($voter[0] . $_SERVER['REMOTE_ADDR'] . getConfig('secret_salt'))) {
         return $voter[1];
     } else {
         return 0;
@@ -23,7 +23,7 @@ function getVoterId() {
 }
 
 function setVoterIdCookie($voter_id) {
-    $cookie = $voter_id . ',' . md5($voter_id . $_SERVER['REMOTE_ADDR'] . SECRET_SALT);
+    $cookie = $voter_id . ',' . md5($voter_id . $_SERVER['REMOTE_ADDR'] . getConfig('secret_salt'));
 
     if (!headers_sent()) setcookie('voter_id', $cookie);
 
@@ -57,7 +57,7 @@ function generateVoterId() {
 }
 
 function verifyVotingHash($client_id, $item_id, $tag, $hash) {
-    if (md5($client_id . $item_id . $tag . SECRET_SALT) == $hash) {
+    if (md5($client_id . $item_id . $tag . getConfig('secret_salt')) == $hash) {
         return true;
     } else {
         return false;
