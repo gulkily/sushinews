@@ -5,6 +5,14 @@ include_once('module/ez_sql.php');
 include_once('module/cache.php');
 include_once('module/voting.php');
 
+function isHash($string) {
+    if (preg_match('/^[a-f0-9]{32}$/i', $string)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function getParam($name) {
     if (isset($_GET[$name])) {
         $param = $_GET[$name];
