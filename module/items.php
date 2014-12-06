@@ -32,7 +32,13 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
 
     $newItemId = $dbp->lastInsertId();
 
-    return $newItemId;
+    if ($newItemId) {
+        updateItemScore($newItemId);
+
+        return $newItemId;
+    } else {
+        return null;
+    }
 }
 
 function getItems($params) {
@@ -42,7 +48,36 @@ function getItems($params) {
     if (!$limit) $limit = 50;
 
     //$stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp FROM item_best_v ORDER BY score DESC, publish_timestamp DESC LIMIT $limit");
-    $stmt = $dbp->prepare("select item.id AS id,item.parent_id AS parent_id,item.group_id AS group_id,item.title AS title,item.body AS body,item.summary AS summary,item.publish_timestamp AS publish_timestamp,item.language AS language,item.author AS author,item.score AS score from (select * from (select * from item order by publish_timestamp desc limit 1000) item order by score desc) item group by item.group_id order by item.group_id desc,item.score desc LIMIT $limit;");
+    $stmt = $dbp->prepare("
+        select
+            item.id AS id,
+            item.parent_id AS parent_id,
+            item.group_id AS group_id,
+            item.title AS title,
+            item.body AS body,
+            item.summary AS summary,
+            item.publish_timestamp AS publish_timestamp,
+            item.language AS language,
+            item.author AS author,
+            item.score AS score
+        from (
+            select *
+            from (
+                select *
+                from
+                    item
+                order by
+                    publish_timestamp desc
+                limit 1000
+            ) item
+            order by score desc
+        ) item
+        group by
+            item.group_id
+        order by
+            item.group_id desc,
+            item.score desc LIMIT $limit;
+    ");
 
     $items = get_cache_dbp("items/$limit", 60, $stmt);
 
