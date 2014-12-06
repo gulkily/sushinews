@@ -55,61 +55,6 @@ function isPost() {
     }
 }
 
-function getConfig($key) {
-    static $config;
-
-    if (!isset($config)) {
-        if (!cache_expired('config', 360)) {
-            $config = get_cache('config');
-        } else {
-            global $db;
-            $rows = $db->get_results("SELECT * FROM config");
-
-            if (count($rows)) {
-                $config = array();
-
-                foreach ($rows as $row) {
-                    $config[$row->key] = $row->value;
-                }
-            } else {
-                $config = array();
-            }
-
-            put_cache('config', $config);
-        }
-    }
-
-    if (isset($config[$key])) {
-        return $config[$key];
-    } else {
-        return null;
-    }
-}
-
-function putConfig($key, $value) {
-    global $dbp;
-
-    $stmt = $dbp->prepare("INSERT INTO config(`key`, `value`) VALUES(:key, :value)");
-
-    $stmt->execute(array(':key' => $key, ':value' => $value));
-
-    delete_cache('config', 1);
-}
-
-function configSanityCheck() {
-    if (!getConfig('guid_seed')) {
-        putConfig('guid_seed', generateSalt());
-    }
-
-    if (!getConfig('secret_salt')) {
-        putConfig('secret_salt', generateSalt());
-    }
-
-    if (!getConfig('site_domain')) {
-        putConfig('site_domain', $_SERVER['HTTP_HOST']);
-    }
-}
-
 function generateSalt() {
     //@todo make this actually crypto-safe; just a placeholder for now
 
