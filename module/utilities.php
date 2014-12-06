@@ -66,6 +66,8 @@ function getConfig($key) {
             $rows = $db->get_results("SELECT * FROM config");
 
             if (count($rows)) {
+                $config = array();
+
                 foreach ($rows as $row) {
                     $config[$row->key] = $row->value;
                 }
@@ -90,6 +92,8 @@ function putConfig($key, $value) {
     $stmt = $dbp->prepare("INSERT INTO config(`key`, `value`) VALUES(:key, :value)");
 
     $stmt->execute(array(':key' => $key, ':value' => $value));
+
+    delete_cache('config', 1);
 }
 
 function configSanityCheck() {
