@@ -78,7 +78,11 @@ CREATE TABLE "item_tag" (
 );
 
 CREATE TABLE "node" (
-  "host" char(64) NOT NULL
+  "url" char(64) NOT NULL,
+  "domain" char(64) NOT NULL,
+  "last_accessed" datetime NOT NULL,
+  "last_item_hash" char(64) NOT NULL,
+  "score" int(11) NOT NULL
 );
 
 CREATE TABLE "session" (
