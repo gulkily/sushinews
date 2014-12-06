@@ -195,8 +195,8 @@ function getAvailableTagList() {
 function getItemByHash( $hash) {
     global $dbp;
 
-    if(!preg_match('/^[a-f0-9]{32}$/i', $hash)) {
-        die(); //this needs to be fixed when replacing md5 with something better
+    if(!isHash($hash)) {
+        die("Quitting due to bad hash"); //this needs to be fixed when replacing md5 with something better
     }
 
     if (isset($hash)) {
