@@ -64,9 +64,15 @@ function getConfig($key) {
         } else {
             global $db;
             $rows = $db->get_results("SELECT * FROM config");
-            foreach ($rows as $row) {
-                $config[$row->key] = $row->value;
+
+            if (count($rows)) {
+                foreach ($rows as $row) {
+                    $config[$row->key] = $row->value;
+                }
+            } else {
+                $config = array();
             }
+
             put_cache('config', $config);
         }
     }
