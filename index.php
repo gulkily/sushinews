@@ -23,7 +23,7 @@ if (!$action) {
 if (isset($action)) {
     switch($action) {
         case 'alltasks':
-            if ($_SERVER['SERVER_ADDR'] == '::1') {
+            if ($_SERVER['SERVER_ADDR'] == '::1' || getVoterId()) { //@todo make this less accessible
                 include_once('module/tasks.php');
                 $tasks = getTasksMenu();
                 foreach($tasks as $task) {
