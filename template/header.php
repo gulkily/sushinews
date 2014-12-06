@@ -17,7 +17,7 @@ function printHeader($title = null) {
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8" />
-    <title><?=($title ? $title . ' - ' : '')?><?=SITE_NAME?></title>
+    <title><?=($title ? $title . ' - ' : '')?><?=getConfig('site_name')?></title>
     <link rel="stylesheet" href="<?=SITE_PATH?>css/foundation.css" />
     <link rel="stylesheet" href="<?=SITE_PATH?>css/sushi.css" />
     <script src="<?=SITE_PATH?>js/vendor/modernizr.js"></script>
@@ -30,7 +30,7 @@ function printHeader($title = null) {
         <?php foreach(getMenuItems() as $action => $item) { echo ('<a href="' . getLink($action) . '">' . $item . '</a>'); } ?>
     </div>
     <div class="large-4 columns" id="sitename">
-        <span><a href="/"><?=SITE_NAME?></a></span>
+        <span><a href="/"><?=getConfig('site_name')?></a></span>
     </div>
 
 </div>
