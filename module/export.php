@@ -48,7 +48,7 @@ function writeMysqlSchema($path, $filename) {
 }
 
 function writeHtmlArchive($path, $filename) {
-    $items = getItems(100000);
+    $items = getItems(array('limit' => 100000));
 
     $zip = new ZipArchive();
 
