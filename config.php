@@ -54,6 +54,9 @@ function getConfigDefault($key) {
         case 'site_name':
             return 'rusrs';
             break;
+        case 'site_path':
+            return '/'; //@todo this should be generated from current url if possible
+            break;
         default:
             return null;
     }

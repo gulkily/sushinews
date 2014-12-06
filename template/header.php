@@ -18,10 +18,10 @@ function printHeader($title = null) {
 <head>
     <meta charset="utf-8" />
     <title><?=($title ? $title . ' - ' : '')?><?=getConfig('site_name')?></title>
-    <link rel="stylesheet" href="<?=SITE_PATH?>css/foundation.css" />
-    <link rel="stylesheet" href="<?=SITE_PATH?>css/sushi.css" />
-    <script src="<?=SITE_PATH?>js/vendor/modernizr.js"></script>
-    <script src="<?=SITE_PATH?>js/sushi.js"></script>
+    <link rel="stylesheet" href="<?=getConfig('site_path')?>css/foundation.css" />
+    <link rel="stylesheet" href="<?=getConfig('site_path')?>css/sushi.css" />
+    <script src="<?=getConfig('site_path')?>js/vendor/modernizr.js"></script>
+    <script src="<?=getConfig('site_path')?>js/sushi.js"></script>
 </head>
 <body>
 

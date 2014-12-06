@@ -150,9 +150,9 @@ function getLink($action, $params = array(), $format = 'relative') {
 
     // determine the link prefix first
     if ($format == 'relative') {
-        $prefix = SITE_PATH;
+        $prefix = getConfig('site_path');
     } elseif ($format == 'absolute') {
-        $prefix = SITE_PREFIX . getConfig('site_domain') . SITE_PATH;
+        $prefix = SITE_PREFIX . getConfig('site_domain') . getConfig('site_path');
     } else {
         die();
     }
