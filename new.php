@@ -15,6 +15,10 @@ include_once('module/items.php');
             if (!getParam('password') || getParam('password') != md5($group . '-' . $parent_id . '-' . SECRET_SALT)) die("Something went wrong...");
         }
 
+        if(!preg_match('/^[a-f0-9]{32}$/i', $group)) {
+            die(); //this needs to be fixed when replacing md5 with something better
+        }
+
         if (!$summary && $body) {
             $body_lines = explode("\n", trim($body));
             $summary = $body_lines[0];
@@ -51,8 +55,10 @@ include_once('module/items.php');
             $newItemId = createNewItem($title, $summary, $body, $parent_id, $group);
 
             if ($newItemId) {
-
                 delete_cache('items/*');
+                if ($group) {
+                    delete_cache("related/$group");
+                }
 
                 header('Location: ' . getItemUrl($newItemId));
             }

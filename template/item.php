@@ -95,8 +95,7 @@ function printOneItem($itemData, $relatedItems) {
                 printItem($itemData);
 
                 if (count($relatedItems) > 1) {
-
-                ?>
+?>
                 <p>
                     <?php
                     printRelatedItems($relatedItems, $itemData['id']);
