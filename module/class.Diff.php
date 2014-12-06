@@ -44,10 +44,10 @@ class Diff{
       $end1 = strlen($string1) - 1;
       $end2 = strlen($string2) - 1;
     }else{
-//      $sequence1 = explode("\n", $string1);
-//      $sequence2 = explode("\n", $string2);
-      $sequence1 = preg_split('/\R/', $string1);
-      $sequence2 = preg_split('/\R/', $string2);
+      $sequence1 = explode("\n", $string1);
+      $sequence2 = explode("\n", $string2);
+//      $sequence1 = preg_split('/\R/', $string1);
+//      $sequence2 = preg_split('/\R/', $string2);
       $end1 = count($sequence1) - 1;
       $end2 = count($sequence2) - 1;
     }
@@ -136,9 +136,8 @@ class Diff{
       for ($index2 = 1; $index2 <= $length2; $index2 ++){
 
         // store the longest common subsequence length
-        if ($sequence1[$index1 + $start - 1]
-            == $sequence2[$index2 + $start - 1]){
-          $table[$index1][$index2] = $table[$index1 - 1][$index2 - 1] + 1;
+        if ($sequence1[$index1 + $start - 1]  == $sequence2[$index2 + $start - 1]) {
+            $table[$index1][$index2] = $table[$index1 - 1][$index2 - 1] + 1;
         }else{
           $table[$index1][$index2] =
               max($table[$index1 - 1][$index2], $table[$index1][$index2 - 1]);
@@ -283,7 +282,7 @@ class Diff{
    * $separator   - the separator between lines; this optional parameter
    *                defaults to '<br>'
    */
-  public static function toTable($diff, $class = '', $indentation = '', $separator = '<br>'){
+  public static function toTable($diff, $class = '', $indentation = '', $separator = ''){
 
     // Initialise the HTML
     $html = '';
