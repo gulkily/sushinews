@@ -179,7 +179,8 @@ function printItem($itemData) {
     <h3><a href="<?=getItemUrl($itemData['id'])?>"><?=htmlspecialchars($itemData['title'])?></a></h3>
     <p><?=$Parsedown->text(htmlspecialchars($itemData['body']))?></p>
     <p class="sharelink">To share this story, copy the following link: <a href="<?=getItemUrl($itemData['id'], 'absolute')?>"><?=getItemUrl($itemData['id'], 'absolute')?></a></p>
-    <p><?=$itemData['hash']?><?=printTagList($itemData['tags'])?></p>
+    <p>Story Checksum: <?=$itemData['hash']?></p>
+    <p><?=printTagList($itemData['tags'])?></p>
 
 <?php
 }

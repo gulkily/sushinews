@@ -203,9 +203,9 @@ function getTagId($tag_name) {
     $tag = strtolower(trim($tag_name));
 
     $stmt = $dbp->prepare("SELECT id FROM tag WHERE name = :tag LIMIT 1");
-    $stmt->bindValue(':tag', $tag);
+    $params = array(':tag' => $tag);
 
-    $tag_id = get_cache_dbp('tagid/' . md5($tag_name), 60, $stmt);
+    $tag_id = get_cache_dbp('tagid/' . md5($tag_name), 60, $stmt, $params);
 
     return $tag_id[0]['id'];
 }

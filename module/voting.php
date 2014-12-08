@@ -1,6 +1,5 @@
 <?php
 
-
 function getVotingHash($client_id, $item_id, $tag) {
     return md5($client_id . $item_id . $tag . getConfig('secret_salt'));
 }

@@ -97,7 +97,7 @@ function getItems($params) {
             item.score desc LIMIT $limit;
     ");
 
-    $items = get_cache_dbp("items/$limit", 60, $stmt);
+    $items = get_cache_dbp("items/$limit", 60, $stmt, array());
 
     return $items;
 }
@@ -167,9 +167,9 @@ function getItemsByGroup($group_id, $limit = 20) {
 
     $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_ut FROM item WHERE group_id = :group_id ORDER BY publish_timestamp DESC LIMIT $limit"); //@todo $limit should be passed in through pdo :limit
 
-    $stmt->bindParam(':group_id', $group_id);
+    $params = array(':group_id' => $group_id);
 
-    $items = get_cache_dbp("related/$group_id", 60, $stmt);
+    $items = get_cache_dbp("related/$group_id", 60, $stmt, $params);
 
     return $items;
 }
@@ -187,7 +187,7 @@ function getAvailableTagList() {
 
     $stmt = $dbp->prepare("SELECT id, name, weight, active FROM tag WHERE active = 1 ORDER BY weight DESC, name");
 
-    $tags = get_cache_dbp("alltags_weight", 60, $stmt);
+    $tags = get_cache_dbp("alltags_weight", 60, $stmt, array());
 
     return $tags;
 }
@@ -201,9 +201,9 @@ function getItemByHash( $hash) {
 
     if (isset($hash)) {
         $stmt = $dbp->prepare("SELECT id FROM item WHERE hash = :hash");
-        $stmt->bindParam(':hash', $hash);
+        $params = array(':hash' => $hash);
 
-        $oldItem = get_cache_dbp("hash/" . $hash, 60, $stmt);
+        $oldItem = get_cache_dbp("hash/" . $hash, 60, $stmt, $params);
 
         if (count($oldItem)) {
             $id = $oldItem[0]['id'];
@@ -221,9 +221,9 @@ function getItem($item_id) {
     if (!$itemId) return;
 
     $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u, hash FROM item WHERE id=:id");
-    $stmt->bindParam(':id', $itemId);
+    $params = array(':id' => $itemId);
 
-    $item = get_cache_dbp("item/$itemId", 60, $stmt);
+    $item = get_cache_dbp("item/$itemId", 60, $stmt, $params);
 
     $itemData = array();
 
@@ -231,9 +231,9 @@ function getItem($item_id) {
         $row = $item[0];
 
         $tags = $dbp->prepare("SELECT name, COUNT(name) tag_count FROM tag, item_tag WHERE item_tag.item_id = :id AND tag.id = item_tag.tag_id GROUP BY name");
-        $tags->bindParam(':id', $itemId);
+        $params = array(':id' => $itemId);
 
-        $tags = get_cache_dbp("itemtags/$itemId", 60, $tags);
+        $tags = get_cache_dbp("itemtags/$itemId", 60, $tags, $params);
 
         $itemTags = array();
 
