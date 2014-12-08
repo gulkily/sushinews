@@ -2,12 +2,17 @@
 
 function doTask($taskName) {
     switch($taskName) {
+        case 'pull_node':
+            include_once('module/node.php');
+
+            break;
+
         case 'export':
             include_once('module/export.php');
 
-            writeHtmlArchive('./mirror/', 'mirror_all.zip');
-            writeMysqlDump('./mirror/', 'sushinews');
-            writeMysqlSchema('./mirror/', 'sushinews');
+            writeHtmlArchive(getConfig('mirror_path') . '/', 'mirror_all.zip');
+            writeMysqlDump(getConfig('mirror_path') . '/', 'sushinews');
+            writeMysqlSchema(getConfig('mirror_path') . '/', 'sushinews');
 
             break;
 

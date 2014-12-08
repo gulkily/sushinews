@@ -1,13 +1,14 @@
 <?php
 
 function getConfig($key) {
+    global $db;
+
     static $config;
 
     if (!isset($config)) {
         if (!cache_expired('config')) {
             $config = get_cache('config');
         } else {
-            global $db;
             $rows = $db->get_results("SELECT * FROM config");
 
             if (count($rows)) {
@@ -20,7 +21,7 @@ function getConfig($key) {
                 $config = array();
             }
 
-            put_cache('config', $config);
+            //put_cache('config', $config);
         }
     }
 
@@ -62,6 +63,9 @@ function getConfigDefault($key) {
             break;
         case 'mirror_path':
             return './mirror';
+            break;
+        case 'populated':
+            return 0;
             break;
         default:
             return null;

@@ -6,10 +6,18 @@ if(!@include_once("config/env.php")) {
     throw new Exception("Please create config/env.php. You can use env.default.php as a starting point.");
 }
 
-include_once('config.php');
+include_once('module/config.php');
 include_once('module/utilities.php');
 //include_once('module/sherlock.php');
 include_once('module/items.php');
+
+if (!get_cache('config')) {
+    include_once('module/setup.php');
+
+    if (getTables() == 0) {
+        populateDatabase();
+    }
+}
 
 //$sherlock = new SherlockSession($db);
 //$sherlock->populateFromGlobals();
@@ -23,6 +31,23 @@ if (!$action) {
 
 if (isset($action)) {
     switch($action) {
+        case 'node':
+            include_once('module/node.php');
+
+            if (!getParam('since')) {
+                $itemList = getItemExport(getParam('since'));
+            } else {
+                if (isHash(getParam('since'))) {
+                    $itemList = getItemExport(getParam('since'));
+                } else {
+                    die('Check parameter and try again');
+                }
+            }
+
+            echo json_encode($itemList, JSON_UNESCAPED_UNICODE);
+
+            break;
+
         case 'alltasks':
             if ($_SERVER['SERVER_ADDR'] == '::1' || getVoterId()) { //@todo make this less accessible
                 include_once('module/tasks.php');

@@ -1,5 +1,5 @@
 <?php
-include_once('config.php');
+include_once('module/config.php');
 include_once('module/utilities.php');
 include_once('module/items.php');
 
@@ -17,7 +17,7 @@ include_once('module/items.php');
             if (!getParam('password') || getParam('password') != md5($group . '-' . $parent_id . '-' . getConfig('secret_salt'))) die("Something went wrong...");
         }
 
-        if(!isHash($group)) {
+        if($group && !isHash($group)) {
             die("There was a problem with the group hash. Please try again");
         }
 
