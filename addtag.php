@@ -2,12 +2,7 @@
 include_once('config/env.php');
 include_once('module/utilities.php');
 include_once('module/items.php');
-//include_once('module/sherlock.php');
-
-//$sherlock = new SherlockSession($db);
-//$sherlock->populateFromGlobals();
-//$sherlock->storeSession();
-//$client_id = $sherlock->getClientId();
+include_once('module/config.php');
 
 $client_id = getVoterId();
 
