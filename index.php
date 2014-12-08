@@ -1,9 +1,9 @@
 <?php
 
-if(!@include_once("config/env.php")) {
-    echo("Please create config/env.php. You can use env.default.php as a starting point.");
+if(!@include_once("config.php")) {
+    echo("Please create config.php. You can use config.default.php as a starting point.");
 
-    throw new Exception("Please create config/env.php. You can use env.default.php as a starting point.");
+    throw new Exception("Please create config.php. You can use config.default.php as a starting point.");
 }
 
 include_once('module/config.php');
