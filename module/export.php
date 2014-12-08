@@ -40,6 +40,8 @@ function writeMysqlSchema($path, $filename) {
         $sql .= $query . ";\n\n";
     }
 
+    $sql = str_replace('"', '`', $sql);
+
     $file = @fopen($path . $filename . '_schema.sql', 'w');
     if ($file) {
         fwrite($file, $sql);

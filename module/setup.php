@@ -3,7 +3,7 @@
 function getTables() {
     global $db;
 
-    $tables = $db->query("SHOW TABLES");
+    $tables = $db->get_col("SHOW TABLES");
 
     return $tables;
 }
