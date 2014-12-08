@@ -71,6 +71,7 @@ CREATE TABLE "item" (
 CREATE TABLE "item_tag" (
   "item_id" int(11) NOT NULL,
   "tag_id" int(11) NOT NULL,
+  "tag_weight" int(11) NOT NULL,
   "voter_id" char(32) NOT NULL,
   UNIQUE KEY "item_id_tag_id_client_id" ("item_id","tag_id"),
   KEY "tag_id" ("tag_id"),
