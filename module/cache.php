@@ -136,9 +136,6 @@
 	function get_cache($cachename, $refresh_rate = 60, $query = '', $function = 'get_results', $force_refresh = 0) {
 		if (!$function) $function = 'get_results';
 
-		global $cache_db_hit; //fixme
-		$cache_db_hit = 0;
-
 		if ($cachename) $filename = get_cache_filename($cachename);
 		else $filename = get_cache_filename(md5($query));
 
@@ -154,7 +151,6 @@
 			$results_array = $db->$function($query);
 
 			if (!mysql_error()) {
-				$cache_db_hit = 1;
 				put_cache($cachename, $results_array);
 
 				return $results_array;
@@ -175,35 +171,31 @@
 		}
 	}
 
-    function get_cache_dbp($cache_name, $refresh_rate = 60, PDOStatement $statement = null, $force_refresh = 0) {
-        $refresh_rate = 0;//@todo remove this
-        global $cache_db_hit; //fixme
-        $cache_db_hit = 0;
+    function get_cache_dbp($cache_name, $refresh_rate = 60, PDOStatement $statement = null, array $parameters, $force_refresh = 0) {
+        $refresh_rate = 0;
 
         if ($cache_name) $filename = get_cache_filename($cache_name);
-        else $filename = get_cache_filename(md5($query));
+        else $filename = get_cache_filename(md5(serialize($statement) . serialize($parameters)));
 
         $ce = cache_expired($cache_name, $refresh_rate);
 
         if (!$force_refresh && cache_expired($cache_name, $refresh_rate) > 0 && $statement) {
-            //queue_cache($cache_name, $statement->queryString, 'dbp');
-            // @todo this still needs some tweaking
+            queue_cache($cache_name, serialize(array('query' => $statement->queryString, 'params' => $parameters)), 'dbp');
         }
 
-        if (($force_refresh && $ce || $ce < 0)  && $cache_name != '' && $statement) {
-            if ($statement->execute()) {
+        if (($force_refresh && $ce || $ce < 0) && $cache_name != '' && $statement) {
+            if ($statement->execute($parameters)) {
                 $results_array = array();
 
                 while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                     $results_array[] = $row;
                 }
 
-                $cache_db_hit = 1;
                 put_cache($cache_name, $results_array);
 
                 return $results_array;
             } elseif ($ce > 0) {
-                return get_cache_dbp($cache_name, $refresh_rate, $statement, 0);
+                return get_cache_dbp($cache_name, $refresh_rate, $statement, $parameters, 0);
             }
         } elseif (file_exists($filename)) {
             $flen = filesize($filename);
@@ -272,8 +264,10 @@
 					$not_cached[] = $cache->cache_name;
 				} else {
                     if ($cache->func == 'dbp') {
-                        $stmt = $dbp->prepare($cache->query);
-                        get_cache_dbp($cache->cache_name, 0, $stmt, 1);
+                        $statement = unserialize($cache->query);
+
+                        $stmt = $dbp->prepare($statement['query']);
+                        get_cache_dbp($cache->cache_name, 0, $stmt, $statement['params'], 1);
                     } else {
                         get_cache($cache->cache_name, 0, $cache->query, $cache->func, 1);
                     }
