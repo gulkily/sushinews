@@ -1,4 +1,18 @@
-finish configSanityCheck()
-    make sure to use crypto-safe random generation
-    add db config values
-continue moving config to database
+* figure out the threshold at which a story should be taken out of rotation
+    * and how to do it
+* flesh out the initial setup with minimum intervention
+    * database config
+    * cache location
+    * mirror location
+    * file permissions
+* continue testing fresh install process
+* moderation tokens
+    * database or hash-based?
+    * weights
+* aggregate moderation
+    * find most similar moderators
+    * adjust their scores
+    * should be easier to do since we have voter ids already
+    * maybe something like this:
+        * select "root" voter
+        * calculate weight of every other voter based on similarity
