@@ -33,7 +33,6 @@ function writeMysqlSchema($path, $filename) {
     $sql = "";
 
     $tables = $db->get_col("SHOW FULL TABLES WHERE table_type LIKE '%TABLE%'");
-    $data_tables = array('config', 'node', 'tag'); //@todo still need to add these
 
     foreach ($tables as $table) {
         $query = $db->get_var("SHOW CREATE TABLE $table", 1);
