@@ -12,6 +12,7 @@ function getMenuItems() {
 }
 
 function printHeader($title = null) {
+    $title = htmlspecialchars($title);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
