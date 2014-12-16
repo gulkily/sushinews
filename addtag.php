@@ -1,5 +1,5 @@
 <?php
-include_once('config/env.php');
+include_once('config.php');
 include_once('module/utilities.php');
 include_once('module/items.php');
 include_once('module/config.php');

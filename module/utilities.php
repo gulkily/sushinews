@@ -1,6 +1,6 @@
 <?php
 
-include_once('config/env.php');
+include_once('config.php');
 include_once('module/ez_sql.php');
 include_once('module/cache.php');
 include_once('module/voting.php');
