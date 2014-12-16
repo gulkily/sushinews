@@ -77,7 +77,7 @@ if (isset($action)) {
             include_once('template/footer.php');
             include_once('template/mirror.php');
 
-            printHeader();
+            printHeader('Mirroring This Site');
 
             printMirrorInfo();
 
@@ -97,7 +97,7 @@ if (isset($action)) {
                     ':id' => $itemId
                 ));
 
-                printHeader();
+                printHeader('Edit Item ' . $itemId);
 
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     printEditForm($row['title'], $row['summary'], $row['body'], $row['group_id'], $row['id']);
@@ -112,7 +112,7 @@ if (isset($action)) {
             include_once('template/edit.php');
             include_once('template/footer.php');
 
-            printHeader();
+            printHeader('Submit a Story');
 
             printEditForm();
 
@@ -136,7 +136,7 @@ if (isset($action)) {
             $linkedItems = getItemsByGroup($itemData['group_id'], 20);
 
             include('template/header.php');
-            printHeader();
+            printHeader($itemData['title']);
 
             include('template/item.php');
 
@@ -155,7 +155,7 @@ if (isset($action)) {
             $linkedItems = getItemsByGroup($itemDataOne['group_id'], 20);
 
             include('template/header.php');
-            printHeader();
+            printHeader("Compare items $one vs $two");;
 
             include('template/item.php');
 
@@ -175,7 +175,7 @@ if (isset($action)) {
 
             include_once('template/footer.php');
 
-            printHeader();
+            printHeader("Front Page");
 
             beginItemList();
             foreach ($items as $item) {
@@ -206,7 +206,7 @@ if (isset($action)) {
             if (!getVoterId()) {
                 include_once('template/notoken.php');
 
-                printHeader();
+                printHeader("Moderation");
                 printNoToken();
                 printFooter();
 
@@ -245,7 +245,7 @@ if (isset($action)) {
 
                 $linkedItems = getItemsByGroup($group);
 
-                printHeader();
+                printHeader("Moderation");
 
                 if ($showModWelcome) {
                     printModerationWelcome();
