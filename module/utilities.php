@@ -157,12 +157,12 @@ function getLink($action, $params = array(), $format = 'relative') {
 
 
     // determine the link prefix first
-    if ($format == 'relative') {
+    if ($format === 'relative') {
         $prefix = getConfig('site_path');
-    } elseif ($format == 'absolute') {
+    } elseif ($format === 'absolute') {
         $prefix = getConfig('site_prefix') . getConfig('site_domain') . getConfig('site_path');
-    } else {
-        die();
+    } elseif ($format === 'global') {
+        $prefix = getConfig('site_prefix') . getConfig('site_domain') . getConfig('site_path');
     }
 
     if (getConfig('pretty_links')) {
