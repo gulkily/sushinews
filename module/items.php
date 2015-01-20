@@ -75,9 +75,11 @@ function getItems($params) {
             item.body AS body,
             item.summary AS summary,
             item.publish_timestamp AS publish_timestamp,
+            UNIX_TIMESTAMP(item.publish_timestamp) AS publish_timestamp_unix,
             item.language AS language,
             item.author AS author,
-            item.score AS score
+            item.score AS score,
+            item.hash AS hash
         from (
             select *
             from (
@@ -175,6 +177,8 @@ function getItemsByGroup($group_id, $limit = 20) {
 }
 
 function getItemUrl($item_id, $format = 'relative') {
+    // $format can be relative (starting with ./), absolute (starting with /), or global (starting with http://)
+
     return getLink('item', array('id' => $item_id), $format);
 }
 
