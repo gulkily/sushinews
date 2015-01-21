@@ -166,6 +166,25 @@ if (isset($action)) {
 
             break;
 
+        case 'json':
+            $params = array();
+            $params['limit'] = 20;
+
+            $lastItem = getParam('last');
+
+            if ($lastItem) {
+                if (isHash($lastItem)) {
+                    $params['since'] = $lastItem;
+                }
+            }
+
+            $items = getItems($params);
+
+            header('Content-Type: application/json');
+            echo(json_encode($items));
+
+            break;
+
         case 'index':
             $items = getItems(array('limit' => 20));
 
