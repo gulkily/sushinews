@@ -53,6 +53,16 @@ function getItems($params) {
         }
     }
 
+    if (array_key_exists('since', $params)) {
+        if (!isHash($params['since'])) {
+            unset($params['since']);
+            $item = 'item';
+        } else {
+            $since = $params['since'];
+            $item = "(SELECT * FROM item WHERE id > (SELECT id FROM item WHERE hash = '$since')) item";
+        }
+    }
+
     $limit = intval($params['limit']);
     if (!$limit) $limit = 50;
 
@@ -85,7 +95,7 @@ function getItems($params) {
             from (
                 select *
                 from
-                    item
+                    $item
                 order by
                     publish_timestamp desc
                 limit 1000
@@ -99,7 +109,11 @@ function getItems($params) {
             item.score desc LIMIT $limit;
     ");
 
-    $items = get_cache_dbp("items/$limit", 60, $stmt, array());
+    if ($since) {
+        $items = get_cache_dbp("items/$since/$limit", 60, $stmt, array());
+    } else {
+        $items = get_cache_dbp("items/$limit", 60, $stmt, array());
+    }
 
     return $items;
 }
