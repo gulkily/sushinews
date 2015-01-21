@@ -58,9 +58,19 @@ function getItems($params) {
             unset($params['since']);
             $item = 'item';
         } else {
+            global $db;
+
             $since = $params['since'];
-            $item = "(SELECT * FROM item WHERE id > (SELECT id FROM item WHERE hash = '$since')) item";
+            $sinceId = $db->get_var("SELECT id FROM item WHERE hash = '$since'");
+            if (!$sinceId) {
+                unset($sinceId);
+                $whereSince = '';
+            } else {
+                $whereSince = "WHERE id > $sinceId";
+            }
         }
+    } else {
+        $whereSince = '';
     }
 
     $limit = intval($params['limit']);
@@ -95,7 +105,8 @@ function getItems($params) {
             from (
                 select *
                 from
-                    $item
+                    item
+                $whereSince
                 order by
                     publish_timestamp desc
                 limit 1000
