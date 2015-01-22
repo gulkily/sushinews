@@ -5,6 +5,10 @@ function doTask($taskName) {
         case 'pull_node':
             include_once('module/node.php');
 
+            $nextNode = getNextNode();
+
+            pullNode($nextNode);
+
             break;
 
         case 'export':
@@ -44,7 +48,8 @@ function getTasksMenu() {
         'export',
         'update_scores',
         'cleanup_tables',
-        'update_cache'
+        'update_cache',
+        'pull_node'
     );
 
     return $possibleTasks;

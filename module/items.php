@@ -13,6 +13,12 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
         $publish_timestamp_string = date("Y-m-d H:i:s", time());
     }
 
+    if ($parent_id) {
+
+    } else {
+        $parent_id = 0;
+    }
+
     $stmt = $dbp->prepare(
         "
         INSERT INTO item(group_id, title, summary, body, publish_timestamp, parent_id, hash)

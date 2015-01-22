@@ -32,8 +32,45 @@ function getItemExport($hash = null) {
     return $items_encoded;
 }
 
-function importItems($blob) {
-    echo $blob;
+function pullNode($node) {
+    $feedUrl = $node['url'] . '?action=json';
+
+    if ($node['last_item'] && isHash($node['last_item'])) {
+        $feedUrl .= '?last=' . $node['last_item'];
+    }
+//
+////  Initiate curl
+//    $ch = curl_init();
+//// Disable SSL verification
+//    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//// Will return the response, if false it print the response
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//// Set the url
+//    curl_setopt($ch, CURLOPT_URL,$feedUrl);
+//// Execute
+//    $result=curl_exec($ch);
+//// Closing
+//    curl_close($ch);
+
+    $result = file_get_contents($feedUrl);
+
+    $items = json_decode($result, 1);
+
+    foreach ($items as $item) {
+        print_r($item);
+        print_r($node);
+        //function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null)
+        createNewItem($item['title'], $item['summary'], $item['body']);
+        touchNode($node['id'], $item['hash']);
+    }
+}
+
+function touchNode($nodeId, $lastItem) {
+    global $db;
+
+    $query = "UPDATE node SET last_accessed = NOW(), last_item_hash = '$lastItem' WHERE id = $nodeId";
+
+    $db->query($query);
 }
 
 function getNodeList() {
@@ -57,7 +94,7 @@ function getNodeList() {
 function getNextNode() {
     global $db;
 
-    $nextNode = $db->get_row("SELECT * FROM node ORDER BY last_accessed LIMIT 1");
+    $nextNode = $db->get_row("SELECT * FROM node ORDER BY last_accessed LIMIT 1", ARRAY_A);
 
     return $nextNode;
 }
