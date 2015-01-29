@@ -88,6 +88,14 @@ CREATE TABLE `node` (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `node_history` (
+  `node_id` int(11) NOT NULL,
+  `access_timestamp` datetime NOT NULL,
+  `result` char(128) NOT NULL,
+  KEY `node_id` (`node_id`),
+  CONSTRAINT `node_history_ibfk_1` FOREIGN KEY (`node_id`) REFERENCES `node` (`id`) ON DELETE CASCADE
+);
+
 CREATE TABLE `session` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `account_id` int(7) DEFAULT NULL,
