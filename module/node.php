@@ -35,12 +35,12 @@ function getItemExport($hash = null) {
 function pullNodeList($node) {
     $feedUrl = $node['url'] . '?action=getNodes';
 
-    $result = getUrl($feedUrl);
+    $result = grabUrl($feedUrl);
 
     $nodes = json_decode($result, 1);
 
     foreach ($nodes as $node) {
-        print_r($node);
+        addNode($node['url']);
     }
 }
 
@@ -51,7 +51,7 @@ function pullNodeFeed($node) {
         $feedUrl .= '?last=' . $node['last_item'];
     }
 
-    $result = getUrl($feedUrl);
+    $result = grabUrl($feedUrl);
 
     $items = json_decode($result, 1);
 
@@ -72,7 +72,7 @@ function addNode($nodeUrl) {
     }
 }
 
-function getUrl($url) {
+function grabUrl($url) {
     //
 ////  Initiate curl
 //    $ch = curl_init();
