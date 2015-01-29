@@ -56,11 +56,19 @@ function pullNodeFeed($node) {
     $items = json_decode($result, 1);
 
     foreach ($items as $item) {
-        print_r($item);
-        print_r($node);
         //function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null)
         createNewItem($item['title'], $item['summary'], $item['body']);
         touchNode($node['id'], $item['hash']);
+    }
+}
+
+function addNode($nodeUrl) {
+    global $db;
+
+    $nodeExists = $db->get_var("SELECT COUNT(id) FROM node WHERE url = '".$db->escape($nodeUrl)."'");
+
+    if (!$nodeExists) {
+        $db->query("INSERT INTO node(url) VALUES('".$db->escape($nodeUrl)."')");
     }
 }
 
@@ -82,7 +90,6 @@ function getUrl($url) {
     $result = file_get_contents($url);
 
     return $result;
-
 }
 
 function touchNode($nodeId, $lastItem) {
