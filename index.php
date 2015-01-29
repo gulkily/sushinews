@@ -185,6 +185,16 @@ if (isset($action)) {
 
             break;
 
+        case 'getNodes':
+            include_once('module/node.php');
+
+            $nodes = getNodeList();
+
+            header('Content-Type: application/json');
+            echo(json_encode($nodes));
+
+            break;
+
         case 'index':
             $items = getItems(array('limit' => 20));
 

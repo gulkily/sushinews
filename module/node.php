@@ -32,13 +32,40 @@ function getItemExport($hash = null) {
     return $items_encoded;
 }
 
-function pullNode($node) {
+function pullNodeList($node) {
+    $feedUrl = $node['url'] . '?action=getNodes';
+
+    $result = getUrl($feedUrl);
+
+    $nodes = json_decode($result, 1);
+
+    foreach ($nodes as $node) {
+        print_r($node);
+    }
+}
+
+function pullNodeFeed($node) {
     $feedUrl = $node['url'] . '?action=json';
 
     if ($node['last_item'] && isHash($node['last_item'])) {
         $feedUrl .= '?last=' . $node['last_item'];
     }
-//
+
+    $result = getUrl($feedUrl);
+
+    $items = json_decode($result, 1);
+
+    foreach ($items as $item) {
+        print_r($item);
+        print_r($node);
+        //function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null)
+        createNewItem($item['title'], $item['summary'], $item['body']);
+        touchNode($node['id'], $item['hash']);
+    }
+}
+
+function getUrl($url) {
+    //
 ////  Initiate curl
 //    $ch = curl_init();
 //// Disable SSL verification
@@ -52,17 +79,10 @@ function pullNode($node) {
 //// Closing
 //    curl_close($ch);
 
-    $result = file_get_contents($feedUrl);
+    $result = file_get_contents($url);
 
-    $items = json_decode($result, 1);
+    return $result;
 
-    foreach ($items as $item) {
-        print_r($item);
-        print_r($node);
-        //function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null)
-        createNewItem($item['title'], $item['summary'], $item['body']);
-        touchNode($node['id'], $item['hash']);
-    }
 }
 
 function touchNode($nodeId, $lastItem) {
@@ -76,19 +96,20 @@ function touchNode($nodeId, $lastItem) {
 function getNodeList() {
     global $db;
 
-    $nodes = $db->get_results("SELECT url, domain FROM node");
+    $nodes = $db->get_results("SELECT url, domain FROM node", ARRAY_A);
+//
+//
+//    $nodes_encoded = array();
+//
+//    foreach ($nodes as $node) {
+//        $node_e = array();
+//        foreach ($node as $key => $value) {
+//            $node_e = base64_encode($value);
+//        }
+//        $nodes_encoded[] = $node_e;
+//    }
 
-    $nodes_encoded = array();
-
-    foreach ($nodes as $node) {
-        $node_e = array();
-        foreach ($node as $key => $value) {
-            $node_e = base64_encode($value);
-        }
-        $nodes_encoded[] = $node_e;
-    }
-
-    return $nodes_encoded;
+    return $nodes;
 }
 
 function getNextNode() {

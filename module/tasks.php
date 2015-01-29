@@ -7,7 +7,8 @@ function doTask($taskName) {
 
             $nextNode = getNextNode();
 
-            pullNode($nextNode);
+            pullNodeFeed($nextNode);
+            pullNodeList($nextNode);
 
             break;
 
