@@ -55,10 +55,15 @@ function pullNodeFeed($node) {
 
     $items = json_decode($result, 1);
 
-    foreach ($items as $item) {
-        //function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null)
-        createNewItem($item['title'], $item['summary'], $item['body']);
-        touchNode($node['id'], $item['hash']);
+    if (count($items)) {
+        foreach ($items as $item) {
+            //function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null)
+            createNewItem($item['title'], $item['summary'], $item['body']);
+            touchNode($node['id'], $item['hash']);
+        }
+
+        delete_cache('items/*', 1);
+
     }
 }
 
