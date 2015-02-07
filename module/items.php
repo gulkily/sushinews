@@ -45,6 +45,25 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
     }
 }
 
+function addNodeItemScore($itemId, $nodeId, $score) {
+
+    print_r("addNodeItemScore");
+    global $dbp;
+
+    $stmt = $dbp->prepare(
+        "
+        INSERT OR UPDATE INTO node_item(item_id, node_id, score)
+        VALUES(:item, :node, :score);
+        "
+    );
+
+    $stmt->bindParam(':item', $itemId);
+    $stmt->bindParam(':node', $nodeId);
+    $stmt->bindParam(':score', $score);
+
+    $stmt->execute();
+}
+
 function getItems($params) {
     global $dbp;
 

@@ -5,7 +5,7 @@ function getItemExport($hash = null) {
 
     //if (!isHash($hash)) return null;
 
-    $fields = "hash, title, body, id, publish_timestamp";
+    $fields = "hash, title, body, id, publish_timestamp, score";
 
     if ($hash) {
         $query = "SELECT $fields FROM item WHERE id > (SELECT id FROM item WHERE hash = '$hash') ORDER BY id";
@@ -57,8 +57,19 @@ function pullNodeFeed($node) {
 
     if (count($items)) {
         foreach ($items as $item) {
-            //function createNewItem($title, $summary, $body, $parent_id = null, $group = null, $publish_timestamp = null)
-            createNewItem($item['title'], $item['summary'], $item['body']);
+            $existingItem = getItemByHash($item['hash']);
+            if (!$existingItem) {
+                $newItem = createNewItem($item['title'], $item['summary'], $item['body']);
+            } else {
+                $newItem = $existingItem;
+            }
+
+            if ($newItem) {
+                addNodeItemScore($newItem, $node['id'], $item['score']);
+            } else {
+                echo "BOO";
+            }
+
             touchNode($node['id'], $item['hash']);
         }
 
