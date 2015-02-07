@@ -96,6 +96,16 @@ CREATE TABLE `node_history` (
   CONSTRAINT `node_history_ibfk_1` FOREIGN KEY (`node_id`) REFERENCES `node` (`id`) ON DELETE CASCADE
 );
 
+CREATE TABLE `node_item` (
+  `item_id` int(11) NOT NULL,
+  `node_id` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  KEY `item_id` (`item_id`),
+  KEY `node_id` (`node_id`),
+  CONSTRAINT `node_item_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `node_item_ibfk_2` FOREIGN KEY (`node_id`) REFERENCES `node` (`id`)
+);
+
 CREATE TABLE `session` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `account_id` int(7) DEFAULT NULL,
