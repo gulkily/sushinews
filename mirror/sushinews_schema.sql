@@ -20,7 +20,7 @@ CREATE TABLE `client_variable` (
 CREATE TABLE `config` (
   `key` char(31) NOT NULL,
   `value` char(255) NOT NULL,
-  UNIQUE KEY `key` (`key`)
+  PRIMARY KEY (`key`)
 );
 
 CREATE TABLE `fp_client` (
@@ -73,7 +73,8 @@ CREATE TABLE `item_tag` (
   `tag_id` int(11) NOT NULL,
   `tag_weight` int(11) NOT NULL,
   `voter_id` char(32) NOT NULL,
-  UNIQUE KEY `item_id_tag_id_client_id` (`item_id`,`tag_id`),
+  `vote_timestamp` datetime NOT NULL,
+  UNIQUE KEY `item_id_tag_id_voter_id` (`item_id`,`tag_id`,`voter_id`),
   KEY `tag_id` (`tag_id`),
   CONSTRAINT `item_tag_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
 );
