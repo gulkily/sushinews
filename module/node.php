@@ -47,8 +47,10 @@ function pullNodeList($node) {
 function pullNodeFeed($node) {
     $feedUrl = $node['url'] . '?action=json';
 
-    if ($node['last_item'] && isHash($node['last_item'])) {
-        $feedUrl .= '?last=' . $node['last_item'];
+    $feedUrl .= '&me=' . urlencode(getConfig('site_domain') . getConfig('site_path'));
+
+    if ($node['last_item_hash'] && isHash($node['last_item_hash'])) {
+        $feedUrl .= '&last=' . $node['last_item_hash'];
     }
 
     $result = grabUrl($feedUrl);
@@ -67,7 +69,6 @@ function pullNodeFeed($node) {
             if ($newItem) {
                 addNodeItemScore($newItem, $node['id'], $item['score']);
             } else {
-                echo "BOO";
             }
 
             touchNode($node['id'], $item['hash']);
