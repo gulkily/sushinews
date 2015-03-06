@@ -81,6 +81,7 @@ function getItems($params) {
         if (!isHash($params['since'])) {
             unset($params['since']);
             $item = 'item';
+            $since = null;
         } else {
             global $db;
 
@@ -144,7 +145,7 @@ function getItems($params) {
             item.score desc LIMIT $limit;
     ");
 
-    if ($since) {
+    if (isset($since) && $since !== null) {
         $items = get_cache_dbp("items/$since/$limit", 60, $stmt, array());
     } else {
         $items = get_cache_dbp("items/$limit", 60, $stmt, array());
