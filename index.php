@@ -14,10 +14,17 @@ include_once('module/items.php');
 if (!get_cache('config')) {
     include_once('module/setup.php');
 
-    if (getTables() == 0) {
-        populateDatabase();
+    $setupClass = new SetupClass();
+
+    if ($setupClass->getTables() == 0) {
+        $setupClass->populateDatabase();
     }
 }
+
+//include_once('module/setup.php');
+
+//$setupClass = new SetupClass();
+//$setupClass->upgradeDatabase(1, 2);
 
 //$sherlock = new SherlockSession($db);
 //$sherlock->populateFromGlobals();
@@ -182,6 +189,12 @@ if (isset($action)) {
 
             header('Content-Type: application/json');
             echo(json_encode($items));
+
+            ob_flush();
+
+            if (getParam('me')) {
+                addNode(getParam('me'));
+            }
 
             break;
 
