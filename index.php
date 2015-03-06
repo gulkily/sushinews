@@ -193,6 +193,7 @@ if (isset($action)) {
             ob_flush();
 
             if (getParam('me')) {
+                include_once('module/node.php');
                 addNode(getParam('me'));
             }
 
