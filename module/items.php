@@ -73,7 +73,7 @@ function getItems($params) {
 
     foreach ($defaults as $def => $default) {
         if (!isset($params[$def])) {
-            $params[$def] = $defaults[$default];
+            $params[$def] = $default;
         }
     }
 
