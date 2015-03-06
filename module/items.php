@@ -47,7 +47,6 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
 
 function addNodeItemScore($itemId, $nodeId, $score) {
 
-    print_r("addNodeItemScore");
     global $dbp;
 
     $stmt = $dbp->prepare(
