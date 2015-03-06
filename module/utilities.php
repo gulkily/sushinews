@@ -226,7 +226,7 @@ function addTagToItem($item_id, $tag_name, $voter_id) {
         return;
     }
 
-    $stmt = $dbp->prepare("INSERT INTO item_tag(item_id, tag_id, voter_id) VALUES(:item_id, :tag_id, :voter_id)");
+    $stmt = $dbp->prepare("INSERT INTO item_tag(item_id, tag_id, voter_id, vote_timestamp) VALUES(:item_id, :tag_id, :voter_id, NOW())");
 
     $stmt->execute(array(':item_id' => $item, ':tag_id' => $tag_id, ':voter_id' => $voter_id));
 }
