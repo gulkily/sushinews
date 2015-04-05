@@ -51,6 +51,7 @@ function writeMysqlSchema($path, $filename) {
 function writeJsonArchive($path, $filename) {
     $items = getItems(array('limit' => 100000));
 
+    include_once('module/json.php');
     $json = getJson($items);
 
     $zip = new ZipArchive();
