@@ -18,6 +18,7 @@ function doTask($taskName) {
             writeHtmlArchive(getConfig('mirror_path') . '/', 'mirror_all.zip');
             writeMysqlDump(getConfig('mirror_path') . '/', 'sushinews');
             writeMysqlSchema(getConfig('mirror_path') . '/', 'sushinews');
+            writeJsonArchive(getConfig('mirror_path') . '/', 'sushinews');
 
             break;
 

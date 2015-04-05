@@ -48,6 +48,33 @@ function writeMysqlSchema($path, $filename) {
     }
 }
 
+function writeJsonArchive($path, $filename) {
+    $items = getItems(array('limit' => 100000));
+
+    $json = getJson($items);
+
+    $zip = new ZipArchive();
+
+    $destination = $path . $filename;
+    $overwrite = true;
+
+    if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
+        return false;
+    }
+
+    file_put_contents($path . 'items.json', $json);
+
+    $tempFiles[] = 'items.json';
+
+    $zip->addFile($path . 'items.json', 'items.json');
+
+    $zip->close();
+
+    foreach($tempFiles as $file) {
+        unlink ($path . $file);
+    }
+}
+
 function writeHtmlArchive($path, $filename) {
     $items = getItems(array('limit' => 100000));
 
