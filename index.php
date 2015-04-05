@@ -173,7 +173,7 @@ if (isset($action)) {
 
             break;
 
-        case 'json':
+        case 'json': //@todo change this to something more descriptive
             $params = array();
             $params['limit'] = 20;
 
@@ -197,6 +197,23 @@ if (isset($action)) {
                 addNode(getParam('me'));
             }
 
+            break;
+
+        case 'getScores':
+            include_once('module/node.php');
+
+            $since = intval(getParam('since'));
+/*
+            $items =
+select item.id, sum(item.score) item_score, max(item_tag.vote_timestamp) last_vote
+from item_tag, item
+where
+item_tag.item_id = item.id
+and unix_timestamp(item_tag.vote_timestamp) > 1115847323
+group by item.id
+order by last_vote
+
+*/
             break;
 
         case 'getNodes':
