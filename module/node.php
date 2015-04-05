@@ -47,7 +47,7 @@ function pullNodeList($node) {
 function pullNodeFeed($node) {
     $feedUrl = $node['url'] . '?action=json';
 
-    $feedUrl .= '&me=' . urlencode(getConfig('site_domain') . getConfig('site_path'));
+    $feedUrl .= '&me=' . urlencode(getLink('json'));
 
     if ($node['last_item_hash'] && isHash($node['last_item_hash'])) {
         $feedUrl .= '&last=' . $node['last_item_hash'];
