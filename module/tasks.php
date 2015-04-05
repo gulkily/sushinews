@@ -16,9 +16,10 @@ function doTask($taskName) {
             include_once('module/export.php');
 
             writeHtmlArchive(getConfig('mirror_path') . '/', 'mirror_all.zip');
+            writeJsonArchive(getConfig('mirror_path') . '/', 'sushinews');
+
             writeMysqlDump(getConfig('mirror_path') . '/', 'sushinews');
             writeMysqlSchema(getConfig('mirror_path') . '/', 'sushinews');
-            writeJsonArchive(getConfig('mirror_path') . '/', 'sushinews');
 
             break;
 
