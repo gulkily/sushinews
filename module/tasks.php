@@ -1,6 +1,8 @@
 <?php
 
 function doTask($taskName) {
+    include_once('module/cache.php');
+
     switch($taskName) {
         case 'pull_node':
             include_once('module/node.php');
@@ -42,8 +44,12 @@ function doTask($taskName) {
 
 
         default:
+            return;
+
             break;
     }
+
+    put_cache("lastrun/$taskName", time());
 }
 
 function getTasksMenu() {
