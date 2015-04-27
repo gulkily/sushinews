@@ -134,7 +134,7 @@ if (isset($action)) {
                 die("No such item");
             }
 
-            $itemData = getItem($itemId);
+            $itemData = getItemById($itemId);
 
             if (!$itemData) {
                 die("No such item");
@@ -156,8 +156,8 @@ if (isset($action)) {
         case 'compare':
             $one = intval(getParam('one'));
             $two = intval(getParam('two'));
-            $itemDataOne = getItem($one);
-            $itemDataTwo = getItem($two);
+            $itemDataOne = getItemById($one);
+            $itemDataTwo = getItemById($two);
 
             $linkedItems = getItemsByGroup($itemDataOne['group_id'], 20);
 
@@ -300,8 +300,8 @@ order by last_vote
                 $chosen[] = array_pop($versions);
                 $chosen[] = array_pop($versions);
 
-                $itemDataOne = getItem($chosen[0]);
-                $itemDataTwo = getItem($chosen[1]);
+                $itemDataOne = getItemById($chosen[0]);
+                $itemDataTwo = getItemById($chosen[1]);
 
                 $linkedItems = getItemsByGroup($group);
 

@@ -268,14 +268,40 @@ function getItemIdByHash( $hash) {
     }
 }
 
-function getItem($item_id) {
+function getItemById($item_id) {
+    return getItemBy('id', $item_id);
+}
+
+function getItemByHash($hash) {
+    return getItemBy('hash' => $hash);
+}
+
+function getItemBy($criteria) {
+    $wheres = array();
+    $params = array();
+
+    foreach($criteria as $n => $v) {
+        if ($n === 'id') {
+            $itemId = intval($v);
+            if (!$itemId) return;
+
+            $params[] = array(':id' => $itemId);
+            $wheres[] = 'id=:id';
+
+        } elseif ($n === 'hash') {
+            if (!isHash($v)) return;
+
+            $params[] = array(':hash' => $v);
+            $wheres[] = 'hash=:hash';
+
+        } else {
+            return;
+        }
+    }
+
     global $dbp;
 
-    $itemId = intval($item_id);
-    if (!$itemId) return;
-
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u, hash FROM item WHERE id=:id");
-    $params = array(':id' => $itemId);
+    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u, hash FROM item WHERE " . join(' AND ', ));
 
     $item = get_cache_dbp("item/$itemId", 60, $stmt, $params);
 
