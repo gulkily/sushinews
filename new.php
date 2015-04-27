@@ -48,7 +48,7 @@ include_once('module/items.php');
 
         if ($title && $summary && $body) {
 
-            $oldItemId = getItemByHash(md5($title . $summary . $body));
+            $oldItemId = getItemIdByHash(md5($title . $summary . $body));
 
             if ($oldItemId) {
                 put_ticket(array("An exact copy of this item already exists. Here it is!"), getItemUrl($oldItemId, 'absolute'));

@@ -246,7 +246,7 @@ function getAvailableTagList() {
     return $tags;
 }
 
-function getItemByHash( $hash) {
+function getItemIdByHash( $hash) {
     global $dbp;
 
     if(!isHash($hash)) {

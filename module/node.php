@@ -59,7 +59,7 @@ function pullNodeFeed($node) {
 
     if (count($items)) {
         foreach ($items as $item) {
-            $existingItem = getItemByHash($item['hash']);
+            $existingItem = getItemIdByHash($item['hash']);
             if (!$existingItem) {
                 $newItem = createNewItem($item['title'], $item['summary'], $item['body']);
             } else {
