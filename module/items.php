@@ -269,11 +269,11 @@ function getItemIdByHash( $hash) {
 }
 
 function getItemById($item_id) {
-    return getItemBy('id', $item_id);
+    return getItemBy(array('id' => $item_id));
 }
 
 function getItemByHash($hash) {
-    return getItemBy('hash' => $hash);
+    return getItemBy(array('hash' => $hash));
 }
 
 function getItemBy($criteria) {
@@ -301,7 +301,8 @@ function getItemBy($criteria) {
 
     global $dbp;
 
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u, hash FROM item WHERE " . join(' AND ', ));
+    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u, hash FROM item WHERE " . join(' AND ', $wheres));
+
 
     $item = get_cache_dbp("item/$itemId", 60, $stmt, $params);
 
