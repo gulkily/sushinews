@@ -44,6 +44,20 @@ function pullNodeList($node) {
     }
 }
 
+function pushNodeList($node) {
+    $pushUrl = $node['url'] . '?action=putNodes';
+
+    $nodes = json_encode(getNodeList());
+
+    $result = grabUrl($feedUrl);
+
+    $nodes = json_decode($result, 1);
+
+    foreach ($nodes as $node) {
+        addNode($node['url']);
+    }
+}
+
 function pullNodeFeed($node) {
     $feedUrl = $node['url'] . '?action=json';
 
@@ -132,6 +146,13 @@ function getNodeList() {
 //        }
 //        $nodes_encoded[] = $node_e;
 //    }
+
+    return $nodes;
+}
+function getGoodNodeList() {
+    global $db;
+
+    $nodes = $db->get_results("SELECT url, domain FROM node WHERE score >= 0", ARRAY_A);
 
     return $nodes;
 }
