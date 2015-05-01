@@ -14,6 +14,16 @@ function doTask($taskName) {
 
             break;
 
+        case 'push_node':
+            include_once('module/node.php');
+
+            $nextNode = getNextNode();
+
+            pushNodeFeed($nextNode);
+            pushNodeList($nextNode);
+
+            break;
+
         case 'export':
             include_once('module/export.php');
 
