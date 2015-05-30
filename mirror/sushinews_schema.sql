@@ -83,7 +83,9 @@ CREATE TABLE `node` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` char(64) NOT NULL,
   `domain` char(64) NOT NULL,
-  `last_accessed` datetime NOT NULL,
+  `access_delay` int(11) NOT NULL DEFAULT '1',
+  `last_pull` datetime NOT NULL,
+  `last_push` datetime NOT NULL,
   `last_item_hash` char(64) NOT NULL,
   `score` int(11) NOT NULL,
   PRIMARY KEY (`id`)
