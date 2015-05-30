@@ -213,10 +213,10 @@ function getTagId($tag_name) {
 function addTagToItem($item_id, $tag_name, $voter_id) {
     global $dbp;
 
-    $item = intval($item_id);
+    $item_id = intval($item_id);
     $tag = strtolower(trim($tag_name));
 
-    if (!$item || !$tag) {
+    if (!$item_id || !$tag) {
         return;
     }
 
@@ -228,7 +228,7 @@ function addTagToItem($item_id, $tag_name, $voter_id) {
 
     $stmt = $dbp->prepare("INSERT INTO item_tag(item_id, tag_id, voter_id, vote_timestamp) VALUES(:item_id, :tag_id, :voter_id, NOW())");
 
-    $stmt->execute(array(':item_id' => $item, ':tag_id' => $tag_id, ':voter_id' => $voter_id));
+    $stmt->execute(array(':item_id' => $item_id, ':tag_id' => $tag_id, ':voter_id' => $voter_id));
 }
 
 function getOwnUrl() {
