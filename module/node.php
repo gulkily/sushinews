@@ -47,15 +47,20 @@ function pullNodeList($node) {
 function pushNodeList($node) {
     $pushUrl = $node['url'] . '?action=putNodes';
 
-    $nodes = json_encode(getNodeList());
+    $postData = array();
+    $postData['nodes'] = json_encode(getGoodNodeList());
+    $postData['items'] = json_encode(getItemExport());//@todo add last accessed hash
 
-    $result = grabUrl($feedUrl);
+    postUrl($pushUrl, $postData);
 
-    $nodes = json_decode($result, 1);
-
-    foreach ($nodes as $node) {
-        addNode($node['url']);
-    }
+//
+//    $result = grabUrl($feedUrl);
+//
+//    $nodes = json_decode($result, 1);
+//
+//    foreach ($nodes as $node) {
+//        addNode($node['url']);
+//    }
 }
 
 function pullNodeFeed($node) {
@@ -123,6 +128,26 @@ function grabUrl($url) {
     return $result;
 }
 
+function postUrl($url, $postData) {
+    //$url = 'http://server.com/path';
+    //$data = array('key1' => 'value1', 'key2' => 'value2');
+
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method'  => 'POST',
+            'content' => http_build_query($postData),
+        ),
+    );
+
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+
+    var_dump($result);
+
+    return $result;
+}
+
 function touchNode($nodeId, $lastItem) {
     global $db;
 
@@ -151,6 +176,9 @@ function getNodeList() {
 }
 function getGoodNodeList() {
     global $db;
+
+    $query = "UPDATE node SET access_delay = MAX(access_delay - 1, 0)";
+    $db->query($query);
 
     $nodes = $db->get_results("SELECT url, domain FROM node WHERE score >= 0", ARRAY_A);
 
