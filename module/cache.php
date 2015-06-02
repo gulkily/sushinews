@@ -34,7 +34,7 @@
 	function put_cache($cachename, $object, $rlevel = 0) {
 		if ($rlevel > 10) {
             //@todo fixme there is a bug here where if a file exists where a directory should be created it will die
-			die('Something is wrong...');
+			die('Something is wrong, put_cache() more than 10 levels deep.');
 		}
 
 		$filename = get_cache_filename($cachename);
