@@ -10,16 +10,16 @@ include_once('module/config.php');
 include_once('module/utilities.php');
 //include_once('module/sherlock.php');
 include_once('module/items.php');
-//
-//if (!get_cache('config')) {
-//    include_once('module/setup.php');
-//
-//    $setupClass = new SetupClass();
-//
-//    if ($setupClass->getTables() == 0) {
-//        $setupClass->populateDatabase();
-//    }
-//}
+
+if (!get_cache('config')) {
+    include_once('module/setup.php');
+
+    $setupClass = new SetupClass();
+
+    if ($setupClass->getTables() == 0) {
+        $setupClass->populateDatabase();
+    }
+}
 
 //include_once('module/setup.php');
 
