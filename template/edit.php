@@ -2,7 +2,7 @@
 
 function printEditForm($title = '', $summary = '', $body = '', $group_id = '', $parentid = '') {
     if ($group_id || $parentid) {
-        $password = md5($group_id . '-' . $parentid . '-' . getConfig('secret_salt'));
+        $password = sha1($group_id . '-' . $parentid . '-' . getConfig('secret_salt'));
     } else {
         $password = '';
     }

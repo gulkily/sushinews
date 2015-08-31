@@ -32,7 +32,7 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
     $stmt->bindParam(':body', $body);
     $stmt->bindParam(':publish_timestamp', $publish_timestamp_string);
     $stmt->bindParam(':parent_id', $parent_id);
-    $stmt->bindParam(':hash', md5($title . $summary . $body));
+    $stmt->bindParam(':hash', sha1($title . $summary . $body));
 
     $stmt->execute();
 

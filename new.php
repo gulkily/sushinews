@@ -14,7 +14,7 @@ include_once('module/items.php');
         if ($group || $parent_id) {
             // this could be prettier, but it's enough
             // if the password doesn't match up for an existing article, something is wrong
-            if (!getParam('password') || getParam('password') != md5($group . '-' . $parent_id . '-' . getConfig('secret_salt'))) die("Something went wrong...");
+            if (!getParam('password') || getParam('password') != sha1($group . '-' . $parent_id . '-' . getConfig('secret_salt'))) die("Something went wrong...");
         }
 
         if($group && !isHash($group)) {
@@ -48,7 +48,7 @@ include_once('module/items.php');
 
         if ($title && $summary && $body) {
 
-            $oldItemId = getItemIdByHash(md5($title . $summary . $body));
+            $oldItemId = getItemIdByHash(sha1($title . $summary . $body));
 
             if ($oldItemId) {
                 put_ticket(array("An exact copy of this item already exists. Here it is!"), getItemUrl($oldItemId, 'absolute'));

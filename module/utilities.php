@@ -205,7 +205,7 @@ function getTagId($tag_name) {
     $stmt = $dbp->prepare("SELECT id FROM tag WHERE name = :tag LIMIT 1");
     $params = array(':tag' => $tag);
 
-    $tag_id = get_cache_dbp('tagid/' . md5($tag_name), 60, $stmt, $params);
+    $tag_id = get_cache_dbp('tagid/' . sha1($tag_name), 60, $stmt, $params);
 
     return $tag_id[0]['id'];
 }
@@ -245,8 +245,3 @@ function concise_timestamp($timestamp) {
     return date('M j \'y', $timestamp);
 }
 
-function hsh($string) {
-    //centralized hashing function so that we can replace md5
-
-    return md5($string);
-}
