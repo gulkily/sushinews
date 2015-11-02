@@ -109,6 +109,23 @@ CREATE TABLE `node_item` (
   CONSTRAINT `node_item_ibfk_2` FOREIGN KEY (`node_id`) REFERENCES `node` (`id`)
 );
 
+CREATE TABLE `package` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(64) NOT NULL,
+  `checksum` char(64) NOT NULL,
+  `active` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `package_piece` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `package_id` int(11) NOT NULL,
+  `piece_no` char(64) NOT NULL,
+  `data` blob NOT NULL,
+  `out_count` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
 CREATE TABLE `session` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `account_id` int(7) DEFAULT NULL,
