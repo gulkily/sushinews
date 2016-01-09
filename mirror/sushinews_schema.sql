@@ -114,10 +114,11 @@ CREATE TABLE `package` (
   `name` char(64) NOT NULL,
   `checksum` char(64) NOT NULL,
   `active` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 );
 
-CREATE TABLE `package_piece` (
+CREATE TABLE `package_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `package_id` int(11) NOT NULL,
   `piece_no` char(64) NOT NULL,
