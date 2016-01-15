@@ -5,50 +5,10 @@ CREATE TABLE `cache_queue` (
   `add_timestamp` datetime NOT NULL
 );
 
-CREATE TABLE `client_session` (
-  `client_id` int(11) NOT NULL,
-  `session_id` int(11) NOT NULL
-);
-
-CREATE TABLE `client_variable` (
-  `client_id` int(11) NOT NULL,
-  `var_name` char(32) NOT NULL,
-  `var_value` varchar(255) NOT NULL,
-  UNIQUE KEY `client_id` (`client_id`,`var_name`)
-);
-
 CREATE TABLE `config` (
   `key` char(31) NOT NULL,
   `value` char(255) NOT NULL,
   PRIMARY KEY (`key`)
-);
-
-CREATE TABLE `fp_client` (
-  `client_id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`client_id`)
-);
-
-CREATE TABLE `fp_field` (
-  `field_id` int(11) NOT NULL,
-  `field_name` varchar(32) NOT NULL,
-  `store` tinyint(1) NOT NULL,
-  `validate` tinyint(1) NOT NULL,
-  `return_param` char(16) DEFAULT NULL,
-  `active` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`field_id`)
-);
-
-CREATE TABLE `fp_record` (
-  `record_id` int(11) NOT NULL AUTO_INCREMENT,
-  `field_id` int(11) NOT NULL,
-  `field_value` varchar(255) NOT NULL,
-  PRIMARY KEY (`record_id`),
-  UNIQUE KEY `field_id` (`field_id`,`field_value`)
-);
-
-CREATE TABLE `fp_session` (
-  `session_id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`session_id`)
 );
 
 CREATE TABLE `item` (
@@ -132,20 +92,6 @@ CREATE TABLE `session` (
   `account_id` int(7) DEFAULT NULL,
   `hash` char(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `session_record` (
-  `session_id` int(11) NOT NULL,
-  `record_id` int(11) NOT NULL,
-  `record_timestamp` datetime NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`session_id`,`record_id`)
-);
-
-CREATE TABLE `sherlock_config` (
-  `name` varchar(32) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  UNIQUE KEY `name` (`name`)
 );
 
 CREATE TABLE `source` (
