@@ -19,7 +19,7 @@ function doTask($taskName) {
 
             $nextNode = getNextNode();
 
-            pushNodeFeed($nextNode);
+            //pushNodeFeed($nextNode);
             pushNodeList($nextNode);
 
             break;
@@ -68,7 +68,8 @@ function getTasksMenu() {
         'update_scores',
         'cleanup_tables',
         'update_cache',
-        'pull_node'
+        'pull_node',
+        'push_node'
     );
 
     return $possibleTasks;

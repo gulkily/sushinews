@@ -6,7 +6,7 @@ include_once('module/cache.php');
 include_once('module/voting.php');
 
 function isHash($string) {
-    if (preg_match('/^[a-f0-9]{32}$/i', $string)) {
+    if (preg_match('/^[a-f0-9]{40}$/i', $string)) {
         return true;
     } else {
         return false;

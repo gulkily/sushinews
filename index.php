@@ -21,6 +21,7 @@ if (!get_cache('config')) {
     }
 }
 
+
 //include_once('module/setup.php');
 
 //$setupClass = new SetupClass();
@@ -63,7 +64,7 @@ if (isset($action)) {
                     doTask($task);
 
                 }
-                echo "cool";
+                echo "done";
             }
             break;
 
@@ -131,13 +132,13 @@ if (isset($action)) {
             $itemId = intval(getParam('id'));
 
             if (!$itemId) {
-                die("No such item");
+                die("No such item (1)");
             }
 
             $itemData = getItemById($itemId);
 
             if (!$itemData) {
-                die("No such item");
+                die("No such item (2)");
             }
 
             $linkedItems = getItemsByGroup($itemData['group_id'], 20);
@@ -323,6 +324,7 @@ order by last_vote
             break;
         default:
     }
+
 }
 
 queue_cache('','','',1);
@@ -334,3 +336,5 @@ if (rand(1, 10) == 5) {
     $task = getRandomTask();
     doTask($task);
 }
+
+

@@ -4,7 +4,7 @@ function createNewItem($title, $summary, $body, $parent_id = null, $group = null
     global $dbp;
 
     if (!$group) {
-        $group = md5(time() . getConfig('guid_seed'));
+        $group = sha1(time() . getConfig('guid_seed'));
     }
 
     if ($publish_timestamp) {
@@ -246,7 +246,7 @@ function getAvailableTagList() {
     return $tags;
 }
 
-function getItemIdByHash( $hash) {
+function getItemIdByHash($hash) {
     global $dbp;
 
     if(!isHash($hash)) {
@@ -289,7 +289,7 @@ function getItemBy($criteria) {
             $wheres[] = 'id=:id';
 
         } elseif ($n === 'hash') {
-            if (!isHash($v)) return;
+            //if (!isHash($v)) return; // @todo restore this check
 
             $params[] = array(':hash' => $v);
             $wheres[] = 'hash=:hash';

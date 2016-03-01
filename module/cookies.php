@@ -39,7 +39,7 @@ function getPackages($cookies) {
 
                         $data = json_decode($data);
 
-                        $decodedPackages[] = $data;
+                        $decodedPackages[] = (array) $data;
                     }
                 }
             }
@@ -66,13 +66,7 @@ function getSizeOfStoredCookies() {
     }
 }
 
-function clearCookies() {
-    // @todo careful here!
-
-
-}
-
-function putPackage($name) {
+function putPackageFromItem($name) {
     global $db;
 
     $name = $db->escape($name);
@@ -80,24 +74,38 @@ function putPackage($name) {
     $package = $db->get_row("SELECT * FROM package WHERE name = '$name'");
 
     if ($package) {
-
         $packageId = intval($package->id);
         $packageName = $package->name;
 
         $packageData = $db->get_results("SELECT * FROM package_data WHERE package_id = $packageId");
-
-        $pieceCount = count($packageData);
-        $cookieNumber = 0;
-
-        foreach ($packageData as $key => $cookie) {
-            $cookieNumber++;
-
-            $cookieName = 'sushiroll_' . $packageName . '_' . $cookie->piece_no . '_' . $pieceCount;
-            $cookieData = $cookie->data;
-
-            setcookie($cookieName, $cookieData, time() + 86400, '/');
-        }
     }
+
+    putPackage($packageName, $packageData);
+}
+
+function putPackage($packageName, $packageData) {
+    $chunkSize = 1024;
+
+    $data = base64_encode(json_encode($packageData));
+    $dataSplit = str_split($data, $chunkSize);
+
+    $pieceCount = count($packageData);
+    $cookieNumber = 0;
+
+    print_r($packageData);
+
+    foreach ($dataSplit as $key => $cookie) {
+        $cookieNumber++;
+
+        $cookieName = 'sushiroll_' . $packageName . '_' . $cookieNumber . '_' . $pieceCount;
+        $cookieData = $cookie;
+
+        setcookie($cookieName, $cookieData, time() + 86400, '/');
+    }
+}
+
+function removePackage($cookies, $name) {
+
 }
 
 function createPackageFromItem($itemId) {
