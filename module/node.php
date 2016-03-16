@@ -108,25 +108,35 @@ function addNode($nodeUrl) {
     }
 }
 
-function grabUrl($url) {
-    //
-////  Initiate curl
-//    $ch = curl_init();
-//// Disable SSL verification
-//    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-//// Will return the response, if false it print the response
-//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//// Set the url
-//    curl_setopt($ch, CURLOPT_URL,$feedUrl);
-//// Execute
-//    $result=curl_exec($ch);
-//// Closing
-//    curl_close($ch);
+function grabUrl($url, $params = array()) {
+    $curl = curl_init();
 
-    $result = file_get_contents($url);
+    if ($curl) {
+        curl_setopt($curl, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+        // @todo remove hard-coded useragent
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 60);
+        curl_setopt($curl, CURLOPT_HTTPGET, 1);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
 
-    return $result;
+        if (isset($params['use_tor'] && $params['use_tor']) {
+            curl_setopt($curl, CURLOPT_PROXY, 'http://127.0.0.1:9050/');
+            curl_setopt($curl, CURLOPT_PROXYTYPE, 7);
+        }
+
+        $result = curl_exec($curl);
+
+        return $result;
+    } else {
+        return null;
+    }
+    //$result = file_get_contents($url);
+
+    //return $result;
 }
+
+
 
 function postUrl($url, $postData) {
     //$url = 'http://server.com/path';
