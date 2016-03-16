@@ -37,10 +37,15 @@ function pullNodeList($node) {
 
     $result = grabUrl($feedUrl);
 
-    $nodes = json_decode($result, 1);
+    if ($result) {
 
-    foreach ($nodes as $node) {
-        addNode($node['url']);
+        $nodes = json_decode($result, 1);
+
+        if (count($nodes)) {
+            foreach ($nodes as $node) {
+                addNode($node['url']);
+            }
+        }
     }
 }
 
@@ -193,7 +198,7 @@ function getGoodNodeList() {
 function getNextNode() {
     global $db;
 
-    $nextNode = $db->get_row("SELECT * FROM node ORDER BY last_accessed LIMIT 1", ARRAY_A);
+    $nextNode = $db->get_row("SELECT * FROM node ORDER BY last_pull LIMIT 1", ARRAY_A);
 
     return $nextNode;
 }
