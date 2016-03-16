@@ -285,13 +285,12 @@ function getItemBy($criteria) {
             $itemId = intval($v);
             if (!$itemId) return;
 
-            $params[] = array(':id' => $itemId);
+            $params[':id'] = $itemId;
             $wheres[] = 'id=:id';
-
         } elseif ($n === 'hash') {
             //if (!isHash($v)) return; // @todo restore this check
 
-            $params[] = array(':hash' => $v);
+            $params[':hash'] = $v;
             $wheres[] = 'hash=:hash';
 
         } else {
@@ -302,7 +301,6 @@ function getItemBy($criteria) {
     global $dbp;
 
     $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u, hash FROM item WHERE " . join(' AND ', $wheres));
-
 
     $item = get_cache_dbp("item/$itemId", 60, $stmt, $params);
 
