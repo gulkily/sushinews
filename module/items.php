@@ -300,7 +300,19 @@ function getItemBy($criteria) {
 
     global $dbp;
 
-    $stmt = $dbp->prepare("SELECT title, body, summary, id, group_id, publish_timestamp, UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u, hash FROM item WHERE " . join(' AND ', $wheres));
+    $stmt = $dbp->prepare("
+        SELECT
+            title,
+            body,
+            summary,
+            id,
+            group_id,
+            publish_timestamp,
+            UNIX_TIMESTAMP(publish_timestamp) publish_timestamp_u,
+            hash
+        FROM
+            item
+        WHERE " . join(' AND ', $wheres));
 
     $item = get_cache_dbp("item/$itemId", 60, $stmt, $params);
 
