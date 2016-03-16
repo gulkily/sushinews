@@ -120,7 +120,7 @@ function grabUrl($url, $params = array()) {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
 
-        if (isset($params['use_tor'] && $params['use_tor']) {
+        if (isset($params['use_tor']) && $params['use_tor']) {
             curl_setopt($curl, CURLOPT_PROXY, 'http://127.0.0.1:9050/');
             curl_setopt($curl, CURLOPT_PROXYTYPE, 7);
         }
@@ -131,12 +131,7 @@ function grabUrl($url, $params = array()) {
     } else {
         return null;
     }
-    //$result = file_get_contents($url);
-
-    //return $result;
 }
-
-
 
 function postUrl($url, $postData) {
     //$url = 'http://server.com/path';
