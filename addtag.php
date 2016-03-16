@@ -11,7 +11,7 @@ if ($client_id && isset($_POST)) {
     $tag = getParam('tag');
     $hash = getParam('hash');
 
-    if (verifyVotingHash($client_id, $item_id, $tag, $hash)) {
+    if (getVotingHash($client_id, $item_id, $tag) === $hash) {
 
         addTagToItem($item_id, $tag, $client_id);
 

@@ -1,7 +1,7 @@
 <?php
 
 function getVotingHash($client_id, $item_id, $tag) {
-    return md5($client_id . $item_id . $tag . getConfig('secret_salt'));
+    return sha1($client_id . $item_id . $tag . getConfig('secret_salt'));
 }
 
 function getVoterId() {
@@ -55,10 +55,3 @@ function generateVoterId() {
     }
 }
 
-function verifyVotingHash($client_id, $item_id, $tag, $hash) {
-    if (sha1($client_id . $item_id . $tag . getConfig('secret_salt')) == $hash) {
-        return true;
-    } else {
-        return false;
-    }
-}
